@@ -5,9 +5,9 @@ public class Nota {
     
     private int idEstudiante;
     private int idCurso;
-    private int idProfesor;
     private int idCiclo;
     private int numeroRubrica;
+    private int numeroNota;
     private float nota;
 
     public int getIdEstudiante() {
@@ -26,14 +26,6 @@ public class Nota {
         this.idCurso = idCurso;
     }
 
-    public int getIdProfesor() {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
-    }
-
     public int getIdCiclo() {
         return idCiclo;
     }
@@ -48,6 +40,14 @@ public class Nota {
 
     public void setNumeroRubrica(int numeroRubrica){
         this.numeroRubrica = numeroRubrica;
+    }
+
+    public int getNumeroNota() {
+        return numeroNota;
+    }
+
+    public void setNumeroNota(int numeroNota) {
+        this.numeroNota = numeroNota;
     }
 
     public float getNota() {

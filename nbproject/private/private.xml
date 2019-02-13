@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/Main.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Estudiante.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Profesor.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Matricula.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Rubrica.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Curso.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Nota.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Ciclo.java</file>
+        </group>
+    </open-files>
 </project-private>

@@ -7,7 +7,6 @@ public class Rubrica {
     
     private int idEstudiante;
     private int idCurso;
-    private int idProfesor;
     private int idCiclo;
     private int numeroRubrica;
     private float peso;
@@ -28,15 +27,7 @@ public class Rubrica {
     public void setIdCurso(int idCurso) {
         this.idCurso = idCurso;
     }
-
-    public int getIdProfesor() {
-        return idProfesor;
-    }
-
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
-    }
-
+    
     public int getIdCiclo() {
         return idCiclo;
     }

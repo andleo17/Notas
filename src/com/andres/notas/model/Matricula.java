@@ -10,6 +10,7 @@ public class Matricula {
     private int idProfesor;
     private int idCiclo;
     private ArrayList<Rubrica> rubricas;
+    private float promedioFinal;
 
     public int getIdEstudiante() {
         return idEstudiante;
@@ -51,4 +52,12 @@ public class Matricula {
         this.rubricas = rubricas;
     }
     
+    public float getPromedioFinal() {
+        return promedioFinal;
+    }
+
+    public void setPromedioFinal(float promedioFinal) {
+        this.promedioFinal = promedioFinal;
+    }
+
 }
