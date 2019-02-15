@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 public interface IDBConnection {
     
-    @SuppressWarnings("finally")
     default Connection conectarBD() throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
         return DriverManager.getConnection(URL + DB, USER, PASSWORD);

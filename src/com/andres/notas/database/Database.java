@@ -13,10 +13,11 @@ public class Database {
     public static final String TESTUDIANTE_nombre = "nombre";
     public static final String TESTUDIANTE_apellidos = "apellidos";
     public static final String TESTUDIANTE_email = "email";
-    public static final String TESTUDIANTE_contraseña = "contraseña";
+    public static final String TESTUDIANTE_password = "pass";
 
     public static final String TCURSO = "curso";
     public static final String TCURSO_id = "id";
+    public static final String TCURSO_nombre = "nombre";
     public static final String TCURSO_creditos = "creditos";
 
     public static final String TPROFESOR = "profesor";
@@ -26,29 +27,29 @@ public class Database {
     public static final String TPROFESOR_email = "email";
     
     public static final String TCICLO = "ciclo";
-    public static final String TCICLO_ID = "id";
-    public static final String TCICLO_NOMBRE = "nombre";
+    public static final String TCICLO_id = "id";
+    public static final String TCICLO_nombre = "nombre";
 
     public static final String TMATRICULA = "matricula";
-    public static final String TMATRICULA_IDESTUDIANTE = "idEstudiante";
-    public static final String TMATRICULA_IDCURSO = "idCurso";
-    public static final String TMATRICULA_IDCICLO = "idCiclo";
-    public static final String TMATRICULA_IDPROFESOR = "idProfesor";
-    public static final String TMATRICULA_PROMEDIOFINAL = "promedioFinal";
+    public static final String TMATRICULA_idEstudiante = "idEstudiante";
+    public static final String TMATRICULA_idCurso = "idCurso";
+    public static final String TMATRICULA_idCiclo = "idCiclo";
+    public static final String TMATRICULA_idProfesor = "idProfesor";
+    public static final String TMATRICULA_promedioFinal = "promedioFinal";
 
     public static final String TRUBRICA = "rubrica";
-    public static final String TRUBRICA_IDESTUDIANTE = "idEstudiante";
-    public static final String TRUBRICA_IDCURSO = "idCurso";
-    public static final String TRUBRICA_IDCICLO = "idCiclo";
-    public static final String TRUBRICA_NUMERORUBRICA = "numeroRubrica";
-    public static final String TRUBRICA_PESO = "peso";
+    public static final String TRUBRICA_idEstudiante = "idEstudiante";
+    public static final String TRUBRICA_idCurso = "idCurso";
+    public static final String TRUBRICA_idCiclo = "idCiclo";
+    public static final String TRUBRICA_numeroRubrica = "numeroRubrica";
+    public static final String TRUBRICA_peso = "peso";
 
     public static final String TNOTA = "nota";
-    public static final String TNOTA_IDESTUDIANTE = "idEstudiante";
-    public static final String TNOTA_IDCURSO = "idCurso";
-    public static final String TNOTA_IDCICLO = "idCiclo";
-    public static final String TNOTA_NUMERORUBRICA = "numeroRubrica";
-    public static final String TNOTA_NUMERONOTA = "numeroNota";
-    public static final String TNOTA_NOTA = "nota";
+    public static final String TNOTA_idEstudiante = "idEstudiante";
+    public static final String TNOTA_idCurso = "idCurso";
+    public static final String TNOTA_idCiclo = "idCiclo";
+    public static final String TNOTA_numeroRubrica = "numeroRubrica";
+    public static final String TNOTA_numeroNota = "numeroNota";
+    public static final String TNOTA_nota = "nota";
     
 }

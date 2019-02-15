@@ -7,7 +7,7 @@ public class Estudiante {
     private String nombre;
     private String apellidos;
     private String email;
-    private String contraseña;
+    private String password;
 
     public int getId(){
         return id;
@@ -41,12 +41,12 @@ public class Estudiante {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

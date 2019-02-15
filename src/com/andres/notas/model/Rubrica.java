@@ -56,7 +56,7 @@ public class Rubrica {
         return notas;
     }
 
-    public void setRubricas(ArrayList<Nota> notas) {
+    public void setNotas(ArrayList<Nota> notas) {
         this.notas = notas;
     }
     

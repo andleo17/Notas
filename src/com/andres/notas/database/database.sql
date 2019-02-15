@@ -1,26 +1,26 @@
 CREATE TABLE estudiante (
-    id              INTEGER             PRIMARY KEY,
+    id              SERIAL              PRIMARY KEY,
     nombre          VARCHAR(35)         NOT NULL,
     apellidos       VARCHAR(35)         NOT NULL,
     email           VARCHAR(100)        NOT NULL UNIQUE,
-    contraseña      VARCHAR(20)         NOT NULL
+    pass            VARCHAR(20)         NOT NULL
 );
 
 CREATE TABLE curso (
-    id              INTEGER             PRIMARY KEY,
+    id              SERIAL              PRIMARY KEY,
     nombre          VARCHAR(30)         NOT NULL UNIQUE,
     creditos        INTEGER             NOT NULL
 );
 
 CREATE TABLE profesor (
-    id              INTEGER             PRIMARY KEY,
+    id              SERIAL              PRIMARY KEY,
     nombre          VARCHAR(35)         NOT NULL,
     apellidos       VARCHAR(35)         NOT NULL,
     email           VARCHAR(100)        NOT NULL UNIQUE
 );
 
 CREATE TABLE ciclo (
-    id              INTEGER             PRIMARY KEY,
+    id              SERIAL              PRIMARY KEY,
     nombre          VARCHAR(7)          NOT NULL UNIQUE
 );
 
@@ -29,7 +29,7 @@ CREATE TABLE matricula (
     idCurso         INTEGER             NOT NULL,
     idCiclo         INTEGER             NOT NULL,
     idProfesor      INTEGER             NOT NULL,
-    promedioFinal   FLOAT               NOT NULL,
+    promedioFinal   FLOAT               NOT NULL DEFAULT 0,
 
     CONSTRAINT  pk_matricula
         PRIMARY KEY     (idEstudiante, idCurso, idCiclo),
@@ -67,7 +67,7 @@ CREATE TABLE nota (
     idCiclo         INTEGER             NOT NULL,
     numeroRubrica   INTEGER             NOT NULL,
     numeroNota      INTEGER             NOT NULL,
-    nota            FLOAT               NOT NULL,
+    nota            FLOAT               NOT NULL DEFAULT 0,
 
     CONSTRAINT  pk_nota
         PRIMARY KEY     (idEstudiante, idCurso, idCiclo, numeroRubrica, numeroNota),
