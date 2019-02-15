@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.andres.notas.dao.EstudianteDAO;
 
-public class Estudiante implements EstudianteDAO{
+public class Estudiante implements EstudianteDAO {
     
     private int id;
     private String nombre;

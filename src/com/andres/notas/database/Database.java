@@ -42,6 +42,7 @@ public class Database {
     public static final String TRUBRICA_idCurso = "idCurso";
     public static final String TRUBRICA_idCiclo = "idCiclo";
     public static final String TRUBRICA_numeroRubrica = "numeroRubrica";
+    public static final String TRUBRICA_nombre = "nombre";
     public static final String TRUBRICA_peso = "peso";
 
     public static final String TNOTA = "nota";

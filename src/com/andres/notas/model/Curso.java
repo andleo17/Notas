@@ -5,13 +5,19 @@ import java.util.ArrayList;
 
 import com.andres.notas.dao.CursoDAO;
 
-public class Curso implements CursoDAO {
+public class Curso implements CursoDAO, IAdministrable {
     
     private int id;
     private String nombre;
     private int creditos;
 
     private static Curso objCurso = new Curso();
+
+    public static Curso buscar(int id) {
+        ArrayList<Curso> curso = listar();
+        curso.stream().filter(c -> c.getId() == id);
+        return curso.get(0);
+    }
 
     public static ArrayList<Curso> listar() {
         return objCurso.consultarLista();

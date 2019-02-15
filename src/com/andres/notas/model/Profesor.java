@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.andres.notas.dao.ProfesorDAO;
 
-public class Profesor implements ProfesorDAO {
+public class Profesor implements ProfesorDAO, IAdministrable {
     
     private int id;
     private String nombre;
@@ -13,6 +13,12 @@ public class Profesor implements ProfesorDAO {
     private String email;
 
     private static Profesor objProfesor = new Profesor();
+
+    public static Profesor buscar(int id) {
+        ArrayList<Profesor> profesor = listar();
+        profesor.stream().filter(p -> p.getId() == id);
+        return profesor.get(0);
+    }
 
     public static ArrayList<Profesor> listar() {
         return objProfesor.consultarLista();

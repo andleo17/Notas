@@ -17,23 +17,22 @@ public interface NotaDAO extends IDBConnection{
         ArrayList<Nota> notas = new ArrayList<>();
 
         try (Connection connection = conectarBD()){
-            String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ?;", 
-                            TRUBRICA,
-                            TRUBRICA_idCiclo,
-                            TRUBRICA_idCurso,
-                            TRUBRICA_idEstudiante);
+            String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ? AND %s = ?;", 
+                            TNOTA,
+                            TNOTA_idCiclo,
+                            TNOTA_idCurso,
+                            TNOTA_idEstudiante,
+                            TNOTA_numeroRubrica);
             PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, rubrica.getIdCiclo());
-            ps.setInt(2, rubrica.getIdCurso());
-            ps.setInt(3, rubrica.getIdEstudiante());
+            ps.setInt(1, rubrica.getMatricula().getCiclo().getId());
+            ps.setInt(2, rubrica.getMatricula().getCurso().getId());
+            ps.setInt(3, rubrica.getMatricula().getEstudiante().getId());
+            ps.setInt(4, rubrica.getNumeroRubrica());
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Nota nota = new Nota();
-                nota.setIdCiclo(rs.getInt(TNOTA_idCiclo));
-                nota.setIdCurso(rs.getInt(TNOTA_idCurso));
-                nota.setIdEstudiante(rs.getInt(TNOTA_idEstudiante));
-                nota.setNumeroRubrica(rs.getInt(TNOTA_numeroRubrica));
+                nota.setRubrica(rubrica);
                 nota.setNumeroNota(rs.getInt(TNOTA_numeroNota));
                 nota.setNota(rs.getFloat(TNOTA_nota));
                 notas.add(nota);
@@ -57,10 +56,10 @@ public interface NotaDAO extends IDBConnection{
                                 TNOTA_numeroRubrica,
                                 TNOTA_numeroNota);
             PreparedStatement ps = connection.prepareStatement(insert);
-            ps.setInt(1, nota.getIdCiclo());
-            ps.setInt(2, nota.getIdCurso());
-            ps.setInt(3, nota.getIdEstudiante());
-            ps.setInt(4, nota.getNumeroRubrica());
+            ps.setInt(1, nota.getRubrica().getMatricula().getCiclo().getId());
+            ps.setInt(2, nota.getRubrica().getMatricula().getCurso().getId());
+            ps.setInt(3, nota.getRubrica().getMatricula().getEstudiante().getId());
+            ps.setInt(4, nota.getRubrica().getNumeroRubrica());
             ps.setInt(5, nota.getNumeroNota());
             ps.executeUpdate();
             ps.close();
@@ -81,10 +80,10 @@ public interface NotaDAO extends IDBConnection{
                                 TNOTA_numeroNota);
             PreparedStatement ps = connection.prepareStatement(update);
             ps.setFloat(1, nota.getNota());
-            ps.setInt(2, nota.getIdCiclo());
-            ps.setInt(3, nota.getIdCurso());
-            ps.setInt(4, nota.getIdEstudiante());
-            ps.setInt(5, nota.getNumeroRubrica());
+            ps.setInt(2, nota.getRubrica().getMatricula().getCiclo().getId());
+            ps.setInt(3, nota.getRubrica().getMatricula().getCurso().getId());
+            ps.setInt(4, nota.getRubrica().getMatricula().getEstudiante().getId());
+            ps.setInt(5, nota.getRubrica().getNumeroRubrica());
             ps.setInt(6, nota.getNumeroNota());
             ps.executeUpdate();
             ps.close();
@@ -103,10 +102,10 @@ public interface NotaDAO extends IDBConnection{
                                 TNOTA_numeroRubrica,
                                 TNOTA_numeroNota);
             PreparedStatement ps = connection.prepareStatement(delete);
-            ps.setInt(1, nota.getIdCiclo());
-            ps.setInt(2, nota.getIdCurso());
-            ps.setInt(3, nota.getIdEstudiante());
-            ps.setInt(4, nota.getNumeroRubrica());
+            ps.setInt(1, nota.getRubrica().getMatricula().getCiclo().getId());
+            ps.setInt(2, nota.getRubrica().getMatricula().getCurso().getId());
+            ps.setInt(3, nota.getRubrica().getMatricula().getEstudiante().getId());
+            ps.setInt(4, nota.getRubrica().getNumeroRubrica());
             ps.setInt(5, nota.getNumeroNota());
             ps.executeUpdate();
             ps.close();

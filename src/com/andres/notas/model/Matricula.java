@@ -5,19 +5,19 @@ import java.util.ArrayList;
 
 import com.andres.notas.dao.MatriculaDAO;
 
-public class Matricula implements MatriculaDAO {
+public class Matricula implements MatriculaDAO, IAdministrable {
     
-    private int idEstudiante;
-    private int idCurso;
-    private int idProfesor;
-    private int idCiclo;
+    private Estudiante estudiante;
+    private Curso curso;
+    private Ciclo ciclo;
+    private Profesor profesor;
     private ArrayList<Rubrica> rubricas;
     private float promedioFinal;
 
     private static Matricula objMatricula = new Matricula();
 
-    public static ArrayList<Matricula> listar() {
-        return objMatricula.consultarLista();
+    public static ArrayList<Matricula> listarMatriculas(Ciclo ciclo, Estudiante estudiante) {
+        return objMatricula.consultarLista(estudiante, ciclo);
     }
 
     public void agregar() {
@@ -32,36 +32,36 @@ public class Matricula implements MatriculaDAO {
         objMatricula.eliminar(this);
     }
 
-    public int getIdEstudiante() {
-        return idEstudiante;
+    public Estudiante getEstudiante() {
+        return estudiante;
     }
 
-    public void setIdEstudiante(int idEstudiante) {
-        this.idEstudiante = idEstudiante;
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
     }
 
-    public int getIdCurso() {
-        return idCurso;
+    public Curso getCurso() {
+        return curso;
     }
 
-    public void setIdCurso(int idCurso) {
-        this.idCurso = idCurso;
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 
-    public int getIdProfesor() {
-        return idProfesor;
+    public Profesor getProfesor() {
+        return profesor;
     }
 
-    public void setIdProfesor(int idProfesor) {
-        this.idProfesor = idProfesor;
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 
-    public int getIdCiclo() {
-        return idCiclo;
+    public Ciclo getCiclo() {
+        return ciclo;
     }
 
-    public void setIdCiclo(int idCiclo) {
-        this.idCiclo = idCiclo;
+    public void setCiclo(Ciclo ciclo) {
+        this.ciclo = ciclo;
     }
 
     public ArrayList<Rubrica> getRubricas() {

@@ -5,19 +5,16 @@ import java.util.ArrayList;
 
 import com.andres.notas.dao.NotaDAO;
 
-public class Nota implements NotaDAO {
+public class Nota implements NotaDAO, IAdministrable {
     
-    private int idEstudiante;
-    private int idCurso;
-    private int idCiclo;
-    private int numeroRubrica;
+    private Rubrica rubrica;
     private int numeroNota;
     private float nota;
 
     private static Nota objNota = new Nota();
 
-    public static ArrayList<Nota> listar() {
-        return objNota.consultarLista();
+    public static ArrayList<Nota> listar(Rubrica rubrica) {
+        return objNota.obtenerNotas(rubrica);
     }
 
     public void agregar() {
@@ -32,36 +29,12 @@ public class Nota implements NotaDAO {
         objNota.eliminar(this);
     }
 
-    public int getIdEstudiante() {
-        return idEstudiante;
+    public Rubrica getRubrica() {
+        return rubrica;
     }
 
-    public void setIdEstudiante(int idEstudiante) {
-        this.idEstudiante = idEstudiante;
-    }
-
-    public int getIdCurso() {
-        return idCurso;
-    }
-
-    public void setIdCurso(int idCurso) {
-        this.idCurso = idCurso;
-    }
-
-    public int getIdCiclo() {
-        return idCiclo;
-    }
-
-    public void setIdCiclo(int idCiclo) {
-        this.idCiclo = idCiclo;
-    }
-    
-    public int getNumeroRubrica(){
-        return numeroRubrica;
-    }
-
-    public void setNumeroRubrica(int numeroRubrica){
-        this.numeroRubrica = numeroRubrica;
+    public void setRubrica(Rubrica rubrica) {
+        this.rubrica = rubrica;
     }
 
     public int getNumeroNota() {

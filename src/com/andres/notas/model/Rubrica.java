@@ -5,19 +5,18 @@ import java.util.ArrayList;
 
 import com.andres.notas.dao.RubricaDAO;
 
-public class Rubrica implements RubricaDAO{
+public class Rubrica implements RubricaDAO, IAdministrable {
     
-    private int idEstudiante;
-    private int idCurso;
-    private int idCiclo;
+    private Matricula matricula;
     private int numeroRubrica;
+    private String nombre;
     private float peso;
     private ArrayList<Nota> notas;
 
     private static Rubrica objRubrica = new Rubrica();
 
-    public static ArrayList<Rubrica> listar() {
-        return objRubrica.consultarLista();
+    public static ArrayList<Rubrica> listar(Matricula matricula) {
+        return objRubrica.obtenerRubricas(matricula);
     }
 
     public void agregar() {
@@ -32,28 +31,12 @@ public class Rubrica implements RubricaDAO{
         objRubrica.eliminar(this);
     }
 
-    public int getIdEstudiante() {
-        return idEstudiante;
+    public Matricula getMatricula() {
+        return matricula;
     }
 
-    public void setIdEstudiante(int idEstudiante) {
-        this.idEstudiante = idEstudiante;
-    }
-
-    public int getIdCurso() {
-        return idCurso;
-    }
-
-    public void setIdCurso(int idCurso) {
-        this.idCurso = idCurso;
-    }
-    
-    public int getIdCiclo() {
-        return idCiclo;
-    }
-
-    public void setIdCiclo(int idCiclo) {
-        this.idCiclo = idCiclo;
+    public void setMatricula(Matricula matricula) {
+        this.matricula = matricula;
     }
     
     public int getNumeroRubrica(){
@@ -70,6 +53,14 @@ public class Rubrica implements RubricaDAO{
     
     public void setPeso(float peso){
         this.peso = peso;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
     
     public ArrayList<Nota> getNotas() {
