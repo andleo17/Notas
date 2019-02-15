@@ -1,7 +1,11 @@
 
 package com.andres.notas.model;
 
-public class Nota {
+import java.util.ArrayList;
+
+import com.andres.notas.dao.NotaDAO;
+
+public class Nota implements NotaDAO {
     
     private int idEstudiante;
     private int idCurso;
@@ -9,6 +13,24 @@ public class Nota {
     private int numeroRubrica;
     private int numeroNota;
     private float nota;
+
+    private static Nota objNota = new Nota();
+
+    public static ArrayList<Nota> listar() {
+        return objNota.consultarLista();
+    }
+
+    public void agregar() {
+        objNota.agregar(this);
+    }
+
+    public void actualizar() {
+        objNota.actualizar(this);
+    }
+
+    public void eliminar() {
+        objNota.eliminar(this);
+    }
 
     public int getIdEstudiante() {
         return idEstudiante;

@@ -3,7 +3,9 @@ package com.andres.notas.model;
 
 import java.util.ArrayList;
 
-public class Rubrica {
+import com.andres.notas.dao.RubricaDAO;
+
+public class Rubrica implements RubricaDAO{
     
     private int idEstudiante;
     private int idCurso;
@@ -11,6 +13,24 @@ public class Rubrica {
     private int numeroRubrica;
     private float peso;
     private ArrayList<Nota> notas;
+
+    private static Rubrica objRubrica = new Rubrica();
+
+    public static ArrayList<Rubrica> listar() {
+        return objRubrica.consultarLista();
+    }
+
+    public void agregar() {
+        objRubrica.agregar(this);
+    }
+
+    public void actualizar() {
+        objRubrica.actualizar(this);
+    }
+
+    public void eliminar() {
+        objRubrica.eliminar(this);
+    }
 
     public int getIdEstudiante() {
         return idEstudiante;

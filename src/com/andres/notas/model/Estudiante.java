@@ -1,13 +1,33 @@
 
 package com.andres.notas.model;
 
-public class Estudiante {
+import java.util.ArrayList;
+
+import com.andres.notas.dao.EstudianteDAO;
+
+public class Estudiante implements EstudianteDAO{
     
     private int id;
     private String nombre;
     private String apellidos;
     private String email;
     private String password;
+
+    private static Estudiante objEstudiante = new Estudiante();
+
+    public Estudiante iniciarSesion(String email, String password) {
+        ArrayList<Estudiante> estudiantes = objEstudiante.consultarLista();
+        estudiantes.stream().filter(e -> e.getEmail().equals(email) && e.getPassword().equals(password));
+        return estudiantes.get(0);
+    }
+
+    public void agregar() {
+        objEstudiante.agregar(this);
+    }
+
+    public void actualizar() {
+        objEstudiante.actualizar(this);
+    }
 
     public int getId(){
         return id;

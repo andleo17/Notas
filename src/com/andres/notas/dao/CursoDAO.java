@@ -36,7 +36,7 @@ public interface CursoDAO extends IDBConnection {
         return cursos;
     }
     
-    default void registrar(Curso curso){
+    default void agregar(Curso curso){
         try (Connection connection = conectarBD()){
             String insert = String.format("INSERT INTO %s (%s, %s) VALUES (?, ?);",
                                 TCURSO,

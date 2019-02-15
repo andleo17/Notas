@@ -1,10 +1,18 @@
 
 package com.andres.notas.model;
 
-public class Ciclo {
+import com.andres.notas.dao.CicloDAO;
+
+public class Ciclo implements CicloDAO{
     
     private int id;
     private String nombre;
+
+    private static Ciclo objCiclo = new Ciclo();
+
+    public static Ciclo obtenerCiclo() {
+        return objCiclo.obtenerCicloActual();
+    }
 
     public int getId() {
         return id;

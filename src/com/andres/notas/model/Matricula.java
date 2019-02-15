@@ -3,7 +3,9 @@ package com.andres.notas.model;
 
 import java.util.ArrayList;
 
-public class Matricula {
+import com.andres.notas.dao.MatriculaDAO;
+
+public class Matricula implements MatriculaDAO {
     
     private int idEstudiante;
     private int idCurso;
@@ -11,6 +13,24 @@ public class Matricula {
     private int idCiclo;
     private ArrayList<Rubrica> rubricas;
     private float promedioFinal;
+
+    private static Matricula objMatricula = new Matricula();
+
+    public static ArrayList<Matricula> listar() {
+        return objMatricula.consultarLista();
+    }
+
+    public void agregar() {
+        objMatricula.agregar(this);
+    }
+
+    public void actualizar() {
+        objMatricula.actualizar(this);
+    }
+
+    public void eliminar() {
+        objMatricula.eliminar(this);
+    }
 
     public int getIdEstudiante() {
         return idEstudiante;
