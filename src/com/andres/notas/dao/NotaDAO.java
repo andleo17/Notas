@@ -9,16 +9,23 @@ import java.util.ArrayList;
 
 import com.andres.notas.database.IDBConnection;
 import com.andres.notas.model.Nota;
+import com.andres.notas.model.Rubrica;
 
 public interface NotaDAO extends IDBConnection{
 
-    default ArrayList<Nota> consultarLista() {
+    default ArrayList<Nota> obtenerNotas(Rubrica rubrica){
         ArrayList<Nota> notas = new ArrayList<>();
-        
-        try (Connection connection = conectarBD()) {
-            String query = String.format("SELECT * FROM %s;",
-                            TNOTA);
+
+        try (Connection connection = conectarBD()){
+            String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ?;", 
+                            TRUBRICA,
+                            TRUBRICA_idCiclo,
+                            TRUBRICA_idCurso,
+                            TRUBRICA_idEstudiante);
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, rubrica.getIdCiclo());
+            ps.setInt(2, rubrica.getIdCurso());
+            ps.setInt(3, rubrica.getIdEstudiante());
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -32,6 +39,7 @@ public interface NotaDAO extends IDBConnection{
                 notas.add(nota);
             }
             ps.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

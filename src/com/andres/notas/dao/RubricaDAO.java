@@ -8,17 +8,24 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import com.andres.notas.database.IDBConnection;
+import com.andres.notas.model.Matricula;
 import com.andres.notas.model.Rubrica;
 
-public interface RubricaDAO extends IDBConnection{
+public interface RubricaDAO extends IDBConnection, NotaDAO {
 
-    default ArrayList<Rubrica> consultarLista() {
+    default ArrayList<Rubrica> obtenerRubricas(Matricula matricula) {
         ArrayList<Rubrica> rubricas = new ArrayList<>();
 
         try (Connection connection = conectarBD()) {
-            String query = String.format("SELECT * FROM %s;",
-                            TRUBRICA);
+            String query = String.format("SELECT * FROM %s WHERE %s = ?, %s = ?, %s = ?;",
+                            TRUBRICA,
+                            TRUBRICA_idCiclo,
+                            TRUBRICA_idCurso,
+                            TRUBRICA_idEstudiante);
             PreparedStatement ps = connection.prepareStatement(query);
+            ps.setInt(1, matricula.getIdCiclo());
+            ps.setInt(2, matricula.getIdCurso());
+            ps.setInt(3, matricula.getIdEstudiante());
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -28,7 +35,7 @@ public interface RubricaDAO extends IDBConnection{
                 rubrica.setIdEstudiante(rs.getInt(TRUBRICA_idEstudiante));
                 rubrica.setNumeroRubrica(rs.getInt(TRUBRICA_numeroRubrica));
                 rubrica.setPeso(rs.getFloat(TRUBRICA_peso));
-                rubrica.setNotas(rubrica.hallarNotas());
+                rubrica.setNotas(obtenerNotas(rubrica));
                 rubricas.add(rubrica);
             }
             ps.close();

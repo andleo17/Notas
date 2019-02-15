@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.andres.notas.database.IDBConnection;
 import com.andres.notas.model.Matricula;
 
-public interface MatriculaDAO extends IDBConnection{
+public interface MatriculaDAO extends IDBConnection, RubricaDAO {
 
     default ArrayList<Matricula> consultarLista() {
         ArrayList<Matricula> matriculas = new ArrayList<>();
@@ -28,7 +28,7 @@ public interface MatriculaDAO extends IDBConnection{
                 matricula.setIdEstudiante(rs.getInt(TMATRICULA_idEstudiante));
                 matricula.setIdProfesor(rs.getInt(TMATRICULA_idProfesor));
                 matricula.setPromedioFinal(rs.getFloat(TMATRICULA_promedioFinal));
-                matricula.setRubricas(matricula.hallarRubricas());
+                matricula.setRubricas(obtenerRubricas(matricula));
                 matriculas.add(matricula);
             }
             ps.close();
