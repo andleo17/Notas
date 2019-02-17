@@ -17,8 +17,11 @@ public class Estudiante implements EstudianteDAO {
 
     public Estudiante iniciarSesion(String email, String password) {
         ArrayList<Estudiante> estudiantes = objEstudiante.consultarLista();
-        estudiantes.stream().filter(e -> e.getEmail().equals(email) && e.getPassword().equals(password));
-        return estudiantes.get(0);
+        for (Estudiante estudiante : estudiantes){
+            if (estudiante.getEmail().equals(email) && estudiante.getPassword().equals(password))
+                return estudiante;
+        }
+        return null;
     }
 
     public void agregar() {

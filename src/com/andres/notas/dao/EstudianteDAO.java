@@ -28,6 +28,7 @@ public interface EstudianteDAO extends IDBConnection{
                 estudiante.setApellidos(rs.getString(TESTUDIANTE_apellidos));
                 estudiante.setEmail(rs.getString(TESTUDIANTE_email));
                 estudiante.setPassword(rs.getString(TESTUDIANTE_password));
+                estudiantes.add(estudiante);
             }
             ps.close();
         } catch (Exception e) {

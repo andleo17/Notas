@@ -3,7 +3,7 @@ package com.andres.notas.database;
 
 public class Database {
     
-    public static final String URL = "jdbc:postgres://localhost:5432/";
+    public static final String URL = "jdbc:postgresql://localhost:5432/";
     public static final String DB = "notas";
     public static final String USER = "postgres";
     public static final String PASSWORD = "123456789";
