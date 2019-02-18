@@ -1,9 +1,6 @@
 
 package com.andres.notas.view;
 
-import java.awt.Component;
-import java.lang.reflect.Field;
-
 public class FrmLogin extends javax.swing.JFrame {
     
     public FrmLogin() {
@@ -119,19 +116,6 @@ public class FrmLogin extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    public Component getComponentByName(String name) {
-        for (Field field : getClass().getDeclaredFields()) { 
-            field.setAccessible(true); 
-            if (name.equals(field.getName())) { 
-                try {
-                    return (Component) field.get(this); 
-                } catch (IllegalArgumentException | IllegalAccessException ex) {
-                }
-            }
-        } 
-        return null; 
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambiarPassword;

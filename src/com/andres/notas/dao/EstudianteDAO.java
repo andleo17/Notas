@@ -51,7 +51,7 @@ public interface EstudianteDAO extends IDBConnection{
             ps.setString(2, estudiante.getApellidos());
             ps.setString(3, estudiante.getEmail());
             ps.setString(4, estudiante.getPassword());
-            ps.executeUpdate(insert);
+            ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,7 +73,7 @@ public interface EstudianteDAO extends IDBConnection{
             ps.setString(3, estudiante.getEmail());
             ps.setString(4, estudiante.getPassword());
             ps.setInt(5, estudiante.getId());
-            ps.executeUpdate(update);
+            ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();

@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class Principal {
+public class Principal implements IMapeable{
     
     private final Estudiante estudiante;
     private FrmPrincipal frmPrincipal;
@@ -31,20 +31,19 @@ public class Principal {
     }
     
     private void colocarEstudiante() {
-        JLabel lblEstudiante = (JLabel) frmPrincipal.getComponentByName("lblEstudiante");
+        JLabel lblEstudiante = (JLabel) getComponentByName("lblEstudiante", frmPrincipal);
         lblEstudiante.setText(estudiante.getApellidos() + ", " + estudiante.getNombre());
     }
     
     private void colocarCiclo() {
         this.ciclo = Ciclo.obtenerCiclo();
-        JLabel lblCiclo = (JLabel) frmPrincipal.getComponentByName("lblCiclo");
+        JLabel lblCiclo = (JLabel) getComponentByName("lblCiclo", frmPrincipal);
         lblCiclo.setText(ciclo.getNombre());
-        System.out.println(ciclo.getId());
     }
     
     private void listarMatricula() {
         ArrayList<Matricula> matriculas = Matricula.listarMatriculas(ciclo, estudiante);
-        JTable tblCursos = (JTable) frmPrincipal.getComponentByName("tblCursos");
+        JTable tblCursos = (JTable) getComponentByName("tblCursos", frmPrincipal);
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
         modelo.addColumn("Profesor");

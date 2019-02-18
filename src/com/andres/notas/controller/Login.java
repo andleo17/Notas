@@ -6,7 +6,7 @@ import com.andres.notas.view.FrmLogin;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
-public class Login {
+public class Login implements IMapeable{
 
     private FrmLogin frmLogin;
     private Estudiante estudiante;
@@ -16,27 +16,44 @@ public class Login {
         frmLogin.setVisible(true);
         frmLogin.setTitle("Bienvenido");
         
-        JButton btnIngresar = (JButton) frmLogin.getComponentByName("btnIngresar");
+        JButton btnIngresar = (JButton) getComponentByName("btnIngresar", frmLogin);
         btnIngresar.addActionListener(evt -> {
             iniciarSesion();
         });
+        
+        JButton btnRegistro = (JButton) getComponentByName("btnRegistro", frmLogin);
+        btnRegistro.addActionListener(evt -> {
+            registrar();
+        });
+        
+        JButton btnCambiarPassword = (JButton) getComponentByName("btnCambiarPassword", frmLogin);
+        btnCambiarPassword.addActionListener(evt -> {
+            actualizar();
+        });
     }
     
-    public void iniciarSesion() {
+    private void iniciarSesion() {
         estudiante = new Estudiante();
-        JTextField txtEmail = (JTextField) frmLogin.getComponentByName("txtEmail");
-        JTextField txtPassword = (JTextField) frmLogin.getComponentByName("txtPassword");
+        JTextField txtEmail = (JTextField) getComponentByName("txtEmail", frmLogin);
+        JTextField txtPassword = (JTextField) getComponentByName("txtPassword", frmLogin);
         
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         
         estudiante = estudiante.iniciarSesion(email, password);
         if (estudiante != null) {
-            Principal principal = new Principal(estudiante);
-            principal.iniciar();
+            new Principal(estudiante).iniciar();
         }else {
             System.err.println("Ingreso incorrecto");
         }
+    }
+    
+    private void registrar() {
+        new Registro().iniciar();
+    }
+    
+    private void actualizar() {
+        new CambiarPassword().iniciar();
     }
     
 }
