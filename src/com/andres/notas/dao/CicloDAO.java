@@ -16,9 +16,10 @@ public interface CicloDAO extends IDBConnection{
         Ciclo c = new Ciclo();
         ArrayList<Ciclo> ciclos = new ArrayList<>();
         try (Connection connection = conectarBD()) {
-            String query = String.format("SELECT * FROM %s WHERE %s LIKE EXTRACT(YEAR FROM CURRENT_DATE)::VARCHAR || '%';", 
+            String query = String.format("SELECT * FROM %s WHERE %s LIKE EXTRACT(YEAR FROM CURRENT_DATE)::VARCHAR || ", 
                 TCICLO,
                 TCICLO_nombre);
+            query = query + "\'%\'";
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             

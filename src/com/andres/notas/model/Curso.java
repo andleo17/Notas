@@ -15,8 +15,10 @@ public class Curso implements CursoDAO, IAdministrable {
 
     public static Curso buscar(int id) {
         ArrayList<Curso> curso = listar();
-        curso.stream().filter(c -> c.getId() == id);
-        return curso.get(0);
+        for (Curso c : curso) {
+            if (c.getId() == id) return c;
+        }
+        return null;
     }
 
     public static ArrayList<Curso> listar() {

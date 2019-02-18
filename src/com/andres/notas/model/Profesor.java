@@ -16,8 +16,10 @@ public class Profesor implements ProfesorDAO, IAdministrable {
 
     public static Profesor buscar(int id) {
         ArrayList<Profesor> profesor = listar();
-        profesor.stream().filter(p -> p.getId() == id);
-        return profesor.get(0);
+        for (Profesor p : profesor) {
+            if (p.getId() == id) return p;
+        }
+        return null;
     }
 
     public static ArrayList<Profesor> listar() {

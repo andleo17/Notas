@@ -17,7 +17,7 @@ public interface RubricaDAO extends IDBConnection, NotaDAO {
         ArrayList<Rubrica> rubricas = new ArrayList<>();
 
         try (Connection connection = conectarBD()) {
-            String query = String.format("SELECT * FROM %s WHERE %s = ?, %s = ?, %s = ?;",
+            String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ?;",
                             TRUBRICA,
                             TRUBRICA_idCiclo,
                             TRUBRICA_idCurso,

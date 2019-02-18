@@ -19,7 +19,6 @@ public class Login {
         JButton btnIngresar = (JButton) frmLogin.getComponentByName("btnIngresar");
         btnIngresar.addActionListener(evt -> {
             iniciarSesion();
-            iniciarSesionOK();
         });
     }
     
@@ -32,11 +31,9 @@ public class Login {
         String password = txtPassword.getText();
         
         estudiante = estudiante.iniciarSesion(email, password);
-    }
-    
-    public void iniciarSesionOK() {
         if (estudiante != null) {
-            System.out.println("Ingreso correcto");
+            Principal principal = new Principal(estudiante);
+            principal.iniciar();
         }else {
             System.err.println("Ingreso incorrecto");
         }
