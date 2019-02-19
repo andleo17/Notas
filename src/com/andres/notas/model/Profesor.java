@@ -12,7 +12,7 @@ public class Profesor implements ProfesorDAO, IAdministrable {
     private String apellidos;
     private String email;
 
-    private static Profesor objProfesor = new Profesor();
+    private static final Profesor objProfesor = new Profesor();
 
     public static Profesor buscar(int id) {
         ArrayList<Profesor> profesor = listar();
@@ -26,14 +26,17 @@ public class Profesor implements ProfesorDAO, IAdministrable {
         return objProfesor.consultarLista();
     }
 
+    @Override
     public void agregar() {
         objProfesor.agregar(this);
     }
     
+    @Override
     public void actualizar() {
         objProfesor.actualizar(this);
     }
 
+    @Override
     public void eliminar() {
         objProfesor.eliminar(this);
     }

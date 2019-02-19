@@ -4,11 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/Main.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Estudiante.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmPrincipal.java</file>
             <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmLogin.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/database/Database.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Principal.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Registro.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmCambiarPassword.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/CambiarPassword.java</file>
             <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Login.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/dao/EstudianteDAO.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmRegistro.java</file>
         </group>
     </open-files>
 </project-private>

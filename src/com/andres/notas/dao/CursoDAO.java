@@ -15,8 +15,9 @@ public interface CursoDAO extends IDBConnection {
         ArrayList<Curso> cursos = new ArrayList<>();
         
         try (Connection connection = conectarBD()){
-            String query = String.format("SELECT * FROM %s;",
-                            TCURSO);
+            String query = String.format("SELECT * FROM %s ORDER BY %s;",
+                            TCURSO,
+                            TCURSO_id);
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             
@@ -45,7 +46,7 @@ public interface CursoDAO extends IDBConnection {
             PreparedStatement ps = connection.prepareStatement(insert);
             ps.setString(1, curso.getNombre());
             ps.setInt(2, curso.getCreditos());
-            ps.executeUpdate(insert);
+            ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,7 +64,7 @@ public interface CursoDAO extends IDBConnection {
             ps.setString(1, curso.getNombre());
             ps.setInt(2, curso.getCreditos());
             ps.setInt(3, curso.getId());
-            ps.executeUpdate(update);
+            ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,7 +76,7 @@ public interface CursoDAO extends IDBConnection {
             String delete = String.format("DELETE FROM %s WHERE %s = ?;", TCURSO, TCURSO_id);
             PreparedStatement ps = connection.prepareStatement(delete);
             ps.setInt(1, curso.getId());
-            ps.executeUpdate(delete);
+            ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
             e.printStackTrace();

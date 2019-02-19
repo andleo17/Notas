@@ -11,7 +11,7 @@ public class Curso implements CursoDAO, IAdministrable {
     private String nombre;
     private int creditos;
 
-    private static Curso objCurso = new Curso();
+    private static final Curso objCurso = new Curso();
 
     public static Curso buscar(int id) {
         ArrayList<Curso> curso = listar();
@@ -25,14 +25,17 @@ public class Curso implements CursoDAO, IAdministrable {
         return objCurso.consultarLista();
     }
 
+    @Override
     public void agregar() {
         objCurso.agregar(this);
     }
 
+    @Override
     public void actualizar() {
         objCurso.actualizar(this);
     }
 
+    @Override
     public void eliminar() {
         objCurso.eliminar(this);
     }

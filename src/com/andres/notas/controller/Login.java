@@ -4,6 +4,7 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Estudiante;
 import com.andres.notas.view.FrmLogin;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class Login implements IMapeable{
@@ -15,6 +16,7 @@ public class Login implements IMapeable{
         frmLogin = new FrmLogin();
         frmLogin.setVisible(true);
         frmLogin.setTitle("Bienvenido");
+        frmLogin.setLocationRelativeTo(null);
         
         JButton btnIngresar = (JButton) getComponentByName("btnIngresar", frmLogin);
         btnIngresar.addActionListener(evt -> {
@@ -42,9 +44,10 @@ public class Login implements IMapeable{
         
         estudiante = estudiante.iniciarSesion(email, password);
         if (estudiante != null) {
+            frmLogin.dispose();
             new Principal(estudiante).iniciar();
         }else {
-            System.err.println("Ingreso incorrecto");
+            JOptionPane.showMessageDialog(frmLogin, "Email y/o contraseña incorrectos", "Login incorrecto", JOptionPane.ERROR_MESSAGE);
         }
     }
     

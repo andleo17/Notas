@@ -13,7 +13,7 @@ public class Estudiante implements EstudianteDAO {
     private String email;
     private String password;
 
-    private static Estudiante objEstudiante = new Estudiante();
+    private static final Estudiante objEstudiante = new Estudiante();
 
     public Estudiante iniciarSesion(String email, String password) {
         ArrayList<Estudiante> estudiantes = objEstudiante.consultarLista();

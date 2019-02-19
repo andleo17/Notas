@@ -13,20 +13,23 @@ public class Rubrica implements RubricaDAO, IAdministrable {
     private float peso;
     private ArrayList<Nota> notas;
 
-    private static Rubrica objRubrica = new Rubrica();
+    private static final Rubrica objRubrica = new Rubrica();
 
     public static ArrayList<Rubrica> listar(Matricula matricula) {
         return objRubrica.obtenerRubricas(matricula);
     }
 
+    @Override
     public void agregar() {
         objRubrica.agregar(this);
     }
 
+    @Override
     public void actualizar() {
         objRubrica.actualizar(this);
     }
 
+    @Override
     public void eliminar() {
         objRubrica.eliminar(this);
     }

@@ -8,7 +8,7 @@ public class Ciclo implements CicloDAO{
     private int id;
     private String nombre;
 
-    private static Ciclo objCiclo = new Ciclo();
+    private static final Ciclo objCiclo = new Ciclo();
 
     public static Ciclo obtenerCiclo() {
         return objCiclo.obtenerCicloActual();

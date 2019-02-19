@@ -14,20 +14,23 @@ public class Matricula implements MatriculaDAO, IAdministrable {
     private ArrayList<Rubrica> rubricas;
     private float promedioFinal;
 
-    private static Matricula objMatricula = new Matricula();
+    private static final Matricula objMatricula = new Matricula();
 
     public static ArrayList<Matricula> listarMatriculas(Ciclo ciclo, Estudiante estudiante) {
         return objMatricula.consultarLista(estudiante, ciclo);
     }
 
+    @Override
     public void agregar() {
         objMatricula.agregar(this);
     }
 
+    @Override
     public void actualizar() {
         objMatricula.actualizar(this);
     }
 
+    @Override
     public void eliminar() {
         objMatricula.eliminar(this);
     }

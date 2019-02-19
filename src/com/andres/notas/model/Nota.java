@@ -11,20 +11,23 @@ public class Nota implements NotaDAO, IAdministrable {
     private int numeroNota;
     private float nota;
 
-    private static Nota objNota = new Nota();
+    private static final Nota objNota = new Nota();
 
     public static ArrayList<Nota> listar(Rubrica rubrica) {
         return objNota.obtenerNotas(rubrica);
     }
 
+    @Override
     public void agregar() {
         objNota.agregar(this);
     }
 
+    @Override
     public void actualizar() {
         objNota.actualizar(this);
     }
 
+    @Override
     public void eliminar() {
         objNota.eliminar(this);
     }

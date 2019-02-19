@@ -14,6 +14,8 @@ public class CambiarPassword implements IMapeable{
         frmCambiarPassword = new FrmCambiarPassword();
         frmCambiarPassword.setVisible(true);
         frmCambiarPassword.setTitle("Cambiar contraseña");
+        frmCambiarPassword.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        frmCambiarPassword.setLocationRelativeTo(null);
         
         JButton btnCambiar = (JButton) getComponentByName("btnCambiar", frmCambiarPassword);
         btnCambiar.addActionListener(evt -> {

@@ -6,6 +6,7 @@ import com.andres.notas.model.Estudiante;
 import com.andres.notas.model.Matricula;
 import com.andres.notas.view.FrmPrincipal;
 import java.util.ArrayList;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +25,10 @@ public class Principal implements IMapeable{
         frmPrincipal = new FrmPrincipal();
         frmPrincipal.setVisible(true);
         frmPrincipal.setTitle("Menú principal");
+        frmPrincipal.setLocationRelativeTo(null);
+        
+        JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmPrincipal);
+        btnAgregar.addActionListener(evt -> agregar());
         
         colocarEstudiante();
         colocarCiclo();
@@ -39,6 +44,10 @@ public class Principal implements IMapeable{
         this.ciclo = Ciclo.obtenerCiclo();
         JLabel lblCiclo = (JLabel) getComponentByName("lblCiclo", frmPrincipal);
         lblCiclo.setText(ciclo.getNombre());
+    }
+    
+    private void agregar() {
+        new AgregarMatricula(estudiante, ciclo).iniciar();
     }
     
     private void listarMatricula() {

@@ -2,12 +2,12 @@
 package com.andres.notas.controller;
 
 import java.awt.Component;
+import java.awt.Window;
 import java.lang.reflect.Field;
-import javax.swing.JFrame;
 
 public interface IMapeable {
     
-    default Component getComponentByName(String name, JFrame frame) {
+    default Component getComponentByName(String name, Window frame) {
         for (Field field : frame.getClass().getDeclaredFields()) { 
             field.setAccessible(true); 
             if (name.equals(field.getName())) { 

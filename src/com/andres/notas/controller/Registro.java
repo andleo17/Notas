@@ -13,6 +13,8 @@ public class Registro implements IMapeable{
     public void iniciar() {
         frmRegistro = new FrmRegistro();
         frmRegistro.setVisible(true);
+        frmRegistro.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        frmRegistro.setLocationRelativeTo(null);
         
         JButton btnRegistro = (JButton) getComponentByName("btnRegistro", frmRegistro);
         btnRegistro.addActionListener(evt -> {
