@@ -3,7 +3,7 @@ package com.andres.notas.view;
 
 public class FrmAgregarCurso extends javax.swing.JDialog {
 
-    public FrmAgregarCurso(java.awt.Frame parent, boolean modal) {
+    public FrmAgregarCurso(java.awt.Window parent, ModalityType modal) {
         super(parent, modal);
         initComponents();
     }

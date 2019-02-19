@@ -47,7 +47,8 @@ public class Principal implements IMapeable{
     }
     
     private void agregar() {
-        new AgregarMatricula(estudiante, ciclo).iniciar();
+        new AgregarMatricula(estudiante, ciclo).iniciar(frmPrincipal);
+        listarMatricula();
     }
     
     private void listarMatricula() {

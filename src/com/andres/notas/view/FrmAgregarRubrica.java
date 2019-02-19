@@ -3,8 +3,8 @@ package com.andres.notas.view;
 
 public class FrmAgregarRubrica extends javax.swing.JDialog {
 
-    public FrmAgregarRubrica(javax.swing.JFrame frame, boolean modal) {
-        super(frame, modal);
+    public FrmAgregarRubrica(java.awt.Window parent, ModalityType modal) {
+        super(parent, modal);
         initComponents();
     }
 

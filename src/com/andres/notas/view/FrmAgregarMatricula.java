@@ -1,9 +1,10 @@
 
 package com.andres.notas.view;
 
-public class FrmAgregarMatricula extends javax.swing.JFrame {
+public class FrmAgregarMatricula extends javax.swing.JDialog {
 
-    public FrmAgregarMatricula() {
+    public FrmAgregarMatricula(java.awt.Frame frame, boolean modal) {
+        super(frame, modal);
         initComponents();
     }
     
@@ -27,7 +28,7 @@ public class FrmAgregarMatricula extends javax.swing.JFrame {
         tblRubricas = new javax.swing.JTable();
         btnAgregarMatricula = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Seleccionar Curso:");
 

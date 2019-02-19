@@ -4,27 +4,33 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Ciclo;
 import com.andres.notas.model.Curso;
 import com.andres.notas.model.Estudiante;
+import com.andres.notas.model.Matricula;
 import com.andres.notas.model.Profesor;
 import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmAgregarMatricula;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class AgregarMatricula implements IMapeable{
     
     private FrmAgregarMatricula frmAgregarMatricula;
-    private Estudiante estudiante;
-    private Ciclo ciclo;
-    private ArrayList<Rubrica> rubricas = new ArrayList<>();
+    private final Estudiante estudiante;
+    private final Ciclo ciclo;
+    private final ArrayList<Rubrica> rubricas;
     
     public AgregarMatricula(Estudiante estudiante, Ciclo ciclo) {
+        this.rubricas = new ArrayList<>();
         this.estudiante = estudiante;
         this.ciclo = ciclo;
     }
     
-    public void iniciar() {
-        frmAgregarMatricula = new FrmAgregarMatricula();
+    public void iniciar(java.awt.Frame frame) {
+        frmAgregarMatricula = new FrmAgregarMatricula(frame, false);
         frmAgregarMatricula.setVisible(true);
         frmAgregarMatricula.setTitle("Agregar Matrícula");
         frmAgregarMatricula.setLocationRelativeTo(null);
@@ -56,6 +62,10 @@ public class AgregarMatricula implements IMapeable{
         
         JButton btnAgregarMatricula = (JButton) getComponentByName("btnAgregarMatricula", frmAgregarMatricula);
         btnAgregarMatricula.addActionListener(evt -> agregarMatricula());
+        
+        frmAgregarMatricula.setModal(true);
+        frmAgregarMatricula.setVisible(false);
+        frmAgregarMatricula.setVisible(true);
     }
     
     private void listarCursos() {
@@ -109,11 +119,61 @@ public class AgregarMatricula implements IMapeable{
     }
     
     private void agregarRubrica() {
+        AgregarRubrica agregarRubrica = new AgregarRubrica();
+        agregarRubrica.iniciar(frmAgregarMatricula);
+        rubricas.add(agregarRubrica.getRubrica());
+        listarRubricas();
+    }
+    
+    private void listarRubricas() {
+        JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
         
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("N° Rúbrica");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Peso");
+        modelo.addColumn("N° Notas");
+        Object datos[] = new Object[4];
+        
+        rubricas.forEach(r -> {
+            datos[0] = rubricas.indexOf(r) + 1;
+            datos[1] = r.getNombre();
+            datos[2] = r.getPeso();
+            datos[3] = r.getNotas().size();
+            
+            modelo.addRow(datos);
+        });
+        
+        tblRubricas.setModel(modelo);
     }
     
     private void agregarMatricula() {
+        JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
+        JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
         
+        Curso curso = Curso.buscar(cboCursos.getSelectedIndex() + 1);
+        Profesor profesor = Profesor.buscar(cboProfesores.getSelectedIndex() + 1);
+        
+        Matricula matricula = new Matricula();
+        matricula.setCiclo(ciclo);
+        matricula.setCurso(curso);
+        matricula.setEstudiante(estudiante);
+        matricula.setProfesor(profesor);
+        matricula.agregar();
+        
+        AtomicInteger i = new AtomicInteger(1);
+        
+        rubricas.forEach(r -> {
+            r.setMatricula(matricula);
+            r.setNumeroRubrica(i.getAndIncrement());
+            r.agregar();
+            r.getNotas().forEach(n -> {
+                n.setRubrica(r);
+                n.agregar();
+            });
+        });
+        
+        frmAgregarMatricula.dispose();
     }
     
 }

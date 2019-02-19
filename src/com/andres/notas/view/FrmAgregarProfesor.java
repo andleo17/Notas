@@ -3,7 +3,7 @@ package com.andres.notas.view;
 
 public class FrmAgregarProfesor extends javax.swing.JDialog {
 
-    public FrmAgregarProfesor(java.awt.Frame parent, boolean modal) {
+    public FrmAgregarProfesor(java.awt.Window parent, ModalityType modal) {
         super(parent, modal);
         initComponents();
     }
