@@ -14,7 +14,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class AgregarMatricula implements IMapeable{
     
@@ -22,6 +21,8 @@ public class AgregarMatricula implements IMapeable{
     private final Estudiante estudiante;
     private final Ciclo ciclo;
     private final ArrayList<Rubrica> rubricas;
+    private ArrayList<Profesor> profesores;
+    private ArrayList<Curso> cursos;
     
     public AgregarMatricula(Estudiante estudiante, Ciclo ciclo) {
         this.rubricas = new ArrayList<>();
@@ -69,14 +70,14 @@ public class AgregarMatricula implements IMapeable{
     }
     
     private void listarCursos() {
-        ArrayList<Curso> cursos = Curso.listar();
+        cursos = Curso.listar();
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
         cboCursos.removeAllItems();
         cursos.forEach(c -> cboCursos.addItem(c.getNombre()));
     }
     
     private void listarProfesores() {
-        ArrayList<Profesor> profesores = Profesor.listar();
+        profesores = Profesor.listar();
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
         cboProfesores.removeAllItems();
         profesores.forEach(p -> cboProfesores.addItem(p.getApellidos() + ", " + p.getNombre()));
@@ -95,7 +96,7 @@ public class AgregarMatricula implements IMapeable{
     
     private void quitarCurso() {
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        Curso curso = Curso.buscar(cboCursos.getSelectedIndex() + 1);
+        Curso curso = cursos.get(cboCursos.getSelectedIndex());
         curso.eliminar();
         listarCursos();
     }
@@ -113,7 +114,7 @@ public class AgregarMatricula implements IMapeable{
     
     private void quitarProfesor() {
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        Profesor profesor = Profesor.buscar(cboProfesores.getSelectedIndex() + 1);
+        Profesor profesor = profesores.get(cboProfesores.getSelectedIndex());
         profesor.eliminar();
         listarProfesores();
     }
@@ -151,8 +152,8 @@ public class AgregarMatricula implements IMapeable{
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
         
-        Curso curso = Curso.buscar(cboCursos.getSelectedIndex() + 1);
-        Profesor profesor = Profesor.buscar(cboProfesores.getSelectedIndex() + 1);
+        Curso curso = cursos.get(cboCursos.getSelectedIndex());
+        Profesor profesor = profesores.get(cboProfesores.getSelectedIndex());
         
         Matricula matricula = new Matricula();
         matricula.setCiclo(ciclo);

@@ -3,15 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/Main.java</file>
             <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmPrincipal.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmLogin.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarRubrica.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Profesor.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Rubrica.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarCurso.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/dao/ProfesorDAO.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/dao/RubricaDAO.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmAgregarProfesor.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarProfesor.java</file>
             <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Principal.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Registro.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmCambiarPassword.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/CambiarPassword.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Login.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmRegistro.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmAgregarMatricula.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Matricula.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarMatricula.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmAgregarRubrica.java</file>
+            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/view/FrmAgregarCurso.java</file>
         </group>
     </open-files>
 </project-private>

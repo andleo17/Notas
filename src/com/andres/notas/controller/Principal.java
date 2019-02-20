@@ -6,6 +6,7 @@ import com.andres.notas.model.Estudiante;
 import com.andres.notas.model.Matricula;
 import com.andres.notas.view.FrmPrincipal;
 import java.util.ArrayList;
+import java.util.Comparator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -53,6 +54,11 @@ public class Principal implements IMapeable{
     
     private void listarMatricula() {
         ArrayList<Matricula> matriculas = Matricula.listarMatriculas(ciclo, estudiante);
+        matriculas.sort((m, m1) -> {
+            String nombre1 = m.getCurso().getNombre();
+            String nombre2 = m1.getCurso().getNombre();
+            return nombre1.compareTo(nombre2);
+        });
         JTable tblCursos = (JTable) getComponentByName("tblCursos", frmPrincipal);
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.addColumn("Nombre");
