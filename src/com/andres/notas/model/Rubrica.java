@@ -22,6 +22,10 @@ public class Rubrica implements RubricaDAO, IAdministrable {
     @Override
     public void agregar() {
         objRubrica.agregar(this);
+        notas.forEach(n -> {
+            n.setRubrica(this);
+            n.agregar();
+        });
     }
 
     @Override

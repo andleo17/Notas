@@ -8,6 +8,7 @@ import com.andres.notas.model.Matricula;
 import com.andres.notas.model.Profesor;
 import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmAgregarMatricula;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
@@ -24,6 +25,7 @@ public class AgregarMatricula implements IMapeable{
     private ArrayList<Rubrica> rubricas;
     private ArrayList<Profesor> profesores;
     private ArrayList<Curso> cursos;
+    private int j;
     
     public AgregarMatricula(Estudiante estudiante, Ciclo ciclo) {
         this.rubricas = new ArrayList<>();
@@ -73,6 +75,7 @@ public class AgregarMatricula implements IMapeable{
     public void iniciar(java.awt.Frame frame, Matricula matricula) {
         this.matricula = matricula;
         rubricas = matricula.getRubricas();
+        j = rubricas.size();
         
         frmAgregarMatricula = new FrmAgregarMatricula(frame, false);
         frmAgregarMatricula.setVisible(true);
@@ -208,44 +211,25 @@ public class AgregarMatricula implements IMapeable{
         matricula.setCurso(cursos.get(cboCursos.getSelectedIndex()));
         matricula.setEstudiante(estudiante);
         matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
+        matricula.setRubricas(rubricas);
         matricula.agregar();
-        
-        AtomicInteger i = new AtomicInteger(1);
-        
-        rubricas.forEach(r -> {
-            r.setMatricula(matricula);
-            r.setNumeroRubrica(i.getAndIncrement());
-            r.agregar();
-            r.getNotas().forEach(n -> {
-                n.setRubrica(r);
-                n.agregar();
-            });
-        });
         
         frmAgregarMatricula.dispose();
     }
     
     private void modificarMatricula() {
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        
-        matricula = new Matricula();
-        matricula.setCiclo(ciclo);
-        matricula.setCurso(cursos.get(cboCursos.getSelectedIndex()));
-        matricula.setEstudiante(estudiante);
         matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
         
-        AtomicInteger i = new AtomicInteger(1);
-        
-        rubricas.forEach(r -> {
-            r.setMatricula(matricula);
-            r.setNumeroRubrica(i.getAndIncrement());
-            r.getNotas().forEach(n -> {
-                n.setRubrica(r);
-                n.actualizar();
-            });
-            r.actualizar();
-        });
+        if(j != rubricas.size()) {
+            
+            for (int i = j; i < rubricas.size(); i++) {
+                Rubrica r = rubricas.get(i);
+                r.setMatricula(matricula);
+                r.setNumeroRubrica(i + 1);
+                r.agregar();
+            }
+        }
         
         matricula.actualizar();
         frmAgregarMatricula.dispose();

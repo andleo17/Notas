@@ -4,6 +4,7 @@ package com.andres.notas.model;
 import java.util.ArrayList;
 
 import com.andres.notas.dao.MatriculaDAO;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Matricula implements MatriculaDAO, IAdministrable {
     
@@ -23,6 +24,13 @@ public class Matricula implements MatriculaDAO, IAdministrable {
     @Override
     public void agregar() {
         objMatricula.agregar(this);
+        AtomicInteger i = new AtomicInteger(1);
+        
+        rubricas.forEach(r -> {
+            r.setMatricula(this);
+            r.setNumeroRubrica(i.getAndIncrement());
+            r.agregar();
+        });
     }
 
     @Override
