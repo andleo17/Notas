@@ -16,9 +16,9 @@ public interface ProfesorDAO extends IDBConnection{
         ArrayList<Profesor> profesores = new ArrayList<>();
 
         try (Connection connection = conectarBD()){
-            String query = String.format("SELECT * FROM %s ORDER BY %s",
+            String query = String.format("SELECT * FROM %s ORDER BY %s;",
                             TPROFESOR,
-                            TPROFESOR_id);
+                            TPROFESOR_apellidos);
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 

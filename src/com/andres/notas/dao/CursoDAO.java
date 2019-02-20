@@ -17,7 +17,7 @@ public interface CursoDAO extends IDBConnection {
         try (Connection connection = conectarBD()){
             String query = String.format("SELECT * FROM %s ORDER BY %s;",
                             TCURSO,
-                            TCURSO_id);
+                            TCURSO_nombre);
             PreparedStatement ps = connection.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             

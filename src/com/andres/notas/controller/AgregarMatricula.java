@@ -90,14 +90,13 @@ public class AgregarMatricula implements IMapeable{
     
     private void modificarCurso() {
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        new AgregarCurso().iniciar(frmAgregarMatricula, Curso.buscar(cboCursos.getSelectedIndex() + 1));
+        new AgregarCurso().iniciar(frmAgregarMatricula, cursos.get(cboCursos.getSelectedIndex()));
         listarCursos();
     }
     
     private void quitarCurso() {
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        Curso curso = cursos.get(cboCursos.getSelectedIndex());
-        curso.eliminar();
+        cursos.get(cboCursos.getSelectedIndex()).eliminar();
         listarCursos();
     }
     
@@ -108,14 +107,13 @@ public class AgregarMatricula implements IMapeable{
     
     private void modificarProfesor() {
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        new AgregarProfesor().iniciar(frmAgregarMatricula, Profesor.buscar(cboProfesores.getSelectedIndex() + 1));
+        new AgregarProfesor().iniciar(frmAgregarMatricula, profesores.get(cboProfesores.getSelectedIndex()));
         listarProfesores();
     }
     
     private void quitarProfesor() {
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        Profesor profesor = profesores.get(cboProfesores.getSelectedIndex());
-        profesor.eliminar();
+        profesores.get(cboProfesores.getSelectedIndex()).eliminar();
         listarProfesores();
     }
     
@@ -152,14 +150,11 @@ public class AgregarMatricula implements IMapeable{
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
         
-        Curso curso = cursos.get(cboCursos.getSelectedIndex());
-        Profesor profesor = profesores.get(cboProfesores.getSelectedIndex());
-        
         Matricula matricula = new Matricula();
         matricula.setCiclo(ciclo);
-        matricula.setCurso(curso);
+        matricula.setCurso(cursos.get(cboCursos.getSelectedIndex()));
         matricula.setEstudiante(estudiante);
-        matricula.setProfesor(profesor);
+        matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
         matricula.agregar();
         
         AtomicInteger i = new AtomicInteger(1);
