@@ -32,6 +32,7 @@ public class Matricula implements MatriculaDAO, IAdministrable {
 
     @Override
     public void eliminar() {
+        rubricas.forEach(r -> r.eliminar());
         objMatricula.eliminar(this);
     }
 

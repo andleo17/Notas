@@ -94,7 +94,7 @@ public interface NotaDAO extends IDBConnection{
 
     default void eliminar(Nota nota) {
         try (Connection connection = conectarBD()) {
-            String delete = String.format("DELETE FROM %s WHERE %s = ? AND %s = ?, %s = ?, %s = ?, %s = ?;", 
+            String delete = String.format("DELETE FROM %s WHERE %s = ? AND %s = ? AND %s = ? AND %s = ? AND %s = ?;", 
                                 TNOTA,
                                 TNOTA_idCiclo,
                                 TNOTA_idCurso,

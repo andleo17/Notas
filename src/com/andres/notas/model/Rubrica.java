@@ -31,6 +31,7 @@ public class Rubrica implements RubricaDAO, IAdministrable {
 
     @Override
     public void eliminar() {
+        notas.forEach(n -> n.eliminar());
         objRubrica.eliminar(this);
     }
 

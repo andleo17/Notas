@@ -71,7 +71,7 @@ public interface RubricaDAO extends IDBConnection, NotaDAO {
 
     default void actualizar(Rubrica rubrica) {
         try (Connection connection = conectarBD()){
-            String update = String.format("UPDATE %s SET %s = ?, SET %s = ? WHERE %s = ? AND %s = ? AND %s = ? AND %s = ?;",
+            String update = String.format("UPDATE %s SET %s = ?, %s = ? WHERE %s = ? AND %s = ? AND %s = ? AND %s = ?;",
                                 TRUBRICA,
                                 TRUBRICA_peso,
                                 TRUBRICA_nombre,
@@ -95,7 +95,7 @@ public interface RubricaDAO extends IDBConnection, NotaDAO {
 
     default void eliminar(Rubrica rubrica) {
         try (Connection connection = conectarBD()) {
-            String delete = String.format("DELETE FROM %s WHERE %s = ? AND %s = ?, %s = ?, %s = ?;", 
+            String delete = String.format("DELETE FROM %s WHERE %s = ? AND %s = ? AND %s = ? AND %s = ?;", 
                                 TRUBRICA,
                                 TRUBRICA_idCiclo,
                                 TRUBRICA_idCurso,

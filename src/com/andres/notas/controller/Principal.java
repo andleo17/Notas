@@ -6,7 +6,6 @@ import com.andres.notas.model.Estudiante;
 import com.andres.notas.model.Matricula;
 import com.andres.notas.view.FrmPrincipal;
 import java.util.ArrayList;
-import java.util.Comparator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTable;
@@ -17,6 +16,7 @@ public class Principal implements IMapeable{
     private final Estudiante estudiante;
     private FrmPrincipal frmPrincipal;
     private Ciclo ciclo;
+    private ArrayList<Matricula> matriculas;
     
     public Principal(Estudiante estudiante) {
         this.estudiante = estudiante;
@@ -30,6 +30,12 @@ public class Principal implements IMapeable{
         
         JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmPrincipal);
         btnAgregar.addActionListener(evt -> agregar());
+        
+        JButton btnModificar = (JButton) getComponentByName("btnModificar", frmPrincipal);
+        btnModificar.addActionListener(evt -> modificar());
+        
+        JButton btnEliminar = (JButton) getComponentByName("btnEliminar", frmPrincipal);
+        btnEliminar.addActionListener(evt -> eliminar());
         
         colocarEstudiante();
         colocarCiclo();
@@ -52,8 +58,20 @@ public class Principal implements IMapeable{
         listarMatricula();
     }
     
+    private void modificar() {
+        JTable tblCursos = (JTable) getComponentByName("tblCursos", frmPrincipal);
+        new AgregarMatricula(estudiante, ciclo).iniciar(frmPrincipal, matriculas.get(tblCursos.getSelectedRow()));
+        listarMatricula();
+    }
+    
+    private void eliminar() {
+        JTable tblCursos = (JTable) getComponentByName("tblCursos", frmPrincipal);
+        matriculas.get(tblCursos.getSelectedRow()).eliminar();
+        listarMatricula();
+    }
+    
     private void listarMatricula() {
-        ArrayList<Matricula> matriculas = Matricula.listarMatriculas(ciclo, estudiante);
+        matriculas = Matricula.listarMatriculas(ciclo, estudiante);
         matriculas.sort((m, m1) -> {
             String nombre1 = m.getCurso().getNombre();
             String nombre2 = m1.getCurso().getNombre();
