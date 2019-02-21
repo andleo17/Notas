@@ -13,6 +13,7 @@ import com.andres.notas.model.Curso;
 import com.andres.notas.model.Estudiante;
 import com.andres.notas.model.Matricula;
 import com.andres.notas.model.Profesor;
+import java.sql.SQLException;
 
 public interface MatriculaDAO extends IDBConnection, RubricaDAO {
 
@@ -41,28 +42,26 @@ public interface MatriculaDAO extends IDBConnection, RubricaDAO {
             }
             ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return matriculas;
     }
 
-    default void agregar(Matricula matricula) {
+    default void agregar(Matricula matricula) throws SQLException {
         try (Connection connection = conectarBD()) {
             String insert = String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES (?, ?, ?, ?);",
-                                TMATRICULA,
-                                TMATRICULA_idCiclo,
-                                TMATRICULA_idCurso,
-                                TMATRICULA_idEstudiante,
-                                TMATRICULA_idProfesor);
+                    TMATRICULA,
+                    TMATRICULA_idCiclo,
+                    TMATRICULA_idCurso,
+                    TMATRICULA_idEstudiante,
+                    TMATRICULA_idProfesor);
             PreparedStatement ps = connection.prepareStatement(insert);
             ps.setInt(1, matricula.getCiclo().getId());
             ps.setInt(2, matricula.getCurso().getId());
             ps.setInt(3, matricula.getEstudiante().getId());
             ps.setInt(4, matricula.getProfesor().getId());
             ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
         }
     }
 
@@ -84,7 +83,6 @@ public interface MatriculaDAO extends IDBConnection, RubricaDAO {
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -102,7 +100,6 @@ public interface MatriculaDAO extends IDBConnection, RubricaDAO {
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

@@ -16,6 +16,7 @@ public class Login implements IMapeable{
         frmLogin = new FrmLogin();
         frmLogin.setVisible(true);
         frmLogin.setTitle("Bienvenido");
+        frmLogin.setResizable(false);
         frmLogin.setLocationRelativeTo(null);
         
         JButton btnIngresar = (JButton) getComponentByName("btnIngresar", frmLogin);

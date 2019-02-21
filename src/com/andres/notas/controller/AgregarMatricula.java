@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -144,6 +145,7 @@ public class AgregarMatricula implements IMapeable{
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
         cboCursos.removeAllItems();
         cursos.forEach(c -> cboCursos.addItem(c.getNombre()));
+        cboCursos.setSelectedIndex(-1);
     }
     
     private void listarProfesores() {
@@ -151,6 +153,7 @@ public class AgregarMatricula implements IMapeable{
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
         cboProfesores.removeAllItems();
         profesores.forEach(p -> cboProfesores.addItem(p.getApellidos() + ", " + p.getNombre()));
+        cboProfesores.setSelectedIndex(-1);
     }
     
     private void agregarCurso() {
@@ -160,13 +163,19 @@ public class AgregarMatricula implements IMapeable{
     
     private void modificarCurso() {
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        new AgregarCurso().iniciar(frmAgregarMatricula, cursos.get(cboCursos.getSelectedIndex()));
+        if (cboCursos.getSelectedIndex() != -1)
+            new AgregarCurso().iniciar(frmAgregarMatricula, cursos.get(cboCursos.getSelectedIndex()));
+        else
+            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
         listarCursos();
     }
     
     private void quitarCurso() {
         JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        cursos.get(cboCursos.getSelectedIndex()).eliminar();
+        if (cboCursos.getSelectedIndex() != -1)
+            cursos.get(cboCursos.getSelectedIndex()).eliminar();
+        else
+            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
         listarCursos();
     }
     
@@ -177,20 +186,26 @@ public class AgregarMatricula implements IMapeable{
     
     private void modificarProfesor() {
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        new AgregarProfesor().iniciar(frmAgregarMatricula, profesores.get(cboProfesores.getSelectedIndex()));
+        if (cboProfesores.getSelectedIndex() != -1)
+            new AgregarProfesor().iniciar(frmAgregarMatricula, profesores.get(cboProfesores.getSelectedIndex()));
+        else
+            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un profesor", "Error", JOptionPane.ERROR_MESSAGE);
         listarProfesores();
     }
     
     private void quitarProfesor() {
         JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        profesores.get(cboProfesores.getSelectedIndex()).eliminar();
+        if (cboProfesores.getSelectedIndex() != -1)
+            profesores.get(cboProfesores.getSelectedIndex()).eliminar();
+        else
+            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un profesor", "Error", JOptionPane.ERROR_MESSAGE);
         listarProfesores();
     }
     
     private void agregarRubrica() {
         AgregarRubrica agregarRubrica = new AgregarRubrica();
         agregarRubrica.iniciar(frmAgregarMatricula);
-        rubricas.add(agregarRubrica.getRubrica());
+        if (agregarRubrica.getRubrica() != null) rubricas.add(agregarRubrica.getRubrica());
         listarRubricas();
     }
     
@@ -198,20 +213,28 @@ public class AgregarMatricula implements IMapeable{
         JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
         AgregarRubrica ar = new AgregarRubrica();
         int i = tblRubricas.getSelectedRow();
-        ar.iniciar(frmAgregarMatricula, rubricas.get(i));
-        if (matricula != null) ar.getRubrica().actualizar();
-        else {
-            rubricas.remove(i);
-            rubricas.add(i, ar.getRubrica());
+        if (i != -1){
+            ar.iniciar(frmAgregarMatricula, rubricas.get(i));
+            if (matricula != null) ar.getRubrica().actualizar();
+            else {
+                rubricas.remove(i);
+                rubricas.add(i, ar.getRubrica());
+            }
+            listarRubricas();
+        } else {
+            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione una rúbrica", "Error", JOptionPane.ERROR_MESSAGE);
         }
-        listarRubricas();
     }
     
     private void quitarRubrica() {
         JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
-        if (matricula != null) rubricas.get(tblRubricas.getSelectedRow()).eliminar();
-        rubricas.remove(tblRubricas.getSelectedRow());
-        listarRubricas();
+        if (tblRubricas.getSelectedRow() != -1) {
+            if (matricula != null) rubricas.get(tblRubricas.getSelectedRow()).eliminar();
+            rubricas.remove(tblRubricas.getSelectedRow());
+            listarRubricas();
+        } else {
+            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione una rúbrica", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void listarRubricas() {
@@ -242,13 +265,28 @@ public class AgregarMatricula implements IMapeable{
         
         matricula = new Matricula();
         matricula.setCiclo(ciclo);
-        matricula.setCurso(cursos.get(cboCursos.getSelectedIndex()));
         matricula.setEstudiante(estudiante);
-        matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
-        matricula.setRubricas(rubricas);
-        matricula.agregar();
-        
-        frmAgregarMatricula.dispose();
+        if(cboCursos.getSelectedIndex() != -1 && cboProfesores.getSelectedIndex() != -1){
+            if (!rubricas.isEmpty()) {
+                matricula.setRubricas(rubricas);
+                matricula.setCurso(cursos.get(cboCursos.getSelectedIndex()));
+                matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
+                try {
+                    matricula.agregar();
+                    frmAgregarMatricula.dispose();
+                } catch (SQLException e) {
+                    switch (Integer.valueOf(e.getSQLState())){
+                        case 23505:
+                            JOptionPane.showMessageDialog(frmAgregarMatricula, "Matrícula ya registrada", "Error al registrar", JOptionPane.ERROR_MESSAGE);
+                        default:
+                            System.err.println("Otro error");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(frmAgregarMatricula, "Ingrese rúbricas", "Error al registrar", JOptionPane.ERROR_MESSAGE);
+            }
+        }else
+            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un curso o un profesor", "Error al registrar", JOptionPane.ERROR_MESSAGE);
     }
     
     private void modificarMatricula() {

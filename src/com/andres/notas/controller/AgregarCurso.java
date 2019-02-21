@@ -4,7 +4,10 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Curso;
 import com.andres.notas.view.FrmAgregarCurso;
 import java.awt.Dialog;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class AgregarCurso implements IMapeable{
@@ -16,6 +19,13 @@ public class AgregarCurso implements IMapeable{
         frmAgregarCurso = new FrmAgregarCurso(frame, Dialog.ModalityType.MODELESS);
         frmAgregarCurso.setTitle("Agregar curso");
         frmAgregarCurso.setLocationRelativeTo(null);
+        frmAgregarCurso.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        frmAgregarCurso.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                agregar();
+            }
+        });
         
         JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarCurso);
         btnAgregar.addActionListener(evt -> agregar());
@@ -31,6 +41,13 @@ public class AgregarCurso implements IMapeable{
         frmAgregarCurso = new FrmAgregarCurso(frame, Dialog.ModalityType.MODELESS);
         frmAgregarCurso.setTitle("Modificar curso");
         frmAgregarCurso.setLocationRelativeTo(null);
+        frmAgregarCurso.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        frmAgregarCurso.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent we) {
+                agregar();
+            }
+        });
         
         JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarCurso);
         btnAgregar.setText("Modificar");
@@ -51,12 +68,17 @@ public class AgregarCurso implements IMapeable{
         JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarCurso);
         JTextField txtNumeroCreditos = (JTextField) getComponentByName("txtNumeroCreditos", frmAgregarCurso);
         
-        curso = new Curso();
-        curso.setNombre(txtNombre.getText());
-        curso.setCreditos(Integer.valueOf(txtNumeroCreditos.getText()));
-        curso.agregar();
-        
-        frmAgregarCurso.dispose();
+        try {
+            curso = new Curso();
+            curso.setNombre(txtNombre.getText());
+            curso.setCreditos(Integer.valueOf(txtNumeroCreditos.getText()));
+            curso.agregar();
+            
+            frmAgregarCurso.dispose();
+        } catch (Exception e) {
+            int respuesta = JOptionPane.showConfirmDialog(frmAgregarCurso, "¿Seguro que no quiere registrar un curso?", "Mensaje", JOptionPane.YES_NO_OPTION);
+            if (respuesta == 0) frmAgregarCurso.dispose();
+        }
     }
     
     private void actualizar() {
