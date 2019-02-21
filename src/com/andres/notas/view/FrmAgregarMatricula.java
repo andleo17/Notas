@@ -27,6 +27,8 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRubricas = new javax.swing.JTable();
         btnAgregarMatricula = new javax.swing.JButton();
+        btnModificarRubrica = new javax.swing.JButton();
+        btnQuitarRubrica = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -50,10 +52,7 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
 
         tblRubricas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "N° Rúbrica", "Nombre", "Peso", "N° Notas"
@@ -82,6 +81,10 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
         }
 
         btnAgregarMatricula.setText("Agregar Matrícula");
+
+        btnModificarRubrica.setText("Modificar Rúbrica");
+
+        btnQuitarRubrica.setText("Quitar Rúbrica");
 
         javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
         pnlFondo.setLayout(pnlFondoLayout);
@@ -113,7 +116,12 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
                                 .addComponent(btnModificarProfesor)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnQuitarProfesor))
-                            .addComponent(btnAgregarRubrica))
+                            .addGroup(pnlFondoLayout.createSequentialGroup()
+                                .addComponent(btnAgregarRubrica)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnModificarRubrica)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnQuitarRubrica)))
                         .addGap(0, 93, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlFondoLayout.createSequentialGroup()
@@ -139,7 +147,10 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
                     .addComponent(btnModificarProfesor)
                     .addComponent(btnQuitarProfesor))
                 .addGap(18, 18, 18)
-                .addComponent(btnAgregarRubrica)
+                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregarRubrica)
+                    .addComponent(btnModificarRubrica)
+                    .addComponent(btnQuitarRubrica))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
@@ -168,8 +179,10 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
     private javax.swing.JButton btnAgregarRubrica;
     private javax.swing.JButton btnModificarCurso;
     private javax.swing.JButton btnModificarProfesor;
+    private javax.swing.JButton btnModificarRubrica;
     private javax.swing.JButton btnQuitarCurso;
     private javax.swing.JButton btnQuitarProfesor;
+    private javax.swing.JButton btnQuitarRubrica;
     private javax.swing.JComboBox<String> cboCursos;
     private javax.swing.JComboBox<String> cboProfesores;
     private javax.swing.JLabel jLabel1;

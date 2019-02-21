@@ -64,6 +64,13 @@ public class AgregarMatricula implements IMapeable{
         JButton btnAgregarRubrica = (JButton) getComponentByName("btnAgregarRubrica", frmAgregarMatricula);
         btnAgregarRubrica.addActionListener(evt -> agregarRubrica());
         
+        JButton btnModificarRubrica = (JButton) getComponentByName("btnModificarRubrica", frmAgregarMatricula);
+        btnModificarRubrica.addActionListener(evt -> modificarRubrica());
+        
+        JButton btnQuitarRubrica = (JButton) getComponentByName("btnQuitarRubrica", frmAgregarMatricula);
+        btnQuitarRubrica.addActionListener(evt -> quitarRubrica());
+        
+        
         JButton btnAgregarMatricula = (JButton) getComponentByName("btnAgregarMatricula", frmAgregarMatricula);
         btnAgregarMatricula.addActionListener(evt -> agregarMatricula());
         
@@ -107,6 +114,13 @@ public class AgregarMatricula implements IMapeable{
         
         JButton btnAgregarRubrica = (JButton) getComponentByName("btnAgregarRubrica", frmAgregarMatricula);
         btnAgregarRubrica.addActionListener(evt -> agregarRubrica());
+        
+        JButton btnModificarRubrica = (JButton) getComponentByName("btnModificarRubrica", frmAgregarMatricula);
+        btnModificarRubrica.addActionListener(evt -> modificarRubrica());
+        
+        JButton btnQuitarRubrica = (JButton) getComponentByName("btnQuitarRubrica", frmAgregarMatricula);
+        btnQuitarRubrica.addActionListener(evt -> quitarRubrica());
+        
         
         JButton btnAgregarMatricula = (JButton) getComponentByName("btnAgregarMatricula", frmAgregarMatricula);
         btnAgregarMatricula.setText("Modificar");
@@ -177,6 +191,26 @@ public class AgregarMatricula implements IMapeable{
         AgregarRubrica agregarRubrica = new AgregarRubrica();
         agregarRubrica.iniciar(frmAgregarMatricula);
         rubricas.add(agregarRubrica.getRubrica());
+        listarRubricas();
+    }
+    
+    private void modificarRubrica() {
+        JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
+        AgregarRubrica ar = new AgregarRubrica();
+        int i = tblRubricas.getSelectedRow();
+        ar.iniciar(frmAgregarMatricula, rubricas.get(i));
+        if (matricula != null) ar.getRubrica().actualizar();
+        else {
+            rubricas.remove(i);
+            rubricas.add(i, ar.getRubrica());
+        }
+        listarRubricas();
+    }
+    
+    private void quitarRubrica() {
+        JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
+        if (matricula != null) rubricas.get(tblRubricas.getSelectedRow()).eliminar();
+        rubricas.remove(tblRubricas.getSelectedRow());
         listarRubricas();
     }
     

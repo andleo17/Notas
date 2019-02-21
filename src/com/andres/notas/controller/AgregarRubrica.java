@@ -27,6 +27,31 @@ public class AgregarRubrica implements IMapeable{
         frmAgregarRubrica.setVisible(true);
     }
     
+    public void iniciar(java.awt.Window frame, Rubrica rubrica) {
+        this.rubrica = rubrica;
+        
+        frmAgregarRubrica = new FrmAgregarRubrica(frame, Dialog.ModalityType.MODELESS);
+        frmAgregarRubrica.setTitle("Modificar Rúbrica");
+        frmAgregarRubrica.setLocationRelativeTo(null);
+        
+        JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarRubrica);
+        btnAgregar.setText("Modificar");
+        btnAgregar.addActionListener(evt -> modificar());
+        
+        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarRubrica);
+        txtNombre.setText(rubrica.getNombre());
+        
+        JTextField txtPeso = (JTextField) getComponentByName("txtPeso", frmAgregarRubrica);
+        txtPeso.setText(String.valueOf(rubrica.getPeso() * 100));
+        
+        JTextField txtNumeroNotas = (JTextField) getComponentByName("txtNumeroNotas", frmAgregarRubrica);
+        txtNumeroNotas.setText(String.valueOf(rubrica.getNotas().size()));
+        
+        frmAgregarRubrica.setModal(true);
+        frmAgregarRubrica.setVisible(false);
+        frmAgregarRubrica.setVisible(true);
+    }
+    
     private void agregar() {
         JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarRubrica);
         JTextField txtNumeroNotas = (JTextField) getComponentByName("txtNumeroNotas", frmAgregarRubrica);
@@ -45,6 +70,16 @@ public class AgregarRubrica implements IMapeable{
         rubrica.setNombre(txtNombre.getText());
         rubrica.setPeso(Float.valueOf(txtPeso.getText()) / 100);
         rubrica.setNotas(notas);
+        
+        frmAgregarRubrica.dispose();
+    }
+    
+    private void modificar() {
+        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarRubrica);
+        JTextField txtPeso = (JTextField) getComponentByName("txtPeso", frmAgregarRubrica);
+        
+        rubrica.setNombre(txtNombre.getText());
+        rubrica.setPeso(Float.valueOf(txtPeso.getText()) / 100);
         
         frmAgregarRubrica.dispose();
     }
