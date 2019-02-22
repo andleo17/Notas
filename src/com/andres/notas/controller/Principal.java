@@ -3,20 +3,23 @@ package com.andres.notas.controller;
 
 import com.andres.notas.model.Ciclo;
 import com.andres.notas.model.Estudiante;
-import com.andres.notas.model.Matricula;
 import com.andres.notas.view.FrmPrincipal;
-import java.util.ArrayList;
+import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JPanel;
 
 public class Principal implements IMapeable{
     
     private final Estudiante estudiante;
     private FrmPrincipal frmPrincipal;
     private Ciclo ciclo;
-    private ArrayList<Matricula> matriculas;
+    
+    private JPanel pnlContenido;
+    private JButton btnMatriculas;
+    private JButton btnCursos;
+    private JButton btnProfesores;
+    private JButton btnNotas;
     
     public Principal(Estudiante estudiante) {
         this.estudiante = estudiante;
@@ -26,20 +29,22 @@ public class Principal implements IMapeable{
         frmPrincipal = new FrmPrincipal();
         frmPrincipal.setVisible(true);
         frmPrincipal.setTitle("Menú principal");
-        frmPrincipal.setLocationRelativeTo(null);
+        frmPrincipal.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         
-        JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmPrincipal);
-        btnAgregar.addActionListener(evt -> agregar());
-        
-        JButton btnModificar = (JButton) getComponentByName("btnModificar", frmPrincipal);
-        btnModificar.addActionListener(evt -> modificar());
-        
-        JButton btnEliminar = (JButton) getComponentByName("btnEliminar", frmPrincipal);
-        btnEliminar.addActionListener(evt -> eliminar());
+        pnlContenido = (JPanel) getComponentByName("pnlContenido", frmPrincipal);
+        btnMatriculas = (JButton) getComponentByName("btnMatriculas", frmPrincipal);
+        btnMatriculas.addActionListener(evt -> abrirMatriculas());
+        btnCursos = (JButton) getComponentByName("btnCursos", frmPrincipal);
+        btnProfesores = (JButton) getComponentByName("btnProfesores", frmPrincipal);
+        btnNotas = (JButton) getComponentByName("btnNotas", frmPrincipal);
         
         colocarEstudiante();
         colocarCiclo();
-        listarMatricula();
+    }
+    
+    private void abrirMatriculas() {
+        Matriculas m = new Matriculas(frmPrincipal, estudiante, ciclo);
+        colocarPanel(m.iniciar());
     }
     
     private void colocarEstudiante() {
@@ -53,42 +58,13 @@ public class Principal implements IMapeable{
         lblCiclo.setText(ciclo.getNombre());
     }
     
-    private void agregar() {
-        new AgregarMatricula(estudiante, ciclo).iniciar(frmPrincipal);
-        listarMatricula();
-    }
-    
-    private void modificar() {
-        JTable tblCursos = (JTable) getComponentByName("tblCursos", frmPrincipal);
-        new AgregarMatricula(estudiante, ciclo).iniciar(frmPrincipal, matriculas.get(tblCursos.getSelectedRow()));
-        listarMatricula();
-    }
-    
-    private void eliminar() {
-        JTable tblCursos = (JTable) getComponentByName("tblCursos", frmPrincipal);
-        matriculas.get(tblCursos.getSelectedRow()).eliminar();
-        listarMatricula();
-    }
-    
-    private void listarMatricula() {
-        matriculas = Matricula.listarMatriculas(ciclo, estudiante);
-        matriculas.sort((m, m1) -> {
-            String nombre1 = m.getCurso().getNombre();
-            String nombre2 = m1.getCurso().getNombre();
-            return nombre1.compareTo(nombre2);
-        });
-        JTable tblCursos = (JTable) getComponentByName("tblCursos", frmPrincipal);
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Profesor");
-        Object datos[] = new Object[2];
-        
-        matriculas.forEach(m -> {
-            datos[0] = m.getCurso().getNombre();
-            datos[1] = m.getProfesor().getApellidos() + ", " + m.getProfesor().getNombre();
-            modelo.addRow(datos);
-        });
-        tblCursos.setModel(modelo);
+    private void colocarPanel(JPanel panel) {
+        panel.setSize(500, 500);
+        panel.setLocation(0, 0);
+        pnlContenido.removeAll();
+        pnlContenido.add(panel, BorderLayout.CENTER);
+        pnlContenido.revalidate();
+        pnlContenido.repaint();
     }
     
 }
