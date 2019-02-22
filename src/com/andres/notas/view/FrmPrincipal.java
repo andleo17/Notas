@@ -18,7 +18,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnMatriculas = new javax.swing.JButton();
         btnCursos = new javax.swing.JButton();
         btnProfesores = new javax.swing.JButton();
-        btnNotas = new javax.swing.JButton();
         pnlContenido = new javax.swing.JPanel();
         pnlFooter = new javax.swing.JPanel();
         lblEstudiante_txt = new javax.swing.JLabel();
@@ -77,14 +76,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnProfesores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProfesores.setFocusPainted(false);
 
-        btnNotas.setBackground(new java.awt.Color(245, 245, 245));
-        btnNotas.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        btnNotas.setText("Notas");
-        btnNotas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnNotas.setBorderPainted(false);
-        btnNotas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnNotas.setFocusPainted(false);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -92,7 +83,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addComponent(btnMatriculas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnCursos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnProfesores, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE)
-            .addComponent(btnNotas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +92,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnNotas, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
+                .addContainerGap(248, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
@@ -192,7 +180,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCursos;
     private javax.swing.JButton btnMatriculas;
-    private javax.swing.JButton btnNotas;
     private javax.swing.JButton btnProfesores;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCiclo;

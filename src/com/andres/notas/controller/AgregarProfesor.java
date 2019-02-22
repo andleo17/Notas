@@ -3,6 +3,7 @@ package com.andres.notas.controller;
 
 import com.andres.notas.model.Profesor;
 import com.andres.notas.view.FrmAgregarProfesor;
+import com.andres.notas.view.FrmPrincipal;
 import java.awt.Dialog;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -12,11 +13,22 @@ import javax.swing.JTextField;
 
 public class AgregarProfesor implements IMapeable{
     
+    private final FrmPrincipal frmPrincipal;
     private FrmAgregarProfesor frmAgregarProfesor;
     private Profesor profesor;
     
-    public void iniciar(java.awt.Window parent) {
-        frmAgregarProfesor = new FrmAgregarProfesor(parent, Dialog.ModalityType.MODELESS);
+    public AgregarProfesor(FrmPrincipal frmPrincipal) {
+        this.frmPrincipal = frmPrincipal;
+        iniciar();
+    }
+    
+    public AgregarProfesor(FrmPrincipal frmPrincipal, Profesor profesor) {
+        this.frmPrincipal = frmPrincipal;
+        iniciar(profesor);
+    }
+    
+    private void iniciar() {
+        frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, Dialog.ModalityType.MODELESS);
         frmAgregarProfesor.setTitle("Agregar Profesor");
         frmAgregarProfesor.setLocationRelativeTo(null);
         frmAgregarProfesor.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -35,10 +47,10 @@ public class AgregarProfesor implements IMapeable{
         frmAgregarProfesor.setVisible(true);
     }
     
-    public void iniciar(java.awt.Window parent, Profesor profesor) {
+    private void iniciar(Profesor profesor) {
         this.profesor = profesor;
         
-        frmAgregarProfesor = new FrmAgregarProfesor(parent, Dialog.ModalityType.MODELESS);
+        frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, Dialog.ModalityType.MODELESS);
         frmAgregarProfesor.setTitle("Modificar Profesor");
         frmAgregarProfesor.setLocationRelativeTo(null);
         frmAgregarProfesor.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);

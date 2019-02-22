@@ -15,14 +15,8 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
         pnlFondo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         cboCursos = new javax.swing.JComboBox<>();
-        btnAgregarCurso = new javax.swing.JButton();
-        btnModificarCurso = new javax.swing.JButton();
-        btnQuitarCurso = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cboProfesores = new javax.swing.JComboBox<>();
-        btnAgregarProfesor = new javax.swing.JButton();
-        btnModificarProfesor = new javax.swing.JButton();
-        btnQuitarProfesor = new javax.swing.JButton();
         btnAgregarRubrica = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRubricas = new javax.swing.JTable();
@@ -34,19 +28,7 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
 
         jLabel1.setText("Seleccionar Curso:");
 
-        btnAgregarCurso.setText("Agregar");
-
-        btnModificarCurso.setText("Modificar");
-
-        btnQuitarCurso.setText("Quitar");
-
         jLabel2.setText("Seleccionar Profesor:");
-
-        btnAgregarProfesor.setText("Agregar");
-
-        btnModificarProfesor.setText("Modificar");
-
-        btnQuitarProfesor.setText("Quitar");
 
         btnAgregarRubrica.setText("Agregrar Rúbrica");
 
@@ -97,32 +79,20 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
                     .addGroup(pnlFondoLayout.createSequentialGroup()
                         .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnlFondoLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(cboCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAgregarCurso)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnModificarCurso)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnQuitarCurso))
-                            .addGroup(pnlFondoLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(cboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnAgregarProfesor)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnModificarProfesor)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnQuitarProfesor))
-                            .addGroup(pnlFondoLayout.createSequentialGroup()
                                 .addComponent(btnAgregarRubrica)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnModificarRubrica)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnQuitarRubrica)))
-                        .addGap(0, 93, Short.MAX_VALUE)))
+                                .addComponent(btnQuitarRubrica))
+                            .addGroup(pnlFondoLayout.createSequentialGroup()
+                                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cboCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 235, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(pnlFondoLayout.createSequentialGroup()
                 .addGap(271, 271, 271)
@@ -135,17 +105,11 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(cboCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarCurso)
-                    .addComponent(btnModificarCurso)
-                    .addComponent(btnQuitarCurso))
+                    .addComponent(cboCursos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregarProfesor)
-                    .addComponent(btnModificarProfesor)
-                    .addComponent(btnQuitarProfesor))
+                    .addComponent(cboProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregarRubrica)
@@ -153,7 +117,7 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
                     .addComponent(btnQuitarRubrica))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addComponent(btnAgregarMatricula)
                 .addContainerGap())
         );
@@ -173,15 +137,9 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregarCurso;
     private javax.swing.JButton btnAgregarMatricula;
-    private javax.swing.JButton btnAgregarProfesor;
     private javax.swing.JButton btnAgregarRubrica;
-    private javax.swing.JButton btnModificarCurso;
-    private javax.swing.JButton btnModificarProfesor;
     private javax.swing.JButton btnModificarRubrica;
-    private javax.swing.JButton btnQuitarCurso;
-    private javax.swing.JButton btnQuitarProfesor;
     private javax.swing.JButton btnQuitarRubrica;
     private javax.swing.JComboBox<String> cboCursos;
     private javax.swing.JComboBox<String> cboProfesores;

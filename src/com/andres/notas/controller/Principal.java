@@ -19,7 +19,6 @@ public class Principal implements IMapeable{
     private JButton btnMatriculas;
     private JButton btnCursos;
     private JButton btnProfesores;
-    private JButton btnNotas;
     
     public Principal(Estudiante estudiante) {
         this.estudiante = estudiante;
@@ -32,11 +31,15 @@ public class Principal implements IMapeable{
         frmPrincipal.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         
         pnlContenido = (JPanel) getComponentByName("pnlContenido", frmPrincipal);
+        
         btnMatriculas = (JButton) getComponentByName("btnMatriculas", frmPrincipal);
         btnMatriculas.addActionListener(evt -> abrirMatriculas());
+        
         btnCursos = (JButton) getComponentByName("btnCursos", frmPrincipal);
+        btnCursos.addActionListener(evt -> abrirCursos());
+        
         btnProfesores = (JButton) getComponentByName("btnProfesores", frmPrincipal);
-        btnNotas = (JButton) getComponentByName("btnNotas", frmPrincipal);
+        btnProfesores.addActionListener(evt -> abrirProfesores());
         
         colocarEstudiante();
         colocarCiclo();
@@ -45,6 +48,16 @@ public class Principal implements IMapeable{
     private void abrirMatriculas() {
         Matriculas m = new Matriculas(frmPrincipal, estudiante, ciclo);
         colocarPanel(m.iniciar());
+    }
+    
+    private void abrirProfesores() {
+        Profesores p = new Profesores(frmPrincipal);
+        colocarPanel(p.iniciar());
+    }
+    
+    private void abrirCursos() {
+        Cursos c = new Cursos(frmPrincipal);
+        colocarPanel(c.iniciar());
     }
     
     private void colocarEstudiante() {

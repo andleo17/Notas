@@ -8,9 +8,9 @@ import com.andres.notas.model.Matricula;
 import com.andres.notas.model.Profesor;
 import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmAgregarMatricula;
+import com.andres.notas.view.FrmPrincipal;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -19,48 +19,37 @@ import javax.swing.table.DefaultTableModel;
 
 public class AgregarMatricula implements IMapeable{
     
+    private final FrmPrincipal frmPrincipal;
     private FrmAgregarMatricula frmAgregarMatricula;
     private Matricula matricula;
-    private final Estudiante estudiante;
-    private final Ciclo ciclo;
+    private Estudiante estudiante;
+    private Ciclo ciclo;
     private ArrayList<Rubrica> rubricas;
     private ArrayList<Profesor> profesores;
     private ArrayList<Curso> cursos;
     private int j;
     
-    public AgregarMatricula(Estudiante estudiante, Ciclo ciclo) {
+    public AgregarMatricula(FrmPrincipal frmPrincipal, Estudiante estudiante, Ciclo ciclo) {
+        this.frmPrincipal = frmPrincipal;
         this.rubricas = new ArrayList<>();
         this.estudiante = estudiante;
         this.ciclo = ciclo;
+        iniciar();
     }
     
-    public void iniciar(java.awt.Frame frame) {
-        frmAgregarMatricula = new FrmAgregarMatricula(frame, false);
+    public AgregarMatricula(FrmPrincipal frmPrincipal, Matricula matricula) {
+        this.frmPrincipal = frmPrincipal;
+        this.rubricas = new ArrayList<>();
+        iniciar(matricula);
+    }
+    
+    private void iniciar() {
+        frmAgregarMatricula = new FrmAgregarMatricula(frmPrincipal, false);
         frmAgregarMatricula.setVisible(true);
         frmAgregarMatricula.setTitle("Agregar Matrícula");
         frmAgregarMatricula.setLocationRelativeTo(null);
         listarCursos();
         listarProfesores();
-        
-        JButton btnAgregarCurso = (JButton) getComponentByName("btnAgregarCurso", frmAgregarMatricula);
-        btnAgregarCurso.addActionListener(evt -> agregarCurso());
-        
-        JButton btnModificarCurso = (JButton) getComponentByName("btnModificarCurso", frmAgregarMatricula);
-        btnModificarCurso.addActionListener(evt -> modificarCurso());
-        
-        JButton btnQuitarCurso = (JButton) getComponentByName("btnQuitarCurso", frmAgregarMatricula);
-        btnQuitarCurso.addActionListener(evt -> quitarCurso());
-        
-        
-        JButton btnAgregarProfesor = (JButton) getComponentByName("btnAgregarProfesor", frmAgregarMatricula);
-        btnAgregarProfesor.addActionListener(evt -> agregarProfesor());
-        
-        JButton btnModificarProfesor = (JButton) getComponentByName("btnModificarProfesor", frmAgregarMatricula);
-        btnModificarProfesor.addActionListener(evt -> modificarProfesor());
-        
-        JButton btnQuitarProfesor = (JButton) getComponentByName("btnQuitarProfesor", frmAgregarMatricula);
-        btnQuitarProfesor.addActionListener(evt -> quitarProfesor());
-        
         
         JButton btnAgregarRubrica = (JButton) getComponentByName("btnAgregarRubrica", frmAgregarMatricula);
         btnAgregarRubrica.addActionListener(evt -> agregarRubrica());
@@ -80,38 +69,18 @@ public class AgregarMatricula implements IMapeable{
         frmAgregarMatricula.setVisible(true);
     }
     
-    public void iniciar(java.awt.Frame frame, Matricula matricula) {
+    private void iniciar(Matricula matricula) {
         this.matricula = matricula;
         rubricas = matricula.getRubricas();
         j = rubricas.size();
         
-        frmAgregarMatricula = new FrmAgregarMatricula(frame, false);
+        frmAgregarMatricula = new FrmAgregarMatricula(frmPrincipal, false);
         frmAgregarMatricula.setVisible(true);
         frmAgregarMatricula.setTitle("Modificar Matrícula");
         frmAgregarMatricula.setLocationRelativeTo(null);
         listarCursos();
         listarProfesores();
         listarRubricas();
-        
-        JButton btnAgregarCurso = (JButton) getComponentByName("btnAgregarCurso", frmAgregarMatricula);
-        btnAgregarCurso.addActionListener(evt -> agregarCurso());
-        
-        JButton btnModificarCurso = (JButton) getComponentByName("btnModificarCurso", frmAgregarMatricula);
-        btnModificarCurso.addActionListener(evt -> modificarCurso());
-        
-        JButton btnQuitarCurso = (JButton) getComponentByName("btnQuitarCurso", frmAgregarMatricula);
-        btnQuitarCurso.addActionListener(evt -> quitarCurso());
-        
-        
-        JButton btnAgregarProfesor = (JButton) getComponentByName("btnAgregarProfesor", frmAgregarMatricula);
-        btnAgregarProfesor.addActionListener(evt -> agregarProfesor());
-        
-        JButton btnModificarProfesor = (JButton) getComponentByName("btnModificarProfesor", frmAgregarMatricula);
-        btnModificarProfesor.addActionListener(evt -> modificarProfesor());
-        
-        JButton btnQuitarProfesor = (JButton) getComponentByName("btnQuitarProfesor", frmAgregarMatricula);
-        btnQuitarProfesor.addActionListener(evt -> quitarProfesor());
-        
         
         JButton btnAgregarRubrica = (JButton) getComponentByName("btnAgregarRubrica", frmAgregarMatricula);
         btnAgregarRubrica.addActionListener(evt -> agregarRubrica());
@@ -154,52 +123,6 @@ public class AgregarMatricula implements IMapeable{
         cboProfesores.removeAllItems();
         profesores.forEach(p -> cboProfesores.addItem(p.getApellidos() + ", " + p.getNombre()));
         cboProfesores.setSelectedIndex(-1);
-    }
-    
-    private void agregarCurso() {
-        new AgregarCurso().iniciar(frmAgregarMatricula);
-        listarCursos();
-    }
-    
-    private void modificarCurso() {
-        JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        if (cboCursos.getSelectedIndex() != -1)
-            new AgregarCurso().iniciar(frmAgregarMatricula, cursos.get(cboCursos.getSelectedIndex()));
-        else
-            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
-        listarCursos();
-    }
-    
-    private void quitarCurso() {
-        JComboBox cboCursos = (JComboBox) getComponentByName("cboCursos", frmAgregarMatricula);
-        if (cboCursos.getSelectedIndex() != -1)
-            cursos.get(cboCursos.getSelectedIndex()).eliminar();
-        else
-            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un curso", "Error", JOptionPane.ERROR_MESSAGE);
-        listarCursos();
-    }
-    
-    private void agregarProfesor() {
-        new AgregarProfesor().iniciar(frmAgregarMatricula);
-        listarProfesores();
-    }
-    
-    private void modificarProfesor() {
-        JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        if (cboProfesores.getSelectedIndex() != -1)
-            new AgregarProfesor().iniciar(frmAgregarMatricula, profesores.get(cboProfesores.getSelectedIndex()));
-        else
-            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un profesor", "Error", JOptionPane.ERROR_MESSAGE);
-        listarProfesores();
-    }
-    
-    private void quitarProfesor() {
-        JComboBox cboProfesores = (JComboBox) getComponentByName("cboProfesores", frmAgregarMatricula);
-        if (cboProfesores.getSelectedIndex() != -1)
-            profesores.get(cboProfesores.getSelectedIndex()).eliminar();
-        else
-            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un profesor", "Error", JOptionPane.ERROR_MESSAGE);
-        listarProfesores();
     }
     
     private void agregarRubrica() {
