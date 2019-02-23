@@ -15,7 +15,7 @@ public class Estudiante implements EstudianteDAO {
 
     private static final Estudiante objEstudiante = new Estudiante();
 
-    public Estudiante iniciarSesion(String email, String password) {
+    public static Estudiante iniciarSesion(String email, String password) {
         ArrayList<Estudiante> estudiantes = objEstudiante.consultarLista();
         for (Estudiante estudiante : estudiantes){
             if (estudiante.getEmail().equals(email) && estudiante.getPassword().equals(password))

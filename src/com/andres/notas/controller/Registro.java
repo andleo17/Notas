@@ -81,7 +81,7 @@ public class Registro implements IMapeable{
                 estudiante.setApellidos(txtApellidos.getText());
                 estudiante.setEmail(txtEmail.getText());
                 estudiante.setPassword(txtPassword.getText());
-                if(estudiante.iniciarSesion(email, password) == null){
+                if(Estudiante.iniciarSesion(email, password) == null){
                     estudiante.agregar();
                     frmRegistro.dispose();
                 } else JOptionPane.showMessageDialog(frmRegistro, "Estudiante ya registrado", "Error", JOptionPane.ERROR_MESSAGE);
