@@ -3,8 +3,8 @@ package com.andres.notas.view;
 
 public class FrmAgregarMatricula extends javax.swing.JDialog {
 
-    public FrmAgregarMatricula(java.awt.Frame frame, boolean modal) {
-        super(frame, modal);
+    public FrmAgregarMatricula(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
     

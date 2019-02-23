@@ -11,6 +11,11 @@ public class Login implements IMapeable{
 
     private FrmLogin frmLogin;
     private Estudiante estudiante;
+    private JButton btnIngresar;
+    private JButton btnRegistro;
+    private JButton btnCambiarPassword;
+    private JTextField txtEmail;
+    private JTextField txtPassword;
     
     public void iniciar() {
         frmLogin = new FrmLogin();
@@ -19,27 +24,21 @@ public class Login implements IMapeable{
         frmLogin.setResizable(false);
         frmLogin.setLocationRelativeTo(null);
         
-        JButton btnIngresar = (JButton) getComponentByName("btnIngresar", frmLogin);
-        btnIngresar.addActionListener(evt -> {
-            iniciarSesion();
-        });
+        btnIngresar = (JButton) getComponentByName("btnIngresar", frmLogin);
+        btnIngresar.addActionListener(evt -> iniciarSesion());
         
-        JButton btnRegistro = (JButton) getComponentByName("btnRegistro", frmLogin);
-        btnRegistro.addActionListener(evt -> {
-            registrar();
-        });
+        btnRegistro = (JButton) getComponentByName("btnRegistro", frmLogin);
+        btnRegistro.addActionListener(evt -> registrar());
         
-        JButton btnCambiarPassword = (JButton) getComponentByName("btnCambiarPassword", frmLogin);
-        btnCambiarPassword.addActionListener(evt -> {
-            actualizar();
-        });
+        btnCambiarPassword = (JButton) getComponentByName("btnCambiarPassword", frmLogin);
+        btnCambiarPassword.addActionListener(evt -> actualizar());
+        
+        txtEmail = (JTextField) getComponentByName("txtEmail", frmLogin);
+        txtPassword = (JTextField) getComponentByName("txtPassword", frmLogin);
     }
     
     private void iniciarSesion() {
         estudiante = new Estudiante();
-        JTextField txtEmail = (JTextField) getComponentByName("txtEmail", frmLogin);
-        JTextField txtPassword = (JTextField) getComponentByName("txtPassword", frmLogin);
-        
         String email = txtEmail.getText();
         String password = txtPassword.getText();
         
@@ -53,11 +52,11 @@ public class Login implements IMapeable{
     }
     
     private void registrar() {
-        new Registro().iniciar();
+        new Registro(frmLogin);
     }
     
     private void actualizar() {
-        new CambiarPassword().iniciar();
+        new CambiarPassword(frmLogin);
     }
     
 }

@@ -1,9 +1,10 @@
 
 package com.andres.notas.view;
 
-public class FrmCambiarPassword extends javax.swing.JFrame {
+public class FrmCambiarPassword extends javax.swing.JDialog {
 
-    public FrmCambiarPassword() {
+    public FrmCambiarPassword(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -22,7 +23,7 @@ public class FrmCambiarPassword extends javax.swing.JFrame {
         txtPasswordRepetido = new javax.swing.JTextField();
         btnCambiar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Email:");
 

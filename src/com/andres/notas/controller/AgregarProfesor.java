@@ -4,7 +4,6 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Profesor;
 import com.andres.notas.view.FrmAgregarProfesor;
 import com.andres.notas.view.FrmPrincipal;
-import java.awt.Dialog;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
@@ -28,7 +27,7 @@ public class AgregarProfesor implements IMapeable{
     }
     
     private void iniciar() {
-        frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, Dialog.ModalityType.MODELESS);
+        frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, false);
         frmAgregarProfesor.setTitle("Agregar Profesor");
         frmAgregarProfesor.setLocationRelativeTo(null);
         frmAgregarProfesor.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -50,7 +49,7 @@ public class AgregarProfesor implements IMapeable{
     private void iniciar(Profesor profesor) {
         this.profesor = profesor;
         
-        frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, Dialog.ModalityType.MODELESS);
+        frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, false);
         frmAgregarProfesor.setTitle("Modificar Profesor");
         frmAgregarProfesor.setLocationRelativeTo(null);
         frmAgregarProfesor.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
