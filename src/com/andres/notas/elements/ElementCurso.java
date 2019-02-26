@@ -16,6 +16,7 @@ public class ElementCurso extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         lblNombre = new javax.swing.JLabel();
         lblCreditos = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(243, 243, 243));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -58,9 +59,13 @@ public class ElementCurso extends javax.swing.JPanel {
         lblNombre.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 15)); // NOI18N
         lblNombre.setText("Curso");
 
-        lblCreditos.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 13)); // NOI18N
+        lblCreditos.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 13)); // NOI18N
         lblCreditos.setForeground(new java.awt.Color(102, 102, 102));
         lblCreditos.setText("x créditos");
+
+        jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setText("N° Créditos:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,8 +75,11 @@ public class ElementCurso extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre)
-                    .addComponent(lblCreditos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 331, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCreditos)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -83,7 +91,9 @@ public class ElementCurso extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblCreditos)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblCreditos))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -91,6 +101,7 @@ public class ElementCurso extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCreditos;
     private javax.swing.JLabel lblNombre;

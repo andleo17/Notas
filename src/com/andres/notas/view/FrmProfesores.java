@@ -45,7 +45,7 @@ public class FrmProfesores extends javax.swing.JPanel {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pnlContenido.setLayout(new java.awt.GridLayout(0, 1));
+        pnlContenido.setLayout(new java.awt.GridLayout(0, 1, 3, 5));
         jScrollPane1.setViewportView(pnlContenido);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

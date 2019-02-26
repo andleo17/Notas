@@ -115,16 +115,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlContenido.setLayout(new java.awt.BorderLayout());
 
+        pnlFooter.setBackground(new java.awt.Color(204, 0, 0));
+
         lblEstudiante_txt.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        lblEstudiante_txt.setForeground(new java.awt.Color(255, 255, 255));
         lblEstudiante_txt.setText("Estudiante:");
 
-        lblEstudiante.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        lblEstudiante.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        lblEstudiante.setForeground(new java.awt.Color(255, 255, 255));
         lblEstudiante.setText("Nombre");
 
         lblCiclo_txt.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        lblCiclo_txt.setForeground(new java.awt.Color(255, 255, 255));
         lblCiclo_txt.setText("Ciclo:");
 
-        lblCiclo.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        lblCiclo.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 14)); // NOI18N
+        lblCiclo.setForeground(new java.awt.Color(255, 255, 255));
         lblCiclo.setText("Ciclo");
 
         javax.swing.GroupLayout pnlFooterLayout = new javax.swing.GroupLayout(pnlFooter);
@@ -134,11 +140,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(pnlFooterLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblEstudiante_txt)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblEstudiante)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 534, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 539, Short.MAX_VALUE)
                 .addComponent(lblCiclo_txt)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblCiclo)
                 .addGap(72, 72, 72))
         );

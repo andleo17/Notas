@@ -3,6 +3,7 @@ package com.andres.notas.controller;
 
 import com.andres.notas.model.Nota;
 import com.andres.notas.model.Rubrica;
+import com.andres.notas.view.FrmAgregarMatricula;
 import com.andres.notas.view.FrmAgregarRubrica;
 import java.awt.Dialog;
 import java.awt.event.WindowAdapter;
@@ -14,11 +15,22 @@ import javax.swing.JTextField;
 
 public class AgregarRubrica implements IMapeable{
     
+    private final FrmAgregarMatricula frmAgregarMatricula;
     private FrmAgregarRubrica frmAgregarRubrica;
     private Rubrica rubrica;
     
-    public void iniciar(java.awt.Window frame) {
-        frmAgregarRubrica = new FrmAgregarRubrica(frame, Dialog.ModalityType.MODELESS);
+    public AgregarRubrica(FrmAgregarMatricula frmAgregarMatricula) {
+        this.frmAgregarMatricula = frmAgregarMatricula;
+        iniciar();
+    }
+    
+    public AgregarRubrica(FrmAgregarMatricula frmAgregarMatricula, Rubrica rubrica) {
+        this.frmAgregarMatricula = frmAgregarMatricula;
+        iniciar(rubrica);
+    }
+    
+    private void iniciar() {
+        frmAgregarRubrica = new FrmAgregarRubrica(frmAgregarMatricula, Dialog.ModalityType.MODELESS);
         frmAgregarRubrica.setTitle("Agregar Rúbrica");
         frmAgregarRubrica.setLocationRelativeTo(null);
         frmAgregarRubrica.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -29,8 +41,6 @@ public class AgregarRubrica implements IMapeable{
             }
         });
         
-        JTextField txtPeso = (JTextField) getComponentByName("txtPeso", frmAgregarRubrica);
-        
         JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarRubrica);
         btnAgregar.addActionListener(evt -> agregar());
         
@@ -39,10 +49,10 @@ public class AgregarRubrica implements IMapeable{
         frmAgregarRubrica.setVisible(true);
     }
     
-    public void iniciar(java.awt.Window frame, Rubrica rubrica) {
+    private void iniciar(Rubrica rubrica) {
         this.rubrica = rubrica;
         
-        frmAgregarRubrica = new FrmAgregarRubrica(frame, Dialog.ModalityType.MODELESS);
+        frmAgregarRubrica = new FrmAgregarRubrica(frmAgregarMatricula, Dialog.ModalityType.MODELESS);
         frmAgregarRubrica.setTitle("Modificar Rúbrica");
         frmAgregarRubrica.setLocationRelativeTo(null);
         frmAgregarRubrica.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);

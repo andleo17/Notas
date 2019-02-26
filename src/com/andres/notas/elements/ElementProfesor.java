@@ -16,6 +16,7 @@ public class ElementProfesor extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
+        lblEmail1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(243, 243, 243));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
@@ -24,7 +25,7 @@ public class ElementProfesor extends javax.swing.JPanel {
         lblNombre.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 15)); // NOI18N
         lblNombre.setText("Apellidos, Nombre");
 
-        lblEmail.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 13)); // NOI18N
+        lblEmail.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 13)); // NOI18N
         lblEmail.setForeground(new java.awt.Color(102, 102, 102));
         lblEmail.setText("email@gmail.com");
 
@@ -63,6 +64,10 @@ public class ElementProfesor extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        lblEmail1.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 13)); // NOI18N
+        lblEmail1.setForeground(new java.awt.Color(102, 102, 102));
+        lblEmail1.setText("Email:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -71,8 +76,11 @@ public class ElementProfesor extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombre)
-                    .addComponent(lblEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblEmail1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblEmail)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -81,7 +89,9 @@ public class ElementProfesor extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblEmail)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEmail)
+                    .addComponent(lblEmail1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -92,6 +102,7 @@ public class ElementProfesor extends javax.swing.JPanel {
     private javax.swing.JButton btnModificar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblEmail1;
     private javax.swing.JLabel lblNombre;
     // End of variables declaration//GEN-END:variables
 }

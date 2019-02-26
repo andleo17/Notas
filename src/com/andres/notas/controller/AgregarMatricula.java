@@ -9,13 +9,15 @@ import com.andres.notas.model.Profesor;
 import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmAgregarMatricula;
 import com.andres.notas.view.FrmPrincipal;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JPanel;
 
 public class AgregarMatricula implements IMapeable{
     
@@ -28,18 +30,21 @@ public class AgregarMatricula implements IMapeable{
     private ArrayList<Profesor> profesores;
     private ArrayList<Curso> cursos;
     private int j;
+    private AtomicInteger index;
     
     public AgregarMatricula(FrmPrincipal frmPrincipal, Estudiante estudiante, Ciclo ciclo) {
         this.frmPrincipal = frmPrincipal;
         this.rubricas = new ArrayList<>();
         this.estudiante = estudiante;
         this.ciclo = ciclo;
+        index = new AtomicInteger(1);
         iniciar();
     }
     
     public AgregarMatricula(FrmPrincipal frmPrincipal, Matricula matricula) {
         this.frmPrincipal = frmPrincipal;
-        this.rubricas = new ArrayList<>();
+        this.rubricas = matricula.getRubricas();
+        index = new AtomicInteger(this.rubricas.size() + 1);
         iniciar(matricula);
     }
     
@@ -51,15 +56,15 @@ public class AgregarMatricula implements IMapeable{
         listarCursos();
         listarProfesores();
         
+        frmAgregarMatricula.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowGainedFocus(WindowEvent we) {
+                listarRubricas();
+            }
+        });
+        
         JButton btnAgregarRubrica = (JButton) getComponentByName("btnAgregarRubrica", frmAgregarMatricula);
-        btnAgregarRubrica.addActionListener(evt -> agregarRubrica());
-        
-        JButton btnModificarRubrica = (JButton) getComponentByName("btnModificarRubrica", frmAgregarMatricula);
-        btnModificarRubrica.addActionListener(evt -> modificarRubrica());
-        
-        JButton btnQuitarRubrica = (JButton) getComponentByName("btnQuitarRubrica", frmAgregarMatricula);
-        btnQuitarRubrica.addActionListener(evt -> quitarRubrica());
-        
+        btnAgregarRubrica.addActionListener(evt -> agregarRubrica());        
         
         JButton btnAgregarMatricula = (JButton) getComponentByName("btnAgregarMatricula", frmAgregarMatricula);
         btnAgregarMatricula.addActionListener(evt -> agregarMatricula());
@@ -82,15 +87,15 @@ public class AgregarMatricula implements IMapeable{
         listarProfesores();
         listarRubricas();
         
+        frmAgregarMatricula.addWindowFocusListener(new WindowAdapter() {
+            @Override
+            public void windowGainedFocus(WindowEvent we) {
+                listarRubricas();
+            }
+        });
+        
         JButton btnAgregarRubrica = (JButton) getComponentByName("btnAgregarRubrica", frmAgregarMatricula);
-        btnAgregarRubrica.addActionListener(evt -> agregarRubrica());
-        
-        JButton btnModificarRubrica = (JButton) getComponentByName("btnModificarRubrica", frmAgregarMatricula);
-        btnModificarRubrica.addActionListener(evt -> modificarRubrica());
-        
-        JButton btnQuitarRubrica = (JButton) getComponentByName("btnQuitarRubrica", frmAgregarMatricula);
-        btnQuitarRubrica.addActionListener(evt -> quitarRubrica());
-        
+        btnAgregarRubrica.addActionListener(evt -> agregarRubrica());        
         
         JButton btnAgregarMatricula = (JButton) getComponentByName("btnAgregarMatricula", frmAgregarMatricula);
         btnAgregarMatricula.setText("Modificar");
@@ -126,60 +131,17 @@ public class AgregarMatricula implements IMapeable{
     }
     
     private void agregarRubrica() {
-        AgregarRubrica agregarRubrica = new AgregarRubrica();
-        agregarRubrica.iniciar(frmAgregarMatricula);
+        AgregarRubrica agregarRubrica = new AgregarRubrica(frmAgregarMatricula);
+        agregarRubrica.getRubrica().setNumeroRubrica(index.getAndIncrement());
         if (agregarRubrica.getRubrica() != null) rubricas.add(agregarRubrica.getRubrica());
         listarRubricas();
     }
     
-    private void modificarRubrica() {
-        JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
-        AgregarRubrica ar = new AgregarRubrica();
-        int i = tblRubricas.getSelectedRow();
-        if (i != -1){
-            ar.iniciar(frmAgregarMatricula, rubricas.get(i));
-            if (matricula != null) ar.getRubrica().actualizar();
-            else {
-                rubricas.remove(i);
-                rubricas.add(i, ar.getRubrica());
-            }
-            listarRubricas();
-        } else {
-            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione una rúbrica", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
-    private void quitarRubrica() {
-        JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
-        if (tblRubricas.getSelectedRow() != -1) {
-            if (matricula != null) rubricas.get(tblRubricas.getSelectedRow()).eliminar();
-            rubricas.remove(tblRubricas.getSelectedRow());
-            listarRubricas();
-        } else {
-            JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione una rúbrica", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
     private void listarRubricas() {
-        JTable tblRubricas = (JTable) getComponentByName("tblRubricas", frmAgregarMatricula);
-        
-        DefaultTableModel modelo = new DefaultTableModel();
-        modelo.addColumn("N° Rúbrica");
-        modelo.addColumn("Nombre");
-        modelo.addColumn("Peso");
-        modelo.addColumn("N° Notas");
-        Object datos[] = new Object[4];
-        
-        rubricas.forEach(r -> {
-            datos[0] = rubricas.indexOf(r) + 1;
-            datos[1] = r.getNombre();
-            datos[2] = r.getPeso();
-            datos[3] = r.getNotas().size();
-            
-            modelo.addRow(datos);
-        });
-        
-        tblRubricas.setModel(modelo);
+        JPanel pnlRubricas = (JPanel) getComponentByName("pnlRubricas", frmAgregarMatricula);
+        pnlRubricas.removeAll();
+        rubricas.forEach(r -> pnlRubricas.add(new CRubrica(r, frmAgregarMatricula).getElementRubrica()));
+        pnlRubricas.updateUI();
     }
     
     private void agregarMatricula() {
