@@ -53,7 +53,7 @@ public class CMatricula implements IMapeable{
     }
     
     private void verDetalles() {
-        
+        new MatriculaDetallada(matricula, frmPrincipal);
     }
     
     private void modificar() {
