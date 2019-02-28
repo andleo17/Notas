@@ -11,52 +11,108 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         pnlFondo = new javax.swing.JPanel();
-        btnAgregarRubrica = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        cboProfesores = new javax.swing.JComboBox<>();
+        lblCursos = new javax.swing.JLabel();
         cboCursos = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblProfesores = new javax.swing.JLabel();
+        cboProfesores = new javax.swing.JComboBox<>();
         btnAgregarMatricula = new javax.swing.JButton();
+        btnAgregarRubrica = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         pnlRubricas = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(800, 400));
+        setPreferredSize(new java.awt.Dimension(800, 400));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         pnlFondo.setBackground(new java.awt.Color(243, 243, 243));
-
-        btnAgregarRubrica.setBackground(new java.awt.Color(204, 0, 0));
-        btnAgregarRubrica.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        btnAgregarRubrica.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregarRubrica.setText("Agregrar Rúbrica");
-        btnAgregarRubrica.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pnlFondo.setPreferredSize(new java.awt.Dimension(800, 400));
+        pnlFondo.setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBackground(new java.awt.Color(243, 243, 243));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 0, 0)));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setLayout(new java.awt.GridBagLayout());
 
-        cboProfesores.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        jPanel1.add(cboProfesores, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 125, 260, -1));
+        lblCursos.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        lblCursos.setText("Seleccionar Curso:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 20, 10, 0);
+        jPanel1.add(lblCursos, gridBagConstraints);
 
         cboCursos.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        jPanel1.add(cboCursos, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 58, 260, -1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 20);
+        jPanel1.add(cboCursos, gridBagConstraints);
 
-        jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        jLabel1.setText("Seleccionar Curso:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 31, -1, -1));
+        lblProfesores.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        lblProfesores.setText("Seleccionar Profesor:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(50, 20, 10, 0);
+        jPanel1.add(lblProfesores, gridBagConstraints);
 
-        jLabel2.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        jLabel2.setText("Seleccionar Profesor:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(31, 98, -1, -1));
+        cboProfesores.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 20);
+        jPanel1.add(cboProfesores, gridBagConstraints);
 
         btnAgregarMatricula.setBackground(new java.awt.Color(204, 0, 0));
         btnAgregarMatricula.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
         btnAgregarMatricula.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarMatricula.setText("Registrar Matrícula");
         btnAgregarMatricula.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        jPanel1.add(btnAgregarMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 380, 160, 30));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 50, 0);
+        jPanel1.add(btnAgregarMatricula, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 0.1;
+        gridBagConstraints.weighty = 1.0;
+        pnlFondo.add(jPanel1, gridBagConstraints);
+
+        btnAgregarRubrica.setBackground(new java.awt.Color(204, 0, 0));
+        btnAgregarRubrica.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        btnAgregarRubrica.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarRubrica.setText("Agregrar Rúbrica");
+        btnAgregarRubrica.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 0, 0);
+        pnlFondo.add(btnAgregarRubrica, gridBagConstraints);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -64,44 +120,23 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
         pnlRubricas.setLayout(new java.awt.GridLayout(0, 1, 3, 5));
         jScrollPane2.setViewportView(pnlRubricas);
 
-        javax.swing.GroupLayout pnlFondoLayout = new javax.swing.GroupLayout(pnlFondo);
-        pnlFondo.setLayout(pnlFondoLayout);
-        pnlFondoLayout.setHorizontalGroup(
-            pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFondoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
-                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
-                    .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addComponent(btnAgregarRubrica, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 279, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        pnlFondoLayout.setVerticalGroup(
-            pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFondoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
-                    .addGroup(pnlFondoLayout.createSequentialGroup()
-                        .addComponent(btnAgregarRubrica, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2)))
-                .addContainerGap())
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 15, 20, 20);
+        pnlFondo.add(jScrollPane2, gridBagConstraints);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFondo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(pnlFondo, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -111,10 +146,10 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
     private javax.swing.JButton btnAgregarRubrica;
     private javax.swing.JComboBox<String> cboCursos;
     private javax.swing.JComboBox<String> cboProfesores;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCursos;
+    private javax.swing.JLabel lblProfesores;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlRubricas;
     // End of variables declaration//GEN-END:variables
