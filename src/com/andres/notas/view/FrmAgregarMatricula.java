@@ -26,7 +26,6 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 400));
-        setPreferredSize(new java.awt.Dimension(800, 400));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         pnlFondo.setBackground(new java.awt.Color(243, 243, 243));
@@ -117,7 +116,7 @@ public class FrmAgregarMatricula extends javax.swing.JDialog {
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pnlRubricas.setLayout(new java.awt.GridLayout(0, 1, 3, 5));
+        pnlRubricas.setLayout(new java.awt.GridBagLayout());
         jScrollPane2.setViewportView(pnlRubricas);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

@@ -59,7 +59,7 @@ public class FrmCursos extends javax.swing.JPanel {
         jScrollPane1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        pnlContenido.setLayout(new java.awt.GridLayout(0, 1, 3, 5));
+        pnlContenido.setLayout(new java.awt.GridBagLayout());
         jScrollPane1.setViewportView(pnlContenido);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

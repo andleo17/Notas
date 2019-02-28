@@ -20,6 +20,7 @@ public class ElementProfesor extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(243, 243, 243));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        setMinimumSize(new java.awt.Dimension(280, 100));
         setPreferredSize(new java.awt.Dimension(500, 100));
         setLayout(new java.awt.GridBagLayout());
 

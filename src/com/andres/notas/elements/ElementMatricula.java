@@ -25,6 +25,8 @@ public class ElementMatricula extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(243, 243, 243));
         setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        setMinimumSize(new java.awt.Dimension(354, 120));
+        setPreferredSize(new java.awt.Dimension(354, 120));
         setLayout(new java.awt.GridBagLayout());
 
         lblCurso.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 15)); // NOI18N

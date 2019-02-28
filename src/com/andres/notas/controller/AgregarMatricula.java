@@ -9,6 +9,8 @@ import com.andres.notas.model.Profesor;
 import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmAgregarMatricula;
 import com.andres.notas.view.FrmPrincipal;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
@@ -140,7 +142,22 @@ public class AgregarMatricula implements IMapeable{
     private void listarRubricas() {
         JPanel pnlRubricas = (JPanel) getComponentByName("pnlRubricas", frmAgregarMatricula);
         pnlRubricas.removeAll();
-        rubricas.forEach(r -> pnlRubricas.add(new CRubrica(r, frmAgregarMatricula).getElementRubrica()));
+        GridBagConstraints gbl = new GridBagConstraints();
+        AtomicInteger i = new AtomicInteger(0);
+        rubricas.forEach(r -> {
+            JPanel panel = new CRubrica(r, frmAgregarMatricula).getElementRubrica();
+            gbl.gridx = 0;
+            gbl.gridy = i.getAndIncrement();
+            gbl.fill = GridBagConstraints.HORIZONTAL;
+            gbl.anchor = GridBagConstraints.NORTH;
+            gbl.weightx = 1.0;
+            gbl.insets = new Insets(5, 5, 5, 5);
+            pnlRubricas.add(panel, gbl);
+        });
+        gbl.gridx = 0;
+        gbl.gridy = i.get();
+        gbl.weighty = 1.0;
+        pnlRubricas.add(new JPanel(), gbl);
         pnlRubricas.updateUI();
     }
     

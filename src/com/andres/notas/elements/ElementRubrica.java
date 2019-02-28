@@ -25,6 +25,7 @@ public class ElementRubrica extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         setMaximumSize(new java.awt.Dimension(32767, 103));
         setMinimumSize(new java.awt.Dimension(352, 100));
+        setPreferredSize(new java.awt.Dimension(251, 100));
         setLayout(new java.awt.GridBagLayout());
 
         lblNumero.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 24)); // NOI18N

@@ -20,6 +20,7 @@ public class ElementCurso extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(243, 243, 243));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        setMinimumSize(new java.awt.Dimension(256, 100));
         setPreferredSize(new java.awt.Dimension(400, 100));
         setLayout(new java.awt.GridBagLayout());
 

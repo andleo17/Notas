@@ -56,7 +56,7 @@ public class FrmMatriculas extends javax.swing.JPanel {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         add(jPanel1, gridBagConstraints);
 
-        pnlContenido.setLayout(new java.awt.GridLayout(0, 1, 3, 5));
+        pnlContenido.setLayout(new java.awt.GridBagLayout());
         jScrollPane2.setViewportView(pnlContenido);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

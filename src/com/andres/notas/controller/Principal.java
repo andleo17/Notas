@@ -4,7 +4,6 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Ciclo;
 import com.andres.notas.model.Estudiante;
 import com.andres.notas.view.FrmPrincipal;
-import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -72,10 +71,8 @@ public class Principal implements IMapeable{
     }
     
     private void colocarPanel(JPanel panel) {
-        panel.setSize(500, 500);
-        panel.setLocation(0, 0);
         pnlContenido.removeAll();
-        pnlContenido.add(panel, BorderLayout.CENTER);
+        pnlContenido.add(panel);
         pnlContenido.revalidate();
         pnlContenido.repaint();
     }

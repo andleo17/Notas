@@ -4,9 +4,12 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Curso;
 import com.andres.notas.view.FrmCursos;
 import com.andres.notas.view.FrmPrincipal;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -45,8 +48,22 @@ public class Cursos implements IMapeable{
     private void listar() {
         ArrayList<Curso> lista = Curso.listar();
         pnlContenido.removeAll();
-        
-        lista.forEach(c -> pnlContenido.add(new CCurso(c, frmPrincipal).getElementCurso()));
+        GridBagConstraints gbl = new GridBagConstraints();
+        AtomicInteger i = new AtomicInteger(0);
+        lista.forEach(c -> {
+            JPanel panel = new CCurso(c, frmPrincipal).getElementCurso();
+            gbl.gridx = 0;
+            gbl.gridy = i.getAndIncrement();
+            gbl.fill = GridBagConstraints.HORIZONTAL;
+            gbl.anchor = GridBagConstraints.NORTH;
+            gbl.weightx = 1.0;
+            gbl.insets = new Insets(5, 5, 5, 5);
+            pnlContenido.add(panel, gbl);
+        });
+        gbl.gridx = 0;
+        gbl.gridy = i.get();
+        gbl.weighty = 1.0;
+        pnlContenido.add(new JPanel(), gbl);
         pnlContenido.updateUI();
     }
     
