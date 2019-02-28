@@ -38,6 +38,12 @@ public class Rubrica implements RubricaDAO, IAdministrable {
         notas.forEach(n -> n.eliminar());
         objRubrica.eliminar(this);
     }
+    
+    public float getPromedio() {
+        float suma = 0;
+        for (Nota n : notas) suma += n.getNota();
+        return suma / notas.size();
+    }
 
     public Matricula getMatricula() {
         return matricula;

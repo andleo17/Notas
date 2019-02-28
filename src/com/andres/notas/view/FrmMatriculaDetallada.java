@@ -18,7 +18,7 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         lblProfesor = new javax.swing.JLabel();
         lblCurso = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        pnlNotas = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(243, 243, 243));
         setLayout(new java.awt.GridBagLayout());
@@ -32,9 +32,8 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 34;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 5);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
@@ -43,9 +42,8 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipady = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 20, 5);
         jPanel1.add(jLabel2, gridBagConstraints);
 
         lblProfesor.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
@@ -54,10 +52,9 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.ipady = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 20, 0);
         jPanel1.add(lblProfesor, gridBagConstraints);
 
         lblCurso.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
@@ -66,10 +63,9 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipady = 34;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(20, 5, 0, 0);
         jPanel1.add(lblCurso, gridBagConstraints);
 
         btnVolver.setText("V");
@@ -88,14 +84,16 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         add(jPanel1, gridBagConstraints);
 
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        pnlNotas.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        add(jPanel2, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 20);
+        add(pnlNotas, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -103,8 +101,8 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblCurso;
     private javax.swing.JLabel lblProfesor;
+    private javax.swing.JPanel pnlNotas;
     // End of variables declaration//GEN-END:variables
 }
