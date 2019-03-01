@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 
 public class Registro implements IMapeable{
     
@@ -81,7 +80,7 @@ public class Registro implements IMapeable{
                 estudiante.setApellidos(txtApellidos.getText());
                 estudiante.setEmail(txtEmail.getText());
                 estudiante.setPassword(txtPassword.getText());
-                if(Estudiante.iniciarSesion(email, password) == null){
+                if (Estudiante.iniciarSesion(email, password) == null) {
                     estudiante.agregar();
                     frmRegistro.dispose();
                 } else JOptionPane.showMessageDialog(frmRegistro, "Estudiante ya registrado", "Error", JOptionPane.ERROR_MESSAGE);

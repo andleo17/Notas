@@ -4,16 +4,16 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Curso;
 import com.andres.notas.view.FrmAgregarCurso;
 import com.andres.notas.view.FrmPrincipal;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class AgregarCurso implements IMapeable{
     
     private final FrmPrincipal frmPrincipal;
     private FrmAgregarCurso frmAgregarCurso;
+    private JTextField txtNombre;
+    private JTextField txtNumeroCreditos;
+    private JButton btnAgregar;
     private Curso curso;
     
     public AgregarCurso(FrmPrincipal frmPrincipal) {
@@ -23,83 +23,51 @@ public class AgregarCurso implements IMapeable{
     
     public AgregarCurso(FrmPrincipal frmPrincipal, Curso curso) {
         this.frmPrincipal = frmPrincipal;
-        iniciar(curso);
+        this.curso = curso;
+        iniciar();
     }
     
     private void iniciar() {
         frmAgregarCurso = new FrmAgregarCurso(frmPrincipal, false);
-        frmAgregarCurso.setTitle("Agregar curso");
         frmAgregarCurso.setLocationRelativeTo(null);
-        frmAgregarCurso.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        frmAgregarCurso.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we) {
-                agregar();
-            }
-        });
+        frmAgregarCurso.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
-        JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarCurso);
-        btnAgregar.addActionListener(evt -> agregar());
+        txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarCurso);
+        txtNumeroCreditos = (JTextField) getComponentByName("txtNumeroCreditos", frmAgregarCurso);
         
+        btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarCurso);
+        
+        if (curso == null) {
+            curso = new Curso();
+            frmAgregarCurso.setTitle("Agregar curso");
+            btnAgregar.addActionListener(evt -> agregar());
+        } else {
+            frmAgregarCurso.setTitle("Modificar curso");
+            btnAgregar.setText("Modificar");
+            btnAgregar.addActionListener(evt -> actualizar());
+            txtNombre.setText(curso.getNombre());
+            txtNumeroCreditos.setText(String.valueOf(curso.getCreditos()));
+        }
+
         frmAgregarCurso.setModal(true);
         frmAgregarCurso.setVisible(false);
         frmAgregarCurso.setVisible(true);
     }
     
-    private void iniciar(Curso curso) {
-        this.curso = curso;
-        
-        frmAgregarCurso = new FrmAgregarCurso(frmPrincipal, false);
-        frmAgregarCurso.setTitle("Modificar curso");
-        frmAgregarCurso.setLocationRelativeTo(null);
-        frmAgregarCurso.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        frmAgregarCurso.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we) {
-                agregar();
-            }
-        });
-        
-        JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarCurso);
-        btnAgregar.setText("Modificar");
-        btnAgregar.addActionListener(evt -> actualizar());
-        
-        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarCurso);
-        txtNombre.setText(curso.getNombre());
-        
-        JTextField txtNumeroCreditos = (JTextField) getComponentByName("txtNumeroCreditos", frmAgregarCurso);
-        txtNumeroCreditos.setText(String.valueOf(curso.getCreditos()));
-        
-        frmAgregarCurso.setModal(true);
-        frmAgregarCurso.setVisible(false);
-        frmAgregarCurso.setVisible(true);
+    private void obtenerDatos() {
+        curso.setNombre(txtNombre.getText());
+        curso.setCreditos(Integer.valueOf(txtNumeroCreditos.getText()));
     }
     
     private void agregar() {
-        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarCurso);
-        JTextField txtNumeroCreditos = (JTextField) getComponentByName("txtNumeroCreditos", frmAgregarCurso);
-        
-        try {
-            curso = new Curso();
-            curso.setNombre(txtNombre.getText());
-            curso.setCreditos(Integer.valueOf(txtNumeroCreditos.getText()));
-            curso.agregar();
-            
-            frmAgregarCurso.dispose();
-        } catch (Exception e) {
-            int respuesta = JOptionPane.showConfirmDialog(frmAgregarCurso, "¿Seguro que no quiere registrar un curso?", "Mensaje", JOptionPane.YES_NO_OPTION);
-            if (respuesta == 0) frmAgregarCurso.dispose();
-        }
+        obtenerDatos();
+        curso.agregar();
+        frmAgregarCurso.dispose();
     }
     
     private void actualizar() {
-        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarCurso);
-        JTextField txtNumeroCreditos = (JTextField) getComponentByName("txtNumeroCreditos", frmAgregarCurso);
-        
-        curso.setNombre(txtNombre.getText());
-        curso.setCreditos(Integer.valueOf(txtNumeroCreditos.getText()));
+        obtenerDatos();
         curso.actualizar();
-        
         frmAgregarCurso.dispose();
     }
     

@@ -15,6 +15,8 @@ public class Principal implements IMapeable{
     private Ciclo ciclo;
     
     private JPanel pnlContenido;
+    private JLabel lblEstudiante;
+    private JLabel lblCiclo;
     private JButton btnMatriculas;
     private JButton btnCursos;
     private JButton btnProfesores;
@@ -30,6 +32,9 @@ public class Principal implements IMapeable{
         frmPrincipal.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         
         pnlContenido = (JPanel) getComponentByName("pnlContenido", frmPrincipal);
+        
+        lblCiclo = (JLabel) getComponentByName("lblCiclo", frmPrincipal);
+        lblEstudiante = (JLabel) getComponentByName("lblEstudiante", frmPrincipal);
         
         btnMatriculas = (JButton) getComponentByName("btnMatriculas", frmPrincipal);
         btnMatriculas.addActionListener(evt -> abrirMatriculas());
@@ -60,21 +65,18 @@ public class Principal implements IMapeable{
     }
     
     private void colocarEstudiante() {
-        JLabel lblEstudiante = (JLabel) getComponentByName("lblEstudiante", frmPrincipal);
         lblEstudiante.setText(estudiante.getApellidos() + ", " + estudiante.getNombre());
     }
     
     private void colocarCiclo() {
         this.ciclo = Ciclo.obtenerCiclo();
-        JLabel lblCiclo = (JLabel) getComponentByName("lblCiclo", frmPrincipal);
         lblCiclo.setText(ciclo.getNombre());
     }
     
     private void colocarPanel(JPanel panel) {
         pnlContenido.removeAll();
         pnlContenido.add(panel);
-        pnlContenido.revalidate();
-        pnlContenido.repaint();
+        pnlContenido.updateUI();
     }
     
 }

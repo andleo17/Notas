@@ -6,7 +6,6 @@ import com.andres.notas.view.FrmMatriculaDetallada;
 import com.andres.notas.view.FrmPrincipal;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
-import java.util.StringTokenizer;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
 import javax.swing.JLabel;

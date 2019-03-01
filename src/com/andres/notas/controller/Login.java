@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 public class Login implements IMapeable{
 
     private FrmLogin frmLogin;
-    private Estudiante estudiante;
     private JButton btnIngresar;
     private JButton btnRegistro;
     private JButton btnCambiarPassword;
@@ -38,17 +37,11 @@ public class Login implements IMapeable{
     }
     
     private void iniciarSesion() {
-        estudiante = new Estudiante();
-        String email = txtEmail.getText();
-        String password = txtPassword.getText();
-        
-        estudiante = estudiante.iniciarSesion(email, password);
+        Estudiante estudiante = Estudiante.iniciarSesion(txtEmail.getText(), txtPassword.getText());
         if (estudiante != null) {
             frmLogin.dispose();
             new Principal(estudiante).iniciar();
-        }else {
-            JOptionPane.showMessageDialog(frmLogin, "Email y/o contraseña incorrectos", "Login incorrecto", JOptionPane.ERROR_MESSAGE);
-        }
+        } else JOptionPane.showMessageDialog(frmLogin, "Email y/o contraseña incorrectos", "Login incorrecto", JOptionPane.ERROR_MESSAGE);
     }
     
     private void registrar() {

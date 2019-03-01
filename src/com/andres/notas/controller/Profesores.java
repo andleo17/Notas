@@ -34,7 +34,6 @@ public class Profesores implements IMapeable{
             public void windowGainedFocus(WindowEvent we) {
                 listar();
             }
-            
         });
         
         btnAgregar = (JButton) getComponentByName("btnAgregar", frmProfesores);
@@ -50,6 +49,7 @@ public class Profesores implements IMapeable{
         ArrayList<Profesor> lista = Profesor.listar();
         pnlContenido.removeAll();
         GridBagConstraints gbl = new GridBagConstraints();
+        Insets margin = new Insets(5, 5, 5, 5);
         AtomicInteger i = new AtomicInteger(0);
         lista.forEach(p -> {
             JPanel panel = new CProfesor(p, frmPrincipal).getElementProfesor();
@@ -58,7 +58,7 @@ public class Profesores implements IMapeable{
             gbl.fill = GridBagConstraints.HORIZONTAL;
             gbl.anchor = GridBagConstraints.NORTH;
             gbl.weightx = 1.0;
-            gbl.insets = new Insets(5, 5, 5, 5);
+            gbl.insets = margin;
             pnlContenido.add(panel, gbl);
         });
         gbl.gridx = 0;

@@ -4,17 +4,18 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Profesor;
 import com.andres.notas.view.FrmAgregarProfesor;
 import com.andres.notas.view.FrmPrincipal;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class AgregarProfesor implements IMapeable{
     
     private final FrmPrincipal frmPrincipal;
-    private FrmAgregarProfesor frmAgregarProfesor;
     private Profesor profesor;
+    private FrmAgregarProfesor frmAgregarProfesor;
+    private JButton btnAgregar;
+    private JTextField txtNombre;
+    private JTextField txtApellidos;
+    private JTextField txtEmail;
     
     public AgregarProfesor(FrmPrincipal frmPrincipal) {
         this.frmPrincipal = frmPrincipal;
@@ -23,99 +24,53 @@ public class AgregarProfesor implements IMapeable{
     
     public AgregarProfesor(FrmPrincipal frmPrincipal, Profesor profesor) {
         this.frmPrincipal = frmPrincipal;
-        iniciar(profesor);
+        this.profesor = profesor;
+        iniciar();
     }
     
     private void iniciar() {
         frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, false);
-        frmAgregarProfesor.setTitle("Agregar Profesor");
         frmAgregarProfesor.setLocationRelativeTo(null);
-        frmAgregarProfesor.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        frmAgregarProfesor.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we) {
-                agregar();
-            }
-        });
+        frmAgregarProfesor.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
-        JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarProfesor);
-        btnAgregar.addActionListener(evt -> agregar());
+        btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarProfesor);
+        txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarProfesor);
+        txtApellidos = (JTextField) getComponentByName("txtApellidos", frmAgregarProfesor);
+        txtEmail = (JTextField) getComponentByName("txtEmail", frmAgregarProfesor);
         
-        frmAgregarProfesor.setModal(true);
-        frmAgregarProfesor.setVisible(false);
-        frmAgregarProfesor.setVisible(true);
-    }
-    
-    private void iniciar(Profesor profesor) {
-        this.profesor = profesor;
-        
-        frmAgregarProfesor = new FrmAgregarProfesor(frmPrincipal, false);
-        frmAgregarProfesor.setTitle("Modificar Profesor");
-        frmAgregarProfesor.setLocationRelativeTo(null);
-        frmAgregarProfesor.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        frmAgregarProfesor.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we) {
-                agregar();
-            }
-        });
-        
-        JButton btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarProfesor);
-        btnAgregar.setText("Modificar");
-        btnAgregar.addActionListener(evt -> actualizar());
-        
-        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarProfesor);
-        txtNombre.setText(profesor.getNombre());
-        
-        JTextField txtApellidos = (JTextField) getComponentByName("txtApellidos", frmAgregarProfesor);
-        txtApellidos.setText(profesor.getApellidos());
-        
-        JTextField txtEmail = (JTextField) getComponentByName("txtEmail", frmAgregarProfesor);
-        txtEmail.setText(profesor.getEmail());
-        
-        frmAgregarProfesor.setModal(true);
-        frmAgregarProfesor.setVisible(false);
-        frmAgregarProfesor.setVisible(true);
-    }
-    
-    private void agregar() {
-        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarProfesor);
-        JTextField txtApellidos = (JTextField) getComponentByName("txtApellidos", frmAgregarProfesor);
-        JTextField txtEmail = (JTextField) getComponentByName("txtEmail", frmAgregarProfesor);
-        
-        String nombre = txtNombre.getText();
-        String apellidos = txtApellidos.getText();
-        String email = txtEmail.getText();
-        
-        if (!nombre.isEmpty() || !apellidos.isEmpty() || !email.isEmpty()) {
-            if (!nombre.isEmpty() && !apellidos.isEmpty() && !email.isEmpty()) {
-                profesor = new Profesor();
-                profesor.setNombre(nombre);
-                profesor.setApellidos(apellidos);
-                profesor.setEmail(email);
-                profesor.agregar();
-    
-                frmAgregarProfesor.dispose();
-            } else {
-                JOptionPane.showMessageDialog(frmAgregarProfesor, "Faltan datos", "Error", JOptionPane.ERROR_MESSAGE);
-            }
+        if (profesor == null) {
+            profesor = new Profesor();
+            frmAgregarProfesor.setTitle("Agregar Profesor");
+            btnAgregar.addActionListener(evt -> agregar());
         } else {
-            int respuesta = JOptionPane.showConfirmDialog(frmAgregarProfesor, "¿Seguro que no quiere registrar un curso?", "Mensaje", JOptionPane.YES_NO_OPTION);
-            if (respuesta == 0) frmAgregarProfesor.dispose();
+            frmAgregarProfesor.setTitle("Modificar Profesor");
+            btnAgregar.setText("Modificar");
+            btnAgregar.addActionListener(evt -> actualizar());
+            txtNombre.setText(profesor.getNombre());
+            txtApellidos.setText(profesor.getApellidos());
+            txtEmail.setText(profesor.getEmail());
         }
         
+        frmAgregarProfesor.setModal(true);
+        frmAgregarProfesor.setVisible(false);
+        frmAgregarProfesor.setVisible(true);
     }
     
-    private void actualizar() {
-        JTextField txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarProfesor);
-        JTextField txtApellidos = (JTextField) getComponentByName("txtApellidos", frmAgregarProfesor);
-        JTextField txtEmail = (JTextField) getComponentByName("txtEmail", frmAgregarProfesor);
-        
+    private void obtenerDatos() {
         profesor.setNombre(txtNombre.getText());
         profesor.setApellidos(txtApellidos.getText());
         profesor.setEmail(txtEmail.getText());
+    }
+    
+    private void agregar() {
+        obtenerDatos();
+        profesor.agregar();
+        frmAgregarProfesor.dispose();
+    }
+    
+    private void actualizar() {
+        obtenerDatos();
         profesor.actualizar();
-        
         frmAgregarProfesor.dispose();
     }
     
