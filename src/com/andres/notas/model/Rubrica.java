@@ -41,7 +41,7 @@ public class Rubrica implements RubricaDAO, IAdministrable {
     
     public float getPromedio() {
         float suma = 0;
-        for (Nota n : notas) suma += n.getNota();
+        for (Nota n : notas) if (n.getNota() != -1) suma += n.getNota();
         return suma / notas.size();
     }
 

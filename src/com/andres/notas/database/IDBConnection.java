@@ -10,7 +10,7 @@ public interface IDBConnection {
     
     default Connection conectarBD() throws ClassNotFoundException, SQLException {
         Class.forName("org.postgresql.Driver");
-        return DriverManager.getConnection(URL + DB, USER, PASSWORD);
+        return DriverManager.getConnection(URL + DB + "?charSet=UTF8", USER, PASSWORD);
     }
     
 }

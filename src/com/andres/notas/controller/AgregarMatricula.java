@@ -60,9 +60,6 @@ public class AgregarMatricula implements IMapeable{
         frmAgregarMatricula = new FrmAgregarMatricula(frmPrincipal, false);
         frmAgregarMatricula.setVisible(true);
         frmAgregarMatricula.setLocationRelativeTo(null);
-        listarCursos();
-        listarProfesores();
-        
         frmAgregarMatricula.addWindowFocusListener(new WindowAdapter() {
             @Override
             public void windowGainedFocus(WindowEvent w) {
@@ -93,6 +90,9 @@ public class AgregarMatricula implements IMapeable{
             cboCursos.setEnabled(false);
             cboProfesores.setSelectedItem(matricula.getProfesor().getApellidos() + ", " + matricula.getProfesor().getNombre());
         }
+        
+        listarCursos();
+        listarProfesores();
         
         frmAgregarMatricula.setModal(true);
         frmAgregarMatricula.setVisible(false);

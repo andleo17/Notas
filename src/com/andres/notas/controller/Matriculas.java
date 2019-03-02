@@ -6,6 +6,7 @@ import com.andres.notas.model.Estudiante;
 import com.andres.notas.model.Matricula;
 import com.andres.notas.view.FrmMatriculas;
 import com.andres.notas.view.FrmPrincipal;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.WindowAdapter;
@@ -13,6 +14,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Matriculas implements IMapeable{
@@ -54,20 +56,32 @@ public class Matriculas implements IMapeable{
         ArrayList<Matricula> lista = Matricula.listarMatriculas(ciclo, estudiante);
         pnlContenido.removeAll();
         GridBagConstraints gbl = new GridBagConstraints();
-        AtomicInteger i = new AtomicInteger(0);
-        lista.forEach(m -> {
-            JPanel panel = new CMatricula(m, frmPrincipal).getElementMatricula();
+        
+        if (!lista.isEmpty()) {
+            AtomicInteger i = new AtomicInteger(0);
+            lista.forEach(m -> {
+                JPanel panel = new CMatricula(m, frmPrincipal).getElementMatricula();
+                gbl.gridx = 0;
+                gbl.gridy = i.getAndIncrement();
+                gbl.fill = GridBagConstraints.HORIZONTAL;
+                gbl.weightx = 1.0;
+                gbl.insets = new Insets(5, 5, 5, 5);
+                pnlContenido.add(panel, gbl);
+            });
             gbl.gridx = 0;
-            gbl.gridy = i.getAndIncrement();
-            gbl.fill = GridBagConstraints.HORIZONTAL;
-            gbl.weightx = 1.0;
-            gbl.insets = new Insets(5, 5, 5, 5);
-            pnlContenido.add(panel, gbl);
-        });
-        gbl.gridx = 0;
-        gbl.gridy = i.get();
-        gbl.weighty = 1.0;
-        pnlContenido.add(new JPanel(), gbl);
+            gbl.gridy = lista.size();
+            gbl.weighty = 1.0;
+            pnlContenido.add(new JPanel(), gbl);
+        } else {
+            JLabel label = new JLabel("No se encuentran matrículas");
+            label.setFont(new Font("Microsoft Sans Serif", 0, 30));
+            gbl.gridx = 0;
+            gbl.gridy = 0;
+            gbl.anchor = GridBagConstraints.CENTER;
+            gbl.weighty = 1.0;
+            pnlContenido.add(label, gbl);
+        }
+        
         pnlContenido.updateUI();
     }
     

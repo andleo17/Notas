@@ -66,13 +66,12 @@ public class AgregarRubrica implements IMapeable{
     
     private void agregar() {
         ArrayList<Nota> notas = new ArrayList<>();
-        for (int i = 1; i <= Integer.valueOf(txtPeso.getText()); i++) {
+        for (int i = 1; i <= Integer.valueOf(txtNumeroNotas.getText()); i++) {
             Nota nota = new Nota();
             nota.setNumeroNota(i);
             notas.add(nota);
         }
         obtenerDatos();
-        rubrica = new Rubrica();
         rubrica.setNotas(notas);
         frmAgregarRubrica.dispose();
     }
