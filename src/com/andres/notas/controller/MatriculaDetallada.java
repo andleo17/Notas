@@ -2,12 +2,19 @@
 package com.andres.notas.controller;
 
 import com.andres.notas.model.Matricula;
+import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmMatriculaDetallada;
 import com.andres.notas.view.FrmPrincipal;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,6 +23,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class MatriculaDetallada implements IMapeable{
     
@@ -27,15 +36,31 @@ public class MatriculaDetallada implements IMapeable{
     private JButton btnVolver;
     private JPanel pnlContenido;
     private JPanel pnlNotas;
+    private ArrayList<Notas> notas;
+    private JTextField promedioFinal;
+    private JTextField promedioCampus;
+    DecimalFormat df = new DecimalFormat("#.##");
+    
+    private class Notas {
+        Rubrica rubrica;
+        ArrayList<JTextField> txtNotas;
+        
+        public Notas(Rubrica rubrica) {
+            this.rubrica = rubrica;
+            txtNotas = new ArrayList<>();
+        }
+    }
     
     public MatriculaDetallada(Matricula matricula, FrmPrincipal frmPrincipal) {
         this.matricula = matricula;
         this.frmPrincipal = frmPrincipal;
+        notas = new ArrayList<>();
         iniciar();
     }
     
     private void iniciar() {
         mostrar();
+        df.setRoundingMode(RoundingMode.HALF_UP);
         
         pnlNotas = (JPanel) getComponentByName("pnlNotas", frmMatriculaDetallada);
         lblCurso = (JLabel) getComponentByName("lblCurso", frmMatriculaDetallada);
@@ -45,7 +70,7 @@ public class MatriculaDetallada implements IMapeable{
         btnVolver.addActionListener(evt -> volver());
         
         lblCurso.setText(matricula.getCurso().getNombre());
-        lblProfesor.setText(matricula.getProfesor().getNombre());
+        lblProfesor.setText(matricula.getProfesor().getApellidos() + ", " + matricula.getProfesor().getNombre());
         
         mostrarNotas();
     }
@@ -118,6 +143,8 @@ public class MatriculaDetallada implements IMapeable{
             
             pnlNotas.add(rubrica, posicion);
             
+            Notas notes = new Notas(r);
+            
             String siglas = obtenerSiglas(r.getNombre());
             
             r.getNotas().forEach(n -> {
@@ -140,11 +167,19 @@ public class MatriculaDetallada implements IMapeable{
                             nota.setHorizontalAlignment(SwingConstants.CENTER);
                             nota.setBorder(bordeNegro);
                 if (n.getNota() != -1) nota.setText(String.valueOf(n.getNota()));
+                nota.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyReleased(KeyEvent ke) {
+                        hallarPromedio(ke);
+                    }
+                });
                 
                 posicion.gridx = i.getAndIncrement();
                 posicion.gridy = 2;
                 
                 pnlNotas.add(nota, posicion);
+                
+                notes.txtNotas.add(nota);
             });
             
             JLabel  promedioNombre = new JLabel("Promedio");
@@ -159,16 +194,35 @@ public class MatriculaDetallada implements IMapeable{
             
             pnlNotas.add(promedioNombre, posicion);
 
-            JTextField  promedio = new JTextField(String.valueOf(r.getPromedio()));
+            JTextField  promedio = new JTextField(df.format(r.getPromedio()));
                         promedio.setBackground(fondoPromedio);
                         promedio.setFont(fuentePromedio);
                         promedio.setHorizontalAlignment(SwingConstants.CENTER);
                         promedio.setBorder(bordeNegro);
+                        promedio.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent de) {
+                    hallarPromedioFinal();
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent de) {
+                    hallarPromedioFinal();
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent de) {
+                    hallarPromedioFinal();
+                }
+            });
             
             posicion.gridx = i.getAndIncrement();
             posicion.gridy = 2;
             
             pnlNotas.add(promedio, posicion);
+            
+            notes.txtNotas.add(promedio);
+            notas.add(notes);
         });
         
         JLabel  promedioFinalNombre = new JLabel("<html><body><center>Promedio<br>Final</center></body></html>");
@@ -185,11 +239,27 @@ public class MatriculaDetallada implements IMapeable{
 
         pnlNotas.add(promedioFinalNombre, posicion);
 
-        JTextField  promedioFinal = new JTextField(String.valueOf(matricula.getPromedioFinal()));
-                    promedioFinal.setBackground(fondoPromedioFinal);
-                    promedioFinal.setFont(fuentePromedioFinal);
-                    promedioFinal.setHorizontalAlignment(SwingConstants.CENTER);
-                    promedioFinal.setBorder(bordeNegro);
+        promedioFinal = new JTextField(df.format(matricula.getPromedioFinal()));
+        promedioFinal.setBackground(fondoPromedioFinal);
+        promedioFinal.setFont(fuentePromedioFinal);
+        promedioFinal.setHorizontalAlignment(SwingConstants.CENTER);
+        promedioFinal.setBorder(bordeNegro);
+        promedioFinal.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                hallarPromedioCampus();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                hallarPromedioCampus();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                hallarPromedioCampus();
+            }
+        });
 
         posicion.gridx = i.getAndIncrement();
         posicion.gridy = 2;
@@ -210,11 +280,11 @@ public class MatriculaDetallada implements IMapeable{
 
         pnlNotas.add(promedioCampusNombre, posicion);
 
-        JTextField  promedioCampus = new JTextField(String.valueOf(Math.round(matricula.getPromedioFinal())));
-                    promedioCampus.setBackground(fondoPromedioCampus);
-                    promedioCampus.setFont(fuentePromedioCampus);
-                    promedioCampus.setHorizontalAlignment(SwingConstants.CENTER);
-                    promedioCampus.setBorder(bordeNegro);
+        promedioCampus = new JTextField(String.valueOf(Math.round(matricula.getPromedioFinal())));
+        promedioCampus.setBackground(fondoPromedioCampus);
+        promedioCampus.setFont(fuentePromedioCampus);
+        promedioCampus.setHorizontalAlignment(SwingConstants.CENTER);
+        promedioCampus.setBorder(bordeNegro);
 
         posicion.gridx = i.get();
         posicion.gridy = 2;
@@ -236,6 +306,45 @@ public class MatriculaDetallada implements IMapeable{
         StringBuilder p = new StringBuilder();
         for (String s : nombre.split(" ")) p.append(s.charAt(0));
         return p.toString();
+    }
+    
+    private void hallarPromedio(KeyEvent e) {
+        Notas nota = null;
+        float suma = 0;
+        int i = 0;
+        for (Notas n : notas) for (JTextField t : n.txtNotas) if (t == e.getComponent()) nota = n;
+        for (i = 0; i < nota.txtNotas.size() - 1; i++) {
+            JTextField t = nota.txtNotas.get(i);
+            float numero = (t.getText().isEmpty()) ? 0 : convertir(t.getText());
+            suma = suma + numero;
+        }
+        nota.txtNotas.get(nota.txtNotas.size() -1).setText(df.format(suma / i));
+    }
+    
+    private void hallarPromedioFinal() {
+        float suma = 0;
+        for (Notas n : notas) {
+            float numero = (n.txtNotas.get(n.txtNotas.size() - 1).getText().isEmpty()) ? 0 : convertir(n.txtNotas.get(n.txtNotas.size() - 1).getText());
+            suma = suma + n.rubrica.getPeso() * numero;
+        }
+        promedioFinal.setText(df.format(suma));
+    }
+    
+    private void hallarPromedioCampus() {
+        float numero = promedioFinal.getText().isEmpty() ? 0 : convertir(promedioFinal.getText());
+        promedioCampus.setText(String.valueOf(Math.round(numero)));
+    }
+    
+    private float convertir(String str) {
+        float numero;
+        
+        try {
+            numero = df.parse(str).floatValue();
+        } catch (ParseException ex) {
+            numero = -1;
+        }
+        
+        return numero;
     }
     
 }
