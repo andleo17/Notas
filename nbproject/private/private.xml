@@ -12,22 +12,7 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/database/database.sql</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarRubrica.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarCurso.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Rubrica.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/CMatricula.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/CCurso.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Matriculas.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarProfesor.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/CProfesor.java</file>
             <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/MatriculaDetallada.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/model/Matricula.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/AgregarMatricula.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/CambiarPassword.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/dao/NotaDAO.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/Login.java</file>
-            <file>file:/C:/Users/asus/Documents/NetBeansProjects/com.andres.notas/src/com/andres/notas/controller/CRubrica.java</file>
         </group>
     </open-files>
 </project-private>

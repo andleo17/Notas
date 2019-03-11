@@ -18,6 +18,7 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         lblProfesor = new javax.swing.JLabel();
         lblCurso = new javax.swing.JLabel();
         btnVolver = new javax.swing.JButton();
+        btnHallarNotas = new javax.swing.JButton();
         pnlNotas = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(243, 243, 243));
@@ -29,43 +30,51 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Curso:");
+        jLabel1.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
         jPanel1.add(jLabel1, gridBagConstraints);
 
         jLabel2.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Profesor:");
+        jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipady = 34;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(0, 20, 20, 5);
+        gridBagConstraints.insets = new java.awt.Insets(0, 20, 0, 0);
         jPanel1.add(jLabel2, gridBagConstraints);
 
         lblProfesor.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
         lblProfesor.setForeground(new java.awt.Color(255, 255, 255));
         lblProfesor.setText("Profesor");
+        lblProfesor.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipady = 34;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 20, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel1.add(lblProfesor, gridBagConstraints);
 
         lblCurso.setFont(new java.awt.Font("Microsoft Sans Serif", 1, 18)); // NOI18N
         lblCurso.setForeground(new java.awt.Color(255, 255, 255));
         lblCurso.setText("Curso");
+        lblCurso.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.ipady = 35;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(20, 5, 0, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 0, 0);
         jPanel1.add(lblCurso, gridBagConstraints);
 
         btnVolver.setText("V");
@@ -84,10 +93,24 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         gridBagConstraints.weightx = 1.0;
         add(jPanel1, gridBagConstraints);
 
-        pnlNotas.setLayout(new java.awt.GridBagLayout());
+        btnHallarNotas.setBackground(new java.awt.Color(204, 0, 0));
+        btnHallarNotas.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        btnHallarNotas.setForeground(new java.awt.Color(255, 255, 255));
+        btnHallarNotas.setText("Hallar Notas");
+        btnHallarNotas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 0, 10, 20);
+        add(btnHallarNotas, gridBagConstraints);
+
+        pnlNotas.setLayout(new java.awt.GridBagLayout());
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         gridBagConstraints.weightx = 1.0;
@@ -97,6 +120,7 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnHallarNotas;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
