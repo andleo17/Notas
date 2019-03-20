@@ -165,6 +165,7 @@ public class MatriculaDetallada implements IMapeable{
                     medidor.setUI(new WindowsSliderUI(medidor));
                     medidor.setLabelTable(labelTable);
                     medidor.setFocusable(false);
+                    medidor.addChangeListener(evt -> hallarNotas());
                     
             posicion.gridy = 3;
             posicion.insets = new Insets(20, 0, 20, 0);
@@ -422,10 +423,8 @@ public class MatriculaDetallada implements IMapeable{
         }
         if (pF != promedioEsperado) {
             for (float p[] : promedios) {
-                while (Math.round(pF) != promedioEsperado) {
-                    if(p[0] < 20){
-                        p[0] = p[0] + 0.01F;
-                    }
+                while (Math.round(pF) != promedioEsperado && p[0] < 20) {
+                    p[0] = p[0] + 0.01F;
                     pF = 0;
                     for (float p1[] : promedios) pF = pF + p1[0] * p1[1];
                 }
@@ -440,6 +439,7 @@ public class MatriculaDetallada implements IMapeable{
                 else sinNota++;
             }
             promedioNota = promedioNota / sinNota;
+            if (promedioNota > 20) promedioNota = Math.round(promedioNota);
             for (JTextField t : f.txtNotas) t.setText(df.format(promedioNota));
         });
     }

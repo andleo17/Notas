@@ -19,9 +19,9 @@ public class FrmAgregarCurso extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         lblNumeroCreditos = new javax.swing.JLabel();
-        txtNumeroCreditos = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         btnAgregar = new javax.swing.JButton();
+        txtNumeroCreditos = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 450));
@@ -73,17 +73,6 @@ public class FrmAgregarCurso extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
         pnlContenido.add(lblNumeroCreditos, gridBagConstraints);
 
-        txtNumeroCreditos.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        txtNumeroCreditos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 50, 0, 50);
-        pnlContenido.add(txtNumeroCreditos, gridBagConstraints);
-
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -108,6 +97,19 @@ public class FrmAgregarCurso extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTH;
         gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
         pnlContenido.add(btnAgregar, gridBagConstraints);
+
+        txtNumeroCreditos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtNumeroCreditos.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        txtNumeroCreditos.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        txtNumeroCreditos.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        txtNumeroCreditos.setValue(new Integer(0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 50, 0, 50);
+        pnlContenido.add(txtNumeroCreditos, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -138,6 +140,6 @@ public class FrmAgregarCurso extends javax.swing.JDialog {
     private javax.swing.JPanel pnlContenido;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNumeroCreditos;
+    private javax.swing.JFormattedTextField txtNumeroCreditos;
     // End of variables declaration//GEN-END:variables
 }

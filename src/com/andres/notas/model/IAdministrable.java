@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public interface IAdministrable {
 
     void agregar() throws SQLException;
-    void actualizar();
-    void eliminar();
+    void actualizar() throws SQLException ;
+    void eliminar() throws SQLException ;
     
 }

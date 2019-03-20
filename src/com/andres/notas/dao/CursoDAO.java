@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import static com.andres.notas.database.Database.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public interface CursoDAO extends IDBConnection {
     
@@ -37,7 +38,7 @@ public interface CursoDAO extends IDBConnection {
         return cursos;
     }
     
-    default void agregar(Curso curso){
+    default void agregar(Curso curso) throws SQLException {
         try (Connection connection = conectarBD()){
             String insert = String.format("INSERT INTO %s (%s, %s) VALUES (?, ?);",
                                 TCURSO,
@@ -48,12 +49,10 @@ public interface CursoDAO extends IDBConnection {
             ps.setInt(2, curso.getCreditos());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    default void actualizar(Curso curso) {
+    default void actualizar(Curso curso) throws SQLException {
         try (Connection connection = conectarBD()) {
             String update = String.format("UPDATE %s SET %s = ?, %s = ? WHERE %s = ?;",
                                 TCURSO,
@@ -66,20 +65,16 @@ public interface CursoDAO extends IDBConnection {
             ps.setInt(3, curso.getId());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    default void eliminar(Curso curso) {
+    default void eliminar(Curso curso) throws SQLException {
         try (Connection connection = conectarBD()){
             String delete = String.format("DELETE FROM %s WHERE %s = ?;", TCURSO, TCURSO_id);
             PreparedStatement ps = connection.prepareStatement(delete);
             ps.setInt(1, curso.getId());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
     

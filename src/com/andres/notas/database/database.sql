@@ -53,7 +53,7 @@ CREATE TABLE rubrica (
     idCiclo         INTEGER             NOT NULL,
     numeroRubrica   INTEGER             NOT NULL,
     nombre          VARCHAR(40)         NOT NULL,
-    peso            FLOAT               NOT NULL,
+    peso            FLOAT(2)            NOT NULL,
 
     CONSTRAINT  pk_rubrica
         PRIMARY KEY     (idEstudiante, idCurso, idCiclo, numeroRubrica),

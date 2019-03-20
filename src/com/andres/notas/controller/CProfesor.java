@@ -4,6 +4,7 @@ package com.andres.notas.controller;
 import com.andres.notas.elements.ElementProfesor;
 import com.andres.notas.model.Profesor;
 import com.andres.notas.view.FrmPrincipal;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -46,9 +47,24 @@ public class CProfesor implements IMapeable{
     }
     
     private void eliminar() {
+        
         int respuesta = JOptionPane.showConfirmDialog(frmPrincipal, "¿Desea eliminar a " + profesor.getApellidos() + ", " + profesor.getNombre() + "?",
                 "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (respuesta == 0) profesor.eliminar();
+        if (respuesta == 0) {
+            try {
+                profesor.eliminar();
+            } catch (SQLException e) {
+                switch (Integer.valueOf(e.getSQLState())){
+                    case 23503:
+                        JOptionPane.showMessageDialog(frmPrincipal, "Profesor asociado a una matrícula, elimine la matrícula primero", "Error al eliminar", JOptionPane.ERROR_MESSAGE);
+                        break;
+                    default:
+                        System.err.println("Otro error");
+                        System.err.println(Integer.valueOf(e.getSQLState()));
+                        break;
+                }
+            }
+        }
     }
     
     public ElementProfesor getElementProfesor() {

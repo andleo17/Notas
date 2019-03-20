@@ -4,6 +4,7 @@ package com.andres.notas.model;
 import java.util.ArrayList;
 
 import com.andres.notas.dao.EstudianteDAO;
+import java.sql.SQLException;
 
 public class Estudiante implements EstudianteDAO {
     
@@ -28,7 +29,7 @@ public class Estudiante implements EstudianteDAO {
         objEstudiante.agregar(this);
     }
 
-    public void actualizar() {
+    public void actualizar() throws SQLException {
         objEstudiante.actualizar(this);
     }
 

@@ -4,6 +4,7 @@ package com.andres.notas.model;
 import java.util.ArrayList;
 
 import com.andres.notas.dao.ProfesorDAO;
+import java.sql.SQLException;
 
 public class Profesor implements ProfesorDAO, IAdministrable {
     
@@ -27,17 +28,17 @@ public class Profesor implements ProfesorDAO, IAdministrable {
     }
 
     @Override
-    public void agregar() {
+    public void agregar() throws SQLException {
         objProfesor.agregar(this);
     }
     
     @Override
-    public void actualizar() {
+    public void actualizar() throws SQLException {
         objProfesor.actualizar(this);
     }
 
     @Override
-    public void eliminar() {
+    public void eliminar() throws SQLException {
         objProfesor.eliminar(this);
     }
 

@@ -4,12 +4,13 @@ package com.andres.notas.model;
 import java.util.ArrayList;
 
 import com.andres.notas.dao.NotaDAO;
+import java.sql.SQLException;
 
 public class Nota implements NotaDAO, IAdministrable {
     
     private Rubrica rubrica;
     private int numeroNota;
-    private float nota;
+    private float nota = -1;
 
     private static final Nota objNota = new Nota();
 
@@ -18,17 +19,17 @@ public class Nota implements NotaDAO, IAdministrable {
     }
 
     @Override
-    public void agregar() {
+    public void agregar() throws SQLException {
         objNota.agregar(this);
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar() throws SQLException {
         objNota.actualizar(this);
     }
 
     @Override
-    public void eliminar() {
+    public void eliminar() throws SQLException {
         objNota.eliminar(this);
     }
 

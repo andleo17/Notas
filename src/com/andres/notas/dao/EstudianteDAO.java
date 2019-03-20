@@ -8,6 +8,7 @@ import static com.andres.notas.database.Database.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface EstudianteDAO extends IDBConnection{
@@ -58,7 +59,7 @@ public interface EstudianteDAO extends IDBConnection{
         }
     }
 
-    default void actualizar(Estudiante estudiante) {
+    default void actualizar(Estudiante estudiante) throws SQLException{
         try (Connection connection = conectarBD()) {
             String update = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ?, %s = ? WHERE %s = ?;",
                                 TESTUDIANTE,
@@ -75,8 +76,6 @@ public interface EstudianteDAO extends IDBConnection{
             ps.setInt(5, estudiante.getId());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

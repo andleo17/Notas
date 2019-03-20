@@ -8,6 +8,7 @@ import static com.andres.notas.database.Database.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ProfesorDAO extends IDBConnection{
@@ -33,13 +34,12 @@ public interface ProfesorDAO extends IDBConnection{
             ps.close();
 
         } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return profesores;
     }
 
-    default void agregar(Profesor profesor) {
+    default void agregar(Profesor profesor) throws SQLException{
         try (Connection connection = conectarBD()) {
             String insert = String.format("INSERT INTO %s (%s, %s, %s) VALUES (?, ?, ?);",
                         TPROFESOR,
@@ -52,13 +52,11 @@ public interface ProfesorDAO extends IDBConnection{
             ps.setString(3, profesor.getEmail());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
     }
 
-    default void actualizar(Profesor profesor) {
+    default void actualizar(Profesor profesor) throws SQLException{
         try (Connection connection = conectarBD()) {
             String update = String.format("UPDATE %s SET %s = ?, %s = ?, %s = ? WHERE %s = ?", 
                                 TPROFESOR,
@@ -73,12 +71,10 @@ public interface ProfesorDAO extends IDBConnection{
             ps.setInt(4, profesor.getId());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
-    default void eliminar (Profesor profesor) {
+    default void eliminar (Profesor profesor) throws SQLException{
         try (Connection connection = conectarBD()) {
             String delete = String.format("DELETE FROM %s WHERE %s = ?", 
                                 TPROFESOR,
@@ -87,8 +83,6 @@ public interface ProfesorDAO extends IDBConnection{
             ps.setInt(1, profesor.getId());
             ps.executeUpdate();
             ps.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
     

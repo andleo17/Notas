@@ -4,6 +4,7 @@ package com.andres.notas.model;
 import java.util.ArrayList;
 
 import com.andres.notas.dao.RubricaDAO;
+import java.sql.SQLException;
 
 public class Rubrica implements RubricaDAO, IAdministrable {
     
@@ -20,22 +21,17 @@ public class Rubrica implements RubricaDAO, IAdministrable {
     }
 
     @Override
-    public void agregar() {
+    public void agregar() throws SQLException {
         objRubrica.agregar(this);
-        notas.forEach(n -> {
-            n.setRubrica(this);
-            n.agregar();
-        });
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar() throws SQLException {
         objRubrica.actualizar(this);
     }
 
     @Override
-    public void eliminar() {
-        notas.forEach(n -> n.eliminar());
+    public void eliminar() throws SQLException {
         objRubrica.eliminar(this);
     }
     

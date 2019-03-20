@@ -43,7 +43,7 @@ public class CRubrica implements IMapeable{
         
         lblNumero.setText(String.valueOf(rubrica.getNumeroRubrica()));
         lblNombre.setText(rubrica.getNombre());
-        lblPeso.setText(rubrica.getPeso() * 100 + "%");
+        lblPeso.setText((rubrica.getPeso() * 10 * 10)+ " %");
         lblNotas.setText(String.valueOf(rubrica.getNotas().size()));
     }
     
@@ -54,7 +54,7 @@ public class CRubrica implements IMapeable{
     private void eliminar() {
         int respuesta = JOptionPane.showConfirmDialog(frmAgregarMatricula, "¿Desea eliminar la rúbrica " + rubrica.getNombre() + "?",
                 "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (respuesta == 0) rubrica.eliminar();
+        if (respuesta == 0) AgregarMatricula.rubricas.remove(rubrica);
     }
     
     public JPanel getElementRubrica() {

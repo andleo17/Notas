@@ -1,10 +1,14 @@
 
 package com.andres.notas.view;
 
+import com.sun.java.swing.plaf.windows.WindowsScrollBarUI;
+
 public class FrmCursos extends javax.swing.JPanel {
 
     public FrmCursos() {
         initComponents();
+        jScrollPane1.getVerticalScrollBar().setUI(new WindowsScrollBarUI());
+        jScrollPane1.getVerticalScrollBar().setUnitIncrement(13);
     }
 
     @SuppressWarnings("unchecked")

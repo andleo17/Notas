@@ -19,13 +19,13 @@ public class FrmAgregarRubrica extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         lblPeso = new javax.swing.JLabel();
-        txtPeso = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
         lblNumeroNotas = new javax.swing.JLabel();
-        txtNumeroNotas = new javax.swing.JTextField();
         lblPorcentaje = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         btnAgregar = new javax.swing.JButton();
+        txtPeso = new javax.swing.JFormattedTextField();
+        txtNumeroNotas = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(350, 450));
@@ -78,18 +78,6 @@ public class FrmAgregarRubrica extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
         jPanel1.add(lblPeso, gridBagConstraints);
 
-        txtPeso.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        txtPeso.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtPeso.setOpaque(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 50, 0, 50);
-        jPanel1.add(txtPeso, gridBagConstraints);
-
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -108,18 +96,6 @@ public class FrmAgregarRubrica extends javax.swing.JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
         jPanel1.add(lblNumeroNotas, gridBagConstraints);
-
-        txtNumeroNotas.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
-        txtNumeroNotas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txtNumeroNotas.setOpaque(false);
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(10, 50, 0, 50);
-        jPanel1.add(txtNumeroNotas, gridBagConstraints);
 
         lblPorcentaje.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
         lblPorcentaje.setText("%");
@@ -156,6 +132,32 @@ public class FrmAgregarRubrica extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(50, 0, 0, 0);
         jPanel1.add(btnAgregar, gridBagConstraints);
 
+        txtPeso.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtPeso.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtPeso.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        txtPeso.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        txtPeso.setOpaque(false);
+        txtPeso.setValue(new Integer(0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 50, 0, 50);
+        jPanel1.add(txtPeso, gridBagConstraints);
+
+        txtNumeroNotas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txtNumeroNotas.setFocusLostBehavior(javax.swing.JFormattedTextField.COMMIT);
+        txtNumeroNotas.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        txtNumeroNotas.setValue(new Integer(0));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(10, 50, 0, 50);
+        jPanel1.add(txtNumeroNotas, gridBagConstraints);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -188,7 +190,7 @@ public class FrmAgregarRubrica extends javax.swing.JDialog {
     private javax.swing.JLabel lblPorcentaje;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNumeroNotas;
-    private javax.swing.JTextField txtPeso;
+    private javax.swing.JFormattedTextField txtNumeroNotas;
+    private javax.swing.JFormattedTextField txtPeso;
     // End of variables declaration//GEN-END:variables
 }

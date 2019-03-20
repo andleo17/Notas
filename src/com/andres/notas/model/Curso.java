@@ -4,6 +4,7 @@ package com.andres.notas.model;
 import java.util.ArrayList;
 
 import com.andres.notas.dao.CursoDAO;
+import java.sql.SQLException;
 
 public class Curso implements CursoDAO, IAdministrable {
     
@@ -26,17 +27,17 @@ public class Curso implements CursoDAO, IAdministrable {
     }
 
     @Override
-    public void agregar() {
+    public void agregar() throws SQLException {
         objCurso.agregar(this);
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar() throws SQLException {
         objCurso.actualizar(this);
     }
 
     @Override
-    public void eliminar() {
+    public void eliminar() throws SQLException {
         objCurso.eliminar(this);
     }
 

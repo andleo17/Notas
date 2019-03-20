@@ -83,6 +83,7 @@ public class FrmRegistro extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 50, 0, 0);
         jPanel1.add(lblApellidos, gridBagConstraints);
 
+        txtApellidos.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
         txtApellidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

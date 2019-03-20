@@ -3,7 +3,10 @@ package com.andres.notas.controller;
 
 import com.andres.notas.elements.ElementMatricula;
 import com.andres.notas.model.Matricula;
+import com.andres.notas.model.Nota;
+import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmPrincipal;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -50,6 +53,14 @@ public class CMatricula implements IMapeable{
         lblCurso.setText(matricula.getCurso().getNombre());
         lblProfesor.setText(matricula.getProfesor().getApellidos() + ", " + matricula.getProfesor().getNombre());
         lblPromedio.setText(String.valueOf(matricula.getPromedioFinal()));
+        
+        int nC = 0, nF = 0;
+        for (Rubrica r : matricula.getRubricas()) {
+            for (Nota n : r.getNotas()) {
+                if (n.getNota() == -1) nF++; else nC++;
+            }
+        }
+        lblNotas.setText(nF + " / " + nC);
     }
     
     private void verDetalles() {
@@ -63,7 +74,24 @@ public class CMatricula implements IMapeable{
     private void eliminar() {
         int respuesta = JOptionPane.showConfirmDialog(frmPrincipal, "¿Desea eliminar la matricula de " + matricula.getCurso().getNombre() + "?",
                 "Confirmar", JOptionPane.YES_NO_OPTION);
-        if (respuesta == 0) matricula.eliminar();
+        if (respuesta == 0) {
+            try {
+                for (Rubrica r : matricula.getRubricas()) {
+                    for (Nota n : r.getNotas()) {
+                        n.eliminar();
+                    }
+                    r.eliminar();
+                }
+                matricula.eliminar();
+            } catch (SQLException e) {
+                switch (Integer.valueOf(e.getSQLState())){
+                    default:
+                        System.err.println("Otro error");
+                        System.err.println(Integer.valueOf(e.getSQLState()));
+                        break;
+                }
+            }
+        }
     }
     
     public ElementMatricula getElementMatricula() {

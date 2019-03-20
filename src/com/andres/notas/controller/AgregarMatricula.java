@@ -5,6 +5,7 @@ import com.andres.notas.model.Ciclo;
 import com.andres.notas.model.Curso;
 import com.andres.notas.model.Estudiante;
 import com.andres.notas.model.Matricula;
+import com.andres.notas.model.Nota;
 import com.andres.notas.model.Profesor;
 import com.andres.notas.model.Rubrica;
 import com.andres.notas.view.FrmAgregarMatricula;
@@ -28,11 +29,9 @@ public class AgregarMatricula implements IMapeable{
     private Matricula matricula;
     private Estudiante estudiante;
     private Ciclo ciclo;
-    private ArrayList<Rubrica> rubricas;
+    public  static ArrayList<Rubrica> rubricas;
     private ArrayList<Profesor> profesores;
     private ArrayList<Curso> cursos;
-    private int j;
-    private AtomicInteger index;
     private JComboBox cboCursos;
     private JComboBox cboProfesores;
     private JButton btnAgregarRubrica;
@@ -41,18 +40,14 @@ public class AgregarMatricula implements IMapeable{
     
     public AgregarMatricula(FrmPrincipal frmPrincipal, Estudiante estudiante, Ciclo ciclo) {
         this.frmPrincipal = frmPrincipal;
-        this.rubricas = new ArrayList<>();
         this.estudiante = estudiante;
         this.ciclo = ciclo;
-        index = new AtomicInteger(1);
         iniciar();
     }
     
     public AgregarMatricula(FrmPrincipal frmPrincipal, Matricula matricula) {
         this.frmPrincipal = frmPrincipal;
-        this.rubricas = matricula.getRubricas();
         this.matricula = matricula;
-        index = new AtomicInteger(rubricas.size() + 1);
         iniciar();
     }
     
@@ -75,13 +70,20 @@ public class AgregarMatricula implements IMapeable{
         btnAgregarRubrica.addActionListener(evt -> agregarRubrica());        
         
         btnAgregarMatricula = (JButton) getComponentByName("btnAgregarMatricula", frmAgregarMatricula);
+        listarCursos();
+        listarProfesores();
+        
+        this.rubricas = new ArrayList<>();
         
         if (matricula == null) {
             matricula = new Matricula();
+            matricula.setRubricas(new ArrayList<>());
+            matricula.setCiclo(ciclo);
+            matricula.setEstudiante(estudiante);
             frmAgregarMatricula.setTitle("Agregar Matrícula");
             btnAgregarMatricula.addActionListener(evt -> agregarMatricula());
         } else {
-            j = rubricas.size();
+            matricula.getRubricas().forEach(r -> rubricas.add(r));
             frmAgregarMatricula.setTitle("Modificar Matrícula");
             btnAgregarMatricula.setText("Modificar");
             btnAgregarMatricula.addActionListener(evt -> modificarMatricula());
@@ -90,10 +92,6 @@ public class AgregarMatricula implements IMapeable{
             cboCursos.setEnabled(false);
             cboProfesores.setSelectedItem(matricula.getProfesor().getApellidos() + ", " + matricula.getProfesor().getNombre());
         }
-        
-        listarCursos();
-        listarProfesores();
-        
         frmAgregarMatricula.setModal(true);
         frmAgregarMatricula.setVisible(false);
         frmAgregarMatricula.setVisible(true);
@@ -115,9 +113,10 @@ public class AgregarMatricula implements IMapeable{
     
     private void agregarRubrica() {
         AgregarRubrica agregarRubrica = new AgregarRubrica(frmAgregarMatricula);
-        agregarRubrica.getRubrica().setNumeroRubrica(index.getAndIncrement());
-        if (agregarRubrica.getRubrica() != null) rubricas.add(agregarRubrica.getRubrica());
-        listarRubricas();
+        if (agregarRubrica.getRubrica() != null) {
+            rubricas.add(agregarRubrica.getRubrica());
+            listarRubricas();
+        }
     }
     
     private void listarRubricas() {
@@ -126,6 +125,7 @@ public class AgregarMatricula implements IMapeable{
         AtomicInteger i = new AtomicInteger(0);
         Insets margin = new Insets(5, 5, 5, 5);
         rubricas.forEach(r -> {
+            r.setNumeroRubrica(rubricas.indexOf(r) + 1);
             JPanel panel = new CRubrica(r, frmAgregarMatricula).getElementRubrica();
             gbl.gridx = 0;
             gbl.gridy = i.getAndIncrement();
@@ -143,42 +143,86 @@ public class AgregarMatricula implements IMapeable{
     }
     
     private void agregarMatricula() {
-        matricula.setCiclo(ciclo);
-        matricula.setEstudiante(estudiante);
+        float peso = 0;
+        for (Rubrica r : rubricas) peso = peso + r.getPeso();
+        rubricas.forEach(r -> matricula.getRubricas().add(r));
         if(cboCursos.getSelectedIndex() != -1 && cboProfesores.getSelectedIndex() != -1){
-            if (!rubricas.isEmpty()) {
-                matricula.setRubricas(rubricas);
-                matricula.setCurso(cursos.get(cboCursos.getSelectedIndex()));
-                matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
-                try {
-                    matricula.agregar();
-                    frmAgregarMatricula.dispose();
-                } catch (SQLException e) {
-                    switch (Integer.valueOf(e.getSQLState())){
-                        case 23505:
-                            JOptionPane.showMessageDialog(frmAgregarMatricula, "Matrícula ya registrada", "Error al registrar", JOptionPane.ERROR_MESSAGE);
-                            break;
-                        default:
-                            System.err.println("Otro error");
-                            break;
+            if (!matricula.getRubricas().isEmpty()) {
+                if (peso == 1) {
+                    matricula.setCurso(cursos.get(cboCursos.getSelectedIndex()));
+                    matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
+                    try {
+                        matricula.agregar();
+                        frmAgregarMatricula.dispose();
+                    } catch (SQLException e) {
+                        switch (Integer.valueOf(e.getSQLState())){
+                            case 23505:
+                                JOptionPane.showMessageDialog(frmAgregarMatricula, "Matrícula ya registrada", "Error al registrar", JOptionPane.ERROR_MESSAGE);
+                                break;
+                            default:
+                                System.err.println("Otro error");
+                                System.err.println(Integer.valueOf(e.getSQLState()));
+                                break;
+                        }
                     }
-                }
+                } else JOptionPane.showMessageDialog(frmAgregarMatricula, "Ingrese correctamente los pesos", "Error al registrar", JOptionPane.ERROR_MESSAGE);
             } else JOptionPane.showMessageDialog(frmAgregarMatricula, "Ingrese rúbricas", "Error al registrar", JOptionPane.ERROR_MESSAGE);
         } else JOptionPane.showMessageDialog(frmAgregarMatricula, "Seleccione un curso o un profesor", "Error al registrar", JOptionPane.ERROR_MESSAGE);
     }
     
     private void modificarMatricula() {
         matricula.setProfesor(profesores.get(cboProfesores.getSelectedIndex()));
-        if(j != rubricas.size()) {
-            for (int i = j; i < rubricas.size(); i++) {
-                Rubrica r = rubricas.get(i);
-                r.setMatricula(matricula);
-                r.setNumeroRubrica(i + 1);
-                r.agregar();
+        ArrayList<Rubrica> rub = Rubrica.listar(matricula);
+        float peso = 0;
+        for (Rubrica r : rubricas) peso = peso + r.getPeso();
+        if (peso == 1) {
+            AtomicInteger i = new AtomicInteger();
+            rubricas.forEach(r -> {
+                try {
+                    Rubrica r1 = rub.get(i.getAndIncrement());
+                    if (!r1.getNombre().equals(r.getNombre()) 
+                            || r1.getPeso() != r.getPeso()) {
+                        try {
+                            r.actualizar();
+                        } catch (SQLException e) {
+                        }
+                    }
+                    if (r1.getNotas().size() != r.getNotas().size()) {
+                        try {
+                            for (Nota n : r1.getNotas()) n.eliminar();
+                            for (Nota n : r.getNotas()) n.agregar();
+                        } catch (SQLException e) {
+                        }
+                    }
+                } catch (ArrayIndexOutOfBoundsException g) {
+                    r.setMatricula(matricula);
+                    try {
+                        r.agregar();
+                        for (Nota n : r.getNotas()) n.agregar();
+                    } catch (SQLException e) {
+                    }
+                }
+            });
+            if (rub.size() > rubricas.size()) {
+                try {
+                    for (int j = rubricas.size(); j < rub.size(); j++) {
+                        Rubrica r = rub.get(j);
+                        for (Nota n : r.getNotas()) n.eliminar();
+                        r.eliminar();
+                    }
+                } catch (SQLException e) {
+                }
             }
-        }
-        matricula.actualizar();
-        frmAgregarMatricula.dispose();
+            matricula.getRubricas().clear();
+            rubricas.forEach(r ->matricula.getRubricas().add(r));
+            if ((matricula.getProfesor().getApellidos() + ", " + matricula.getProfesor().getNombre()).equals(cboProfesores.getSelectedItem().toString())){
+                try {
+                    matricula.actualizar();
+                } catch (SQLException ex) {
+                }
+            }
+            frmAgregarMatricula.dispose();
+        } else JOptionPane.showMessageDialog(frmAgregarMatricula, "Ingrese correctamente los pesos", "Error al registrar", JOptionPane.ERROR_MESSAGE);
     }
     
 }

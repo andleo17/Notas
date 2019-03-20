@@ -61,8 +61,7 @@ public interface MatriculaDAO extends IDBConnection, RubricaDAO {
             ps.setInt(3, matricula.getEstudiante().getId());
             ps.setInt(4, matricula.getProfesor().getId());
             ps.executeUpdate();
-        } catch (ClassNotFoundException e) {
-        }
+        }   
     }
 
     default void actualizar(Matricula matricula) {

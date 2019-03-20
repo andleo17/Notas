@@ -25,23 +25,20 @@ public class Matricula implements MatriculaDAO, IAdministrable {
     @Override
     public void agregar() throws SQLException{
         objMatricula.agregar(this);
-        AtomicInteger i = new AtomicInteger(1);
-        
-        rubricas.forEach(r -> {
+        for (Rubrica r : rubricas) {
             r.setMatricula(this);
-            r.setNumeroRubrica(i.getAndIncrement());
             r.agregar();
-        });
+            for (Nota n : r.getNotas()) n.agregar();
+        }
     }
 
     @Override
-    public void actualizar() {
+    public void actualizar() throws SQLException {
         objMatricula.actualizar(this);
     }
 
     @Override
-    public void eliminar() {
-        rubricas.forEach(r -> r.eliminar());
+    public void eliminar() throws SQLException {
         objMatricula.eliminar(this);
     }
 

@@ -4,7 +4,10 @@ package com.andres.notas.controller;
 import com.andres.notas.model.Curso;
 import com.andres.notas.view.FrmAgregarCurso;
 import com.andres.notas.view.FrmPrincipal;
+import java.sql.SQLException;
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class AgregarCurso implements IMapeable{
@@ -12,7 +15,7 @@ public class AgregarCurso implements IMapeable{
     private final FrmPrincipal frmPrincipal;
     private FrmAgregarCurso frmAgregarCurso;
     private JTextField txtNombre;
-    private JTextField txtNumeroCreditos;
+    private JFormattedTextField txtNumeroCreditos;
     private JButton btnAgregar;
     private Curso curso;
     
@@ -33,7 +36,7 @@ public class AgregarCurso implements IMapeable{
         frmAgregarCurso.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         
         txtNombre = (JTextField) getComponentByName("txtNombre", frmAgregarCurso);
-        txtNumeroCreditos = (JTextField) getComponentByName("txtNumeroCreditos", frmAgregarCurso);
+        txtNumeroCreditos = (JFormattedTextField) getComponentByName("txtNumeroCreditos", frmAgregarCurso);
         
         btnAgregar = (JButton) getComponentByName("btnAgregar", frmAgregarCurso);
         
@@ -60,15 +63,47 @@ public class AgregarCurso implements IMapeable{
     }
     
     private void agregar() {
-        obtenerDatos();
-        curso.agregar();
-        frmAgregarCurso.dispose();
+        if (!txtNombre.getText().isEmpty() && Integer.valueOf(txtNumeroCreditos.getText()) > 0) {
+            try {
+                obtenerDatos();
+                curso.agregar();
+                frmAgregarCurso.dispose();
+            } catch (SQLException e) {
+                switch (Integer.valueOf(e.getSQLState())){
+                    case 23505:
+                        JOptionPane.showMessageDialog(frmPrincipal, "Curso ya existe", "Error al agregar", JOptionPane.ERROR_MESSAGE);
+                        break;
+                    default:
+                        System.err.println("Otro error");
+                        System.err.println(Integer.valueOf(e.getSQLState()));
+                        break;
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(frmAgregarCurso, "Ingrese los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void actualizar() {
-        obtenerDatos();
-        curso.actualizar();
-        frmAgregarCurso.dispose();
+        if (!txtNombre.getText().isEmpty() && Integer.valueOf(txtNumeroCreditos.getText()) > 0) {
+            try {
+                obtenerDatos();
+                curso.actualizar();
+                frmAgregarCurso.dispose();
+            } catch (SQLException e) {
+                switch (Integer.valueOf(e.getSQLState())){
+                    case 23505:
+                        JOptionPane.showMessageDialog(frmPrincipal, "Curso ya existe", "Error al modificar", JOptionPane.ERROR_MESSAGE);
+                        break;
+                    default:
+                        System.err.println("Otro error");
+                        System.err.println(Integer.valueOf(e.getSQLState()));
+                        break;
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(frmAgregarCurso, "Ingrese los datos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
 }

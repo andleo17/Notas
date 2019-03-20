@@ -7,6 +7,7 @@ import com.andres.notas.view.FrmLogin;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JSeparator;
@@ -74,9 +75,21 @@ public class CambiarPassword implements IMapeable{
             if (nuevaPass.equals(confPass)) {
                 Estudiante e = Estudiante.iniciarSesion(email, passActual);
                 if (e != null) {
-                    e.setPassword(nuevaPass);
-                    e.actualizar();
-                    frmCambiarPassword.dispose();
+                    try {
+                        e.setPassword(nuevaPass);
+                        e.actualizar();
+                        frmCambiarPassword.dispose();
+                    } catch (SQLException ex) {
+                        switch (Integer.valueOf(ex.getSQLState())){
+                            case 23505:
+                                JOptionPane.showMessageDialog(frmCambiarPassword, "Email ya existe", "Error al modificar", JOptionPane.ERROR_MESSAGE);
+                                break;
+                            default:
+                                System.err.println("Otro error");
+                                System.err.println(Integer.valueOf(ex.getSQLState()));
+                                break;
+                        }
+                    }
                 } else JOptionPane.showMessageDialog(frmCambiarPassword, "Estudiante no registrado", "Error", JOptionPane.ERROR_MESSAGE);
             } else JOptionPane.showMessageDialog(frmCambiarPassword, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
         } else JOptionPane.showMessageDialog(frmCambiarPassword, "Ingrese los datos", "Error", JOptionPane.ERROR_MESSAGE);
