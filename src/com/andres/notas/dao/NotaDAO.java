@@ -18,7 +18,7 @@ public interface NotaDAO extends IDBConnection{
         ArrayList<Nota> notas = new ArrayList<>();
 
         try (Connection connection = conectarBD()){
-            String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ? AND %s = ?;", 
+            String query = String.format("SELECT * FROM %s WHERE %s = ? AND %s = ? AND %s = ? AND %s = ? ORDER BY NUMERONOTA;", 
                             TNOTA,
                             TNOTA_idCiclo,
                             TNOTA_idCurso,

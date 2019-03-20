@@ -11,7 +11,10 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.math.RoundingMode;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -42,6 +45,7 @@ public class MatriculaDetallada implements IMapeable{
     private JTextField promedioFinal;
     private JTextField promedioCampus;
     private JButton btnHallarNotas;
+    private JButton btnGuardarNotas;
     private DecimalFormat df = new DecimalFormat("#.##");
     
     private class Notas {
@@ -77,10 +81,14 @@ public class MatriculaDetallada implements IMapeable{
         btnHallarNotas = (JButton) getComponentByName("btnHallarNotas", frmMatriculaDetallada);
         btnHallarNotas.addActionListener(evt -> hallarNotas());
         
+        btnGuardarNotas = (JButton) getComponentByName("btnGuardarNotas", frmMatriculaDetallada);
+        btnGuardarNotas.addActionListener(evt -> guardarNotas());
+        
         lblCurso.setText(matricula.getCurso().getNombre());
         lblProfesor.setText(matricula.getProfesor().getApellidos() + ", " + matricula.getProfesor().getNombre());
         
         mostrarNotas();
+        hallarPromedioFinal();
     }
     
     private void volver() {
@@ -197,6 +205,15 @@ public class MatriculaDetallada implements IMapeable{
                             nota.setHorizontalAlignment(SwingConstants.CENTER);
                             nota.setBorder(bordeNegro);
                 if (n.getNota() != -1) nota.setText(String.valueOf(n.getNota()));
+                nota.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyReleased(KeyEvent ke) {
+                        if (!nota.getText().isEmpty())
+                            nota.setFont(nota.getFont().deriveFont(1));
+                        else
+                            nota.setFont(nota.getFont().deriveFont(0));
+                    }
+                });
                 nota.getDocument().addDocumentListener(new DocumentListener() {
                     @Override
                     public void insertUpdate(DocumentEvent de) {
@@ -441,6 +458,21 @@ public class MatriculaDetallada implements IMapeable{
             promedioNota = promedioNota / sinNota;
             if (promedioNota > 20) promedioNota = Math.round(promedioNota);
             for (JTextField t : f.txtNotas) t.setText(df.format(promedioNota));
+        });
+    }
+    
+    private void guardarNotas() {
+        notas.forEach(nt -> {
+            for (int i = 0; i < nt.txtNotas.size() - 1; i++) {
+                JTextField txt = nt.txtNotas.get(i);
+                if (txt.getFont().getStyle() == 1) {
+                    nt.rubrica.getNotas().get(i).setNota(Float.valueOf(txt.getText()));
+                    try {
+                        nt.rubrica.getNotas().get(i).actualizar();
+                    } catch (SQLException ex) {
+                    }
+                }
+            }
         });
     }
     

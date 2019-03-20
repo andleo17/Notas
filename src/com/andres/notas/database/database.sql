@@ -68,7 +68,7 @@ CREATE TABLE nota (
     idCiclo         INTEGER             NOT NULL,
     numeroRubrica   INTEGER             NOT NULL,
     numeroNota      INTEGER             NOT NULL,
-    nota            FLOAT               NOT NULL DEFAULT -1,
+    nota            FLOAT(2)            NOT NULL DEFAULT -1,
 
     CONSTRAINT  pk_nota
         PRIMARY KEY     (idEstudiante, idCurso, idCiclo, numeroRubrica, numeroNota),

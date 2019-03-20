@@ -20,6 +20,7 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         btnVolver = new javax.swing.JButton();
         btnHallarNotas = new javax.swing.JButton();
         pnlNotas = new javax.swing.JPanel();
+        btnGuardarNotas = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(243, 243, 243));
         setLayout(new java.awt.GridBagLayout());
@@ -116,9 +117,24 @@ public class FrmMatriculaDetallada extends javax.swing.JPanel {
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(20, 20, 0, 20);
         add(pnlNotas, gridBagConstraints);
+
+        btnGuardarNotas.setBackground(new java.awt.Color(204, 0, 0));
+        btnGuardarNotas.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 14)); // NOI18N
+        btnGuardarNotas.setForeground(new java.awt.Color(255, 255, 255));
+        btnGuardarNotas.setText("Guardar Notas");
+        btnGuardarNotas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.ipadx = 30;
+        gridBagConstraints.ipady = 15;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 10, 0);
+        add(btnGuardarNotas, gridBagConstraints);
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardarNotas;
     private javax.swing.JButton btnHallarNotas;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
